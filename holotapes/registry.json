@@ -712,6 +712,7 @@
     "version": "1.2.0",
     "description": "Choose custom Pip-Boy startup animations with embedded audio, a low-memory persistent runtime, and up to five drop-in AVI-only community Custom Bootups.",
     "icon": "PipCoStartupSystems/assets/PIP_CO_STARTUP_SYSTEMS.IMG",
+    "previews": ["PipCoStartupSystems/previews/menu.bmp"],
     "type": "app",
     "readme": "PipCoStartupSystems/README.md",
     "storage": [
