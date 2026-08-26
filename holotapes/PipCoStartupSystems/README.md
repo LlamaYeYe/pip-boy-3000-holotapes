@@ -34,6 +34,29 @@ whose AVI is installed.
 - Classic Mr. House Fully Animated
 - Dogmeat
 
+## Community Custom Bootups
+
+PIP-CO Startup Systems can automatically detect up to five user/community
+startup animations directly in `HOLO/STARTUP_ANIMATIONS/`. No JavaScript
+editing, JSON descriptor, or additional folder is required.
+
+Supported filenames:
+
+- `Custom_Bootup.AVI`
+- `Custom_Bootup_2.AVI`
+- `Custom_Bootup_3.AVI`
+- `Custom_Bootup_4.AVI`
+- `Custom_Bootup_5.AVI`
+
+When at least one of these files exists, a **Custom Bootups** submenu appears
+automatically. Missing slots remain hidden. Audio should be embedded in the AVI,
+matching the normal Startup Systems media format. Custom bootups use the
+firmware `videoStopped` event as their normal completion signal, with a hard
+failsafe for safety.
+
+This scan occurs when the holotape UI opens; the persistent startup runtime does
+not continuously scan the SD card.
+
 ## Controls
 
 - Left wheel: navigate
@@ -44,10 +67,10 @@ whose AVI is installed.
 
 ## Runtime / compatibility notes
 
-Version 1.1.0 uses a small persistent startup service separated from the
-holotape menu/UI. This prevents the startup hook from retaining the full menu,
-title, and scroller closure after the holotape closes. The change was made after
-repeated hardware testing exposed `CALLBACK`, `LOW_MEMORY`, and `MEMORY`
+Version 1.2.0 continues to use a small persistent startup service separated from
+the holotape menu/UI. This prevents the startup hook from retaining the full
+menu, title, and scroller closure after the holotape closes. The change was made
+after repeated hardware testing exposed `CALLBACK`, `LOW_MEMORY`, and `MEMORY`
 failures on Pip-Boy OS 1.1.6.
 
 The hard-failsafe timer now begins after `Pip.videoStart()` succeeds, so

@@ -118,10 +118,57 @@
       hard: 13000,
       eventEnd: 1,
     },
+    {
+      file: 'Custom_Bootup.AVI',
+      label: 'Custom Bootup',
+      cat: 'custom',
+      fade: 30000,
+      hard: 120000,
+      eventEnd: 1,
+    },
+    {
+      file: 'Custom_Bootup_2.AVI',
+      label: 'Custom Bootup 2',
+      cat: 'custom',
+      fade: 30000,
+      hard: 120000,
+      eventEnd: 1,
+    },
+    {
+      file: 'Custom_Bootup_3.AVI',
+      label: 'Custom Bootup 3',
+      cat: 'custom',
+      fade: 30000,
+      hard: 120000,
+      eventEnd: 1,
+    },
+    {
+      file: 'Custom_Bootup_4.AVI',
+      label: 'Custom Bootup 4',
+      cat: 'custom',
+      fade: 30000,
+      hard: 120000,
+      eventEnd: 1,
+    },
+    {
+      file: 'Custom_Bootup_5.AVI',
+      label: 'Custom Bootup 5',
+      cat: 'custom',
+      fade: 30000,
+      hard: 120000,
+      eventEnd: 1,
+    },
   ];
   const CAT_SPECIAL = [0, 1, 2, 8],
     CAT_FACTION = [4, 5, 7, 6],
-    CAT_NPC = [3, 9, 10, 11, 12, 13];
+    CAT_NPC = [3, 9, 10, 11, 12, 13],
+    CAT_CUSTOM = [14, 15, 16, 17, 18];
+
+  /* CUSTOM BOOTUPS MEMORY-SAFE:
+     The holotape UI checks the five fixed Custom_Bootup*.AVI slots only while open.
+     The persistent boot runtime resolves only the selected custom filename.
+     AVI bytes are streamed by Pip.videoStart and are never loaded into JS memory.
+     Custom AVIs use videoStopped as the normal end condition; 120 seconds is emergency cleanup only. */
 
   /* Persistent startup runtime.
      This is deliberately created in global scope so Pip.bootAnimation/Pip.audioStart
@@ -135,8 +182,13 @@
       'var FA=[6250,3500,3500,4917,5500,5500,5500,5500,26000,7667,5250,6083,6000,4167];' +
       'var HA=[15000,12000,13000,16000,9015,9015,9015,16500,30500,11182,13000,15000,15000,13000];' +
       'var EV=[1,1,1,1,0,0,0,1,0,0,1,1,1,1],ownV=0,ownA=0,crt=0;' +
-      'function sel(){try{var n=JSON.parse(fs.readFileSync(S)).startup|0;return n>=-2&&n<F.length?n:-2}catch(e){return -2}}' +
-      'function ok(n){try{return n>=0&&n<F.length&&!!fs.statSync(B+F[n])}catch(e){return false}}' +
+      "function cf(n){var q=n-14;return q===0?'Custom_Bootup.AVI':q>0&&q<5?'Custom_Bootup_'+(q+1)+'.AVI':''}" +
+      'function fn(n){return n<14?F[n]:cf(n)}' +
+      'function hd(n){return n<14?HA[n]:120000}' +
+      'function ev(n){return n<14?EV[n]:1}' +
+      'function fd(n){return n<14?FA[n]:0}' +
+      'function sel(){try{var n=JSON.parse(fs.readFileSync(S)).startup|0;return n>=-2&&n<19?n:-2}catch(e){return -2}}' +
+      'function ok(n){try{var f=fn(n);return n>=0&&n<19&&f&&!!fs.statSync(B+f)}catch(e){return false}}' +
       "if(!Pip.__PIPCOStockBoot){if(typeof Pip.__SA22CleanBoot==='function')Pip.__PIPCOStockBoot=Pip.__SA22CleanBoot;else if(typeof Pip.bootAnimation==='function'&&!Pip.bootAnimation.__pipcoRT)Pip.__PIPCOStockBoot=Pip.bootAnimation.bind(Pip)}" +
       "if(!Pip.__PIPCOStockAudio){if(typeof Pip.__SA22CleanAudio==='function')Pip.__PIPCOStockAudio=Pip.__SA22CleanAudio;else if(typeof Pip.audioStart==='function'&&!Pip.audioStart.__pipcoRT)Pip.__PIPCOStockAudio=Pip.audioStart.bind(Pip)}" +
       'var sb=Pip.__PIPCOStockBoot,sa=Pip.__PIPCOStockAudio;' +
@@ -145,8 +197,8 @@
       "function ah(p){var n=sel();if(!ok(n)){restore();return sa?sa.apply(Pip,arguments):undefined}if((crt||global.__PIPCO_CRT)&&p==='SOUND/FX/CRT_ON2.WAV'){crt=0;global.__PIPCO_CRT=0;return}return sa?sa.apply(Pip,arguments):undefined}" +
       'function bh(){var n=sel();if(!ok(n)){restore();try{return sb?sb.call(Pip):Promise.resolve()}catch(e){return Promise.resolve()}}return new Promise(function(done){var a,b,d,vs,x=0;' +
       "function end(r,nat){if(x)return;x=1;if(a)clearTimeout(a);if(b)clearTimeout(b);if(d)clearTimeout(d);if(vs){try{Pip.removeListener('videoStopped',vs)}catch(e){}vs=undefined}if(!nat){try{if(ownV)Pip.videoStop()}catch(e){}try{if(ownA)Pip.audioStop()}catch(e){}}ownV=ownA=0;try{h.reset()}catch(e){}try{h.setClipRect(0,0,479,319)}catch(e){}try{delete Pip.blitOptions.disable}catch(e){}crt=1;global.__PIPCO_CRT=1;setTimeout(done,160)}" +
-      "function play(){if(x)return;if(!ok(n)){x=1;restore();finish(done,'invalid');return}try{Pip.videoStop()}catch(e){}try{Pip.audioStop()}catch(e){}try{h.clear();h.flip()}catch(e){}try{Pip.videoStart(B+F[n],{x:0,y:0});ownV=1;ownA=1;d=setTimeout(function(){end('hard-failsafe',0)},HA[n])}catch(e){restore();x=1;finish(done);return}" +
-      "if(EV[n]){vs=function(){if(!x)end('videoStopped',1)};try{Pip.on('videoStopped',vs)}catch(e){vs=undefined;b=setTimeout(function(){end('fade-fallback',0)},FA[n]+500)}}else b=setTimeout(function(){end('fade',0)},FA[n]+(n===8?420:180))}" +
+      "function play(){if(x)return;if(!ok(n)){x=1;restore();finish(done,'invalid');return}try{Pip.videoStop()}catch(e){}try{Pip.audioStop()}catch(e){}try{h.clear();h.flip()}catch(e){}try{Pip.videoStart(B+fn(n),{x:0,y:0});ownV=1;ownA=1;d=setTimeout(function(){end('hard-failsafe',0)},hd(n))}catch(e){restore();x=1;finish(done);return}" +
+      "if(ev(n)){vs=function(){if(!x)end('videoStopped',1)};try{Pip.on('videoStopped',vs)}catch(e){vs=undefined;if(n<14)b=setTimeout(function(){end('fade-fallback',0)},fd(n)+500)}}else b=setTimeout(function(){end('fade',0)},fd(n)+(n===8?420:180))}" +
       'try{a=setTimeout(play,1895)}catch(e){restore();finish(done)}})}' +
       'ah.__pipcoRT=1;bh.__pipcoRT=1;ah.__pipcoOriginal=sa;bh.__pipcoOriginal=sb;' +
       'if(sa)Pip.audioStart=ah;Pip.bootAnimation=bh;global.__PIPCO_RT={restore:restore};' +
@@ -231,11 +283,15 @@
   function npcEntries() {
     return entriesFor(CAT_NPC);
   }
+  function customEntries() {
+    return entriesFor(CAT_CUSTOM);
+  }
   function mainEntries() {
     let a = [['Default Bootup', -1, 0]];
     if (specialEntries().length) a.push(['Special Bootups', -10, 1]);
     if (factionEntries().length) a.push(['Faction Bootups', -11, 2]);
     if (npcEntries().length) a.push(['NPC Bootups', -12, 3]);
+    if (customEntries().length) a.push(['Custom Bootups', -13, 4]);
     a.push(['< Back', -99, -1]);
     return a;
   }
@@ -243,6 +299,7 @@
     if (page === 1) return specialEntries();
     if (page === 2) return factionEntries();
     if (page === 3) return npcEntries();
+    if (page === 4) return customEntries();
     return mainEntries();
   }
   function drawNpcScroller(total) {
