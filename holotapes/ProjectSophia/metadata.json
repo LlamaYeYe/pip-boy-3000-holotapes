@@ -1,0 +1,73 @@
+{
+  "id": "sophia",
+  "name": "S.O.P.H.I.A.",
+  "author": "@LlamaYeYe",
+  "version": "1.0.0",
+  "description": "S.O.P.H.I.A. adds selectable Fallout-themed companion voices to The Wand Company Pip-Boy 3000, featuring YES MAN, FISTO, KL-E-O, MK II Stealth Suit, and Andy with contextual responses across supported Pip-Boy menus.",
+  "previews": [],
+  "type": "app",
+  "readme": "README.md",
+  "storage": [
+    {
+      "name": "HOLO/Project_Sophia/APP.JS",
+      "url": "assets/APP.JS"
+    },
+    {
+      "name": "HOLO/Project_Sophia/SOPHIA_UI.JS",
+      "url": "assets/SOPHIA_UI.JS"
+    },
+    {
+      "name": "HOLO/Project_Sophia/SOPHIA_CONFIG.JSON",
+      "url": "assets/SOPHIA_CONFIG.JSON"
+    },
+    {
+      "name": "HOLO/Project_Sophia/SOPHIA_PLAY.WAV",
+      "url": "assets/SOPHIA_PLAY.WAV"
+    },
+    {
+      "name": "HOLO/Project_Sophia/SOPHIA_SERVICE.JS",
+      "url": "assets/SOPHIA_SERVICE.JS"
+    },
+    {
+      "name": "HOLO/Project_Sophia/YES_MAN_VOICE.BIN",
+      "url": "assets/YES_MAN_VOICE.BIN"
+    },
+    {
+      "name": "HOLO/Project_Sophia/YES_MAN_VOICE.IDX",
+      "url": "assets/YES_MAN_VOICE.IDX"
+    },
+    {
+      "name": "HOLO/Project_Sophia/FISTO_VOICE.BIN",
+      "url": "assets/FISTO_VOICE.BIN"
+    },
+    {
+      "name": "HOLO/Project_Sophia/FISTO_VOICE.IDX",
+      "url": "assets/FISTO_VOICE.IDX"
+    },
+    {
+      "name": "HOLO/Project_Sophia/KL-E-O_VOICE.BIN",
+      "url": "assets/KL-E-O_VOICE.BIN"
+    },
+    {
+      "name": "HOLO/Project_Sophia/KL-E-O_VOICE.IDX",
+      "url": "assets/KL-E-O_VOICE.IDX"
+    },
+    {
+      "name": "HOLO/Project_Sophia/MK_II_STEALTH_SUIT_VOICE.BIN",
+      "url": "assets/MK_II_STEALTH_SUIT_VOICE.BIN"
+    },
+    {
+      "name": "HOLO/Project_Sophia/MK_II_STEALTH_SUIT_VOICE.IDX",
+      "url": "assets/MK_II_STEALTH_SUIT_VOICE.IDX"
+    },
+    {
+      "name": "HOLO/Project_Sophia/ANDY_VOICE.BIN",
+      "url": "assets/ANDY_VOICE.BIN"
+    },
+    {
+      "name": "HOLO/Project_Sophia/ANDY_VOICE.IDX",
+      "url": "assets/ANDY_VOICE.IDX"
+    }
+  ],
+  "storageOptional": []
+}

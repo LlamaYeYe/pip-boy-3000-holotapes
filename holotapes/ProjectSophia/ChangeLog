@@ -1,0 +1,12 @@
+1.0.0
+- Initial public release of S.O.P.H.I.A. — Companion Pip-Boy Framework.
+- Includes YES MAN, FISTO, KL-E-O, MK II Stealth Suit, and Andy (Mister Handy).
+- Adds contextual companion voice responses across supported STATS, ITEMS, DATA, and mode-switch menus.
+- Uses five compact 51-line voice banks with one active companion at a time.
+- Adds low-memory resident service behavior designed for The Wand Company Pip-Boy 3000.
+- Parks the companion service while the S.O.P.H.I.A. configuration holotape is open and resumes it when leaving.
+- Adds stable STATUS CND/EFF/CLK/ENG navigation tracking.
+- Prevents repeated voice lines during the same menu visit.
+- Preserves silence for MAP, STATUS RAD, RADIO/FM, and protected audio/video playback.
+- Includes updated voice packs and balanced FISTO playback level.
+- Includes UI performance and memory-safety cleanup.
