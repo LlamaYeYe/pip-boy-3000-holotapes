@@ -1035,6 +1035,7 @@
     "previews": [],
     "type": "app",
     "readme": "ProjectSophia/README.md",
+    "icon": "ProjectSophia/assets/icon.png",
     "storage": [
       {
         "name": "HOLO/Project_Sophia/APP.JS",
