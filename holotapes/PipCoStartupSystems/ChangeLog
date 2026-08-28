@@ -1,4 +1,5 @@
 1.2.0 (2026-08-26)
+https://github.com/CodyTolene/pip-boy-3000-holotapes/pull/97
 - Added automatic detection of up to five user-supplied Custom_Bootup AVI files directly in HOLO/STARTUP_ANIMATIONS/.
 - Custom Bootups submenu appears only when at least one supported custom AVI exists.
 - No custom folder, JSON descriptor, or core JavaScript editing required.
