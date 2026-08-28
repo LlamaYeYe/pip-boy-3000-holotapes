@@ -3,19 +3,19 @@
   "name": "S.O.P.H.I.A.",
   "author": "@LlamaYeYe",
   "version": "1.0.0",
-  "description": "S.O.P.H.I.A. adds selectable Fallout-themed companion voices to The Wand Company Pip-Boy 3000, featuring YES MAN, FISTO, KL-E-O, MK II Stealth Suit, and Andy with contextual responses across supported Pip-Boy menus.",
+  "description": "S.O.P.H.I.A. adds selectable Fallout-themed companion voices to The Wand Company Pip-Boy 3000. Install only the companion voice banks you want; the holotape automatically shows only voices that are present on the device.",
+  "icon": "assets/icon.png",
   "previews": [],
   "type": "app",
   "readme": "README.md",
-  "icon": "assets/icon.png",
   "storage": [
     {
       "name": "HOLO/Project_Sophia/APP.JS",
-      "url": "assets/APP.JS"
+      "url": "assets/APP.MIN.JS"
     },
     {
       "name": "HOLO/Project_Sophia/SOPHIA_UI.JS",
-      "url": "assets/SOPHIA_UI.JS"
+      "url": "assets/SOPHIA_UI.MIN.JS"
     },
     {
       "name": "HOLO/Project_Sophia/SOPHIA_CONFIG.JSON",
@@ -27,48 +27,59 @@
     },
     {
       "name": "HOLO/Project_Sophia/SOPHIA_SERVICE.JS",
-      "url": "assets/SOPHIA_SERVICE.JS"
-    },
-    {
-      "name": "HOLO/Project_Sophia/YES_MAN_VOICE.BIN",
-      "url": "assets/YES_MAN_VOICE.BIN"
+      "url": "assets/SOPHIA_SERVICE.MIN.JS"
     },
     {
       "name": "HOLO/Project_Sophia/YES_MAN_VOICE.IDX",
       "url": "assets/YES_MAN_VOICE.IDX"
     },
     {
-      "name": "HOLO/Project_Sophia/FISTO_VOICE.BIN",
-      "url": "assets/FISTO_VOICE.BIN"
-    },
-    {
       "name": "HOLO/Project_Sophia/FISTO_VOICE.IDX",
       "url": "assets/FISTO_VOICE.IDX"
-    },
-    {
-      "name": "HOLO/Project_Sophia/KL-E-O_VOICE.BIN",
-      "url": "assets/KL-E-O_VOICE.BIN"
     },
     {
       "name": "HOLO/Project_Sophia/KL-E-O_VOICE.IDX",
       "url": "assets/KL-E-O_VOICE.IDX"
     },
     {
-      "name": "HOLO/Project_Sophia/MK_II_STEALTH_SUIT_VOICE.BIN",
-      "url": "assets/MK_II_STEALTH_SUIT_VOICE.BIN"
-    },
-    {
       "name": "HOLO/Project_Sophia/MK_II_STEALTH_SUIT_VOICE.IDX",
       "url": "assets/MK_II_STEALTH_SUIT_VOICE.IDX"
-    },
-    {
-      "name": "HOLO/Project_Sophia/ANDY_VOICE.BIN",
-      "url": "assets/ANDY_VOICE.BIN"
     },
     {
       "name": "HOLO/Project_Sophia/ANDY_VOICE.IDX",
       "url": "assets/ANDY_VOICE.IDX"
     }
   ],
-  "storageOptional": []
+  "storageOptional": [
+    {
+      "label": "YES MAN Voice Pack",
+      "name": "HOLO/Project_Sophia/YES_MAN_VOICE.BIN",
+      "sizeKB": 9635,
+      "url": "assets/YES_MAN_VOICE.BIN"
+    },
+    {
+      "label": "FISTO Voice Pack",
+      "name": "HOLO/Project_Sophia/FISTO_VOICE.BIN",
+      "sizeKB": 7859,
+      "url": "assets/FISTO_VOICE.BIN"
+    },
+    {
+      "label": "KL-E-O Voice Pack",
+      "name": "HOLO/Project_Sophia/KL-E-O_VOICE.BIN",
+      "sizeKB": 10348,
+      "url": "assets/KL-E-O_VOICE.BIN"
+    },
+    {
+      "label": "MK II Stealth Suit Voice Pack",
+      "name": "HOLO/Project_Sophia/MK_II_STEALTH_SUIT_VOICE.BIN",
+      "sizeKB": 11422,
+      "url": "assets/MK_II_STEALTH_SUIT_VOICE.BIN"
+    },
+    {
+      "label": "Andy / Mister Handy Voice Pack",
+      "name": "HOLO/Project_Sophia/ANDY_VOICE.BIN",
+      "sizeKB": 10957,
+      "url": "assets/ANDY_VOICE.BIN"
+    }
+  ]
 }

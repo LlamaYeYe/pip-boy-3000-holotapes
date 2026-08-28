@@ -1,72 +1,79 @@
 (function () {
-  var V = 'v3.51nolog',
-    fs = require('fs'),
-    B = 'HOLO/Project_Sophia/',
-    C = B + 'SOPHIA_CONFIG.JSON',
-    q = global.__PipCoSophiaService || global.__PipCoYesManService,
-    c,
-    t,
-    f;
-  if (q && q.version !== V) {
-    try {
-      if (q.destroy) q.destroy();
-    } catch (e) {}
-    q = 0;
+  var SERVICE_VERSION = 'v3.51nolog';
+  var fs = require('fs');
+  var BASE_PATH = 'HOLO/Project_Sophia/';
+  var CONFIG_PATH = BASE_PATH + 'SOPHIA_CONFIG.JSON';
+  var service = global.__PipCoSophiaService;
+  var config;
+  var source;
+  var factory;
+
+  function collectGarbage() {
     try {
       process.memory(true);
       E.defrag();
-    } catch (e) {}
+    } catch (error) {}
   }
-  function g() {
+
+  function loadConfig() {
     try {
-      c = JSON.parse(fs.readFileSync(C));
+      config = JSON.parse(fs.readFileSync(CONFIG_PATH));
       return {
-        enabled: c.enabled ? 1 : 0,
-        companion: c.companion || 'YES_MAN',
+        enabled: config.enabled ? 1 : 0,
+        companion: config.companion || 'YES_MAN',
       };
-    } catch (e) {
+    } catch (error) {
       return { enabled: 0, companion: 'YES_MAN' };
     }
   }
+
   try {
-    if (!q) {
-      c = g();
-      t = fs.readFileSync(B + 'SOPHIA_SERVICE.JS');
-      f = Function('return ' + t)();
-      t = 0;
+    /*
+     * S.O.P.H.I.A.'s companion service intentionally survives normal page
+     * changes so it can speak outside the configuration holotape.  Keep one
+     * narrow resident handle for that service only; the UI receives the
+     * service directly instead of discovering it through another global.
+     */
+    if (service && service.version !== SERVICE_VERSION) {
       try {
-        process.memory(true);
-        E.defrag();
-      } catch (e) {}
-      q = f(c, fs, B);
-      f = 0;
-      c = 0;
+        if (service.destroy) service.destroy();
+      } catch (error) {}
+      service = 0;
+      collectGarbage();
     }
-    if (q) {
-      try {
-        if (q.statusDetach) q.statusDetach();
-      } catch (e) {}
-      try {
-        if (q.setEnabled) q.setEnabled(0);
-        else q.enabled = 0;
-      } catch (e) {}
+
+    if (!service) {
+      config = loadConfig();
+      source = fs.readFileSync(BASE_PATH + 'SOPHIA_SERVICE.JS');
+      factory = Function('return ' + source)();
+      source = 0;
+      collectGarbage();
+      service = factory(config, fs, BASE_PATH);
+      factory = 0;
+      config = 0;
     }
+
+    if (service) {
+      try {
+        if (service.statusDetach) service.statusDetach();
+      } catch (error) {}
+      try {
+        if (service.setEnabled) service.setEnabled(0);
+        else service.enabled = 0;
+      } catch (error) {}
+    }
+
+    collectGarbage();
+    source = fs.readFileSync(BASE_PATH + 'SOPHIA_UI.JS');
+    factory = Function('return ' + source)();
+    source = 0;
+    collectGarbage();
+
+    return factory(service);
+  } catch (error) {
     try {
-      process.memory(true);
-      E.defrag();
-    } catch (e) {}
-    t = fs.readFileSync(B + 'SOPHIA_UI.JS');
-    f = Function('return ' + t)();
-    t = 0;
-    try {
-      process.memory(true);
-      E.defrag();
-    } catch (e) {}
-    return f();
-  } catch (e) {
-    try {
-      console.log('SOPHIA BOOT FAIL ' + e);
-    } catch (z) {}
-    throw e;
+      console.log('SOPHIA BOOT FAIL ' + error);
+    } catch (ignored) {}
+    throw error;
   }
 });

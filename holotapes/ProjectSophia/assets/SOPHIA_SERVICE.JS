@@ -1,5 +1,5 @@
 (function (cfg, fs, B) {
-  var old = global.__PipCoSophiaService || global.__PipCoYesManService;
+  var old = global.__PipCoSophiaService;
   if (old && old.version === 'v3.51nolog') {
     if (old.setCompanion) old.setCompanion(cfg.companion || 'YES_MAN');
     if (old.setEnabled) old.setEnabled(cfg.enabled ? 1 : 0);
@@ -339,18 +339,13 @@
             startPrepared(p);
             return;
           }
-          r =
-            p.left > (p.kind === 'TAB' ? 8192 : 4096)
-              ? p.kind === 'TAB'
-                ? 8192
-                : 4096
-              : p.left;
+          r = p.left > 2048 ? 2048 : p.left;
           ch = p.src.read(r);
           if (!ch || !ch.length) throw 'short read ' + p.left;
           p.out.write(ch);
           p.left -= ch.length;
           ch = undefined;
-          setPrepTimer(step, 1);
+          setPrepTimer(step, 8);
         } catch (e) {
           try {
             if (p.src && p.src.close) p.src.close();
@@ -493,9 +488,12 @@
       return 0;
     }
     if (m === 2) {
-      if (x === 2) return 14; // Quests
-      if (x === 3) return 15; // Notes
-      return 0; // Settings/Map/other DATA pages are silent here
+      if (x === 2) return 14;
+      // Quests
+      if (x === 3) return 15;
+      // Notes
+      return 0;
+      // Settings/Map/other DATA pages are silent here
     }
     if (u.indexOf('WEAPON') >= 0) return 1;
     if (u.indexOf('APPAREL') >= 0 || u.indexOf('ARMOR') >= 0) return 2;
@@ -746,7 +744,6 @@
     S.navM = -99;
     S.navX = -99;
     S.lastNV = nvMode();
-
     setTimer(wake, 350);
   };
   S.destroy = function () {
@@ -764,7 +761,6 @@
     } catch (e) {}
     S.enabled = 0;
     if (global.__PipCoSophiaService === S) delete global.__PipCoSophiaService;
-    if (global.__PipCoYesManService === S) delete global.__PipCoYesManService;
     gc();
   };
   S.statusDetach = statusDetach;
@@ -781,7 +777,6 @@
     setTimer(wake, 350);
   };
   global.__PipCoSophiaService = S;
-  global.__PipCoYesManService = S;
   function navWake() {
     var m = Pip.MODE | 0,
       x = Pip.MENUX | 0;

@@ -1,11 +1,14 @@
-(function () {
+(function (q) {
   var fs = require('fs'),
     B = 'HOLO/Project_Sophia/',
     C = B + 'SOPHIA_CONFIG.JSON',
     s = 0,
     p = 0,
     r = 0,
-    ot;
+    m = 0,
+    n = 0,
+    i,
+    f;
   function N(v) {
     v = String(v || '').toUpperCase();
     if (v === 'FISTO') return 'FISTO';
@@ -20,6 +23,17 @@
       return 'ANDY';
     return 'YES_MAN';
   }
+  function W(x) {
+    return x === 1
+      ? 'FISTO'
+      : x === 2
+        ? 'KL-E-O'
+        : x === 3
+          ? 'MK_II_STEALTH_SUIT'
+          : x === 4
+            ? 'ANDY'
+            : 'YES_MAN';
+  }
   function D(v) {
     v = N(v);
     return v === 'YES_MAN'
@@ -30,15 +44,83 @@
           ? 'Andy - Mister Handy'
           : v;
   }
+  function I(w) {
+    var a, b;
+    try {
+      a = E.openFile(B + w + '_VOICE.IDX', 'r');
+      if (!a) return 0;
+      if (a.close) a.close();
+      a = 0;
+      b = E.openFile(B + w + '_VOICE.BIN', 'r');
+      if (!b) return 0;
+      if (b.close) b.close();
+      return 1;
+    } catch (e) {
+      try {
+        if (a && a.close) a.close();
+      } catch (z) {}
+      try {
+        if (b && b.close) b.close();
+      } catch (z) {}
+      return 0;
+    }
+  }
+  for (i = 0; i < 5; i++)
+    if (I(W(i))) {
+      m |= 1 << i;
+      n++;
+    }
+  function J(x) {
+    var k;
+    for (k = 0; k < 5; k++)
+      if (m & (1 << k)) {
+        if (x-- === 0) return W(k);
+      }
+    return 0;
+  }
+  function Q(w) {
+    var k,
+      j = 0;
+    w = N(w);
+    for (k = 0; k < 5; k++)
+      if (m & (1 << k)) {
+        if (W(k) === w) return j;
+        j++;
+      }
+    return 0;
+  }
   function L() {
     var x;
     try {
       x = JSON.parse(fs.readFileSync(C));
-      return { enabled: x.enabled ? 1 : 0, companion: N(x.companion) };
+      return {
+        enabled: x.enabled ? 1 : 0,
+        companion: N(x.companion),
+      };
     } catch (e) {}
-    return { enabled: 0, companion: 'YES_MAN' };
+    return {
+      enabled: 0,
+      companion: 'YES_MAN',
+    };
   }
   var c = L();
+  if (!n) c.enabled = 0;
+  else if (
+    !(
+      m &
+      (1 <<
+        ({
+          YES_MAN: 0,
+          FISTO: 1,
+          'KL-E-O': 2,
+          MK_II_STEALTH_SUIT: 3,
+          ANDY: 4,
+        }[c.companion] || 0))
+    )
+  ) {
+    c.enabled = 0;
+    c.companion = J(0);
+  }
   function S(v, w) {
     w = N(w);
     c.enabled = v ? 1 : 0;
@@ -49,7 +131,6 @@
         '{"enabled":' + c.enabled + ',"companion":"' + w + '"}',
       );
     } catch (e) {}
-    M(v ? 'ENABLE' : 'DISABLE', w);
   }
   function A(w) {
     return c.enabled && c.companion === w;
@@ -69,58 +150,50 @@
     h.setFontAlign(-1, -1);
   }
   function dm() {
+    var y = 140,
+      k,
+      w;
+    if (s < 0 || s > n) s = 0;
     p = 0;
-    if (s < 0 || s > 5) s = 0;
     T();
     h.drawString('Status: ' + (c.enabled ? 'Enabled' : 'Disabled'), 36, 72);
     if (c.enabled) h.drawString('Active: ' + D(c.companion), 36, 94);
-    var a = [
-        'YES MAN',
-        'FISTO',
-        'KL-E-O',
-        'MK II Stealth Suit',
-        'Andy - Mister Handy',
-        '< Back',
-      ],
-      y = 140,
-      i;
-    for (i = 0; i < 6; i++) {
-      if (i === s) Pip.shadeBox(22, y - 4, 458, y + 22);
-      h.setColor(3).drawString(a[i], 36, y);
-      y += 29;
+    if (!n) {
+      h.drawString('No voice packs installed', 36, 118);
+      if (s === 0) Pip.shadeBox(22, y - 4, 458, y + 22);
+      h.setColor(3).drawString('< Back', 36, y);
+    } else {
+      for (k = 0; k < n; k++) {
+        w = J(k);
+        if (k === s) Pip.shadeBox(22, y - 4, 458, y + 22);
+        h.setColor(3).drawString(D(w), 36, y);
+        y += 29;
+      }
+      if (s === n) Pip.shadeBox(22, y - 4, 458, y + 22);
+      h.setColor(3).drawString('< Back', 36, y);
     }
     h.flip();
   }
   function dc(w) {
-    p =
-      w === 'FISTO'
-        ? 2
-        : w === 'KL-E-O'
-          ? 3
-          : w === 'MK_II_STEALTH_SUIT'
-            ? 4
-            : w === 'ANDY'
-              ? 5
-              : 1;
+    p = N(w);
     if (s < 0 || s > 2) s = 0;
     T();
-    h.drawString(D(w), 36, 74).drawString(
-      'Status: ' + (A(w) ? 'Enabled' : 'Disabled'),
+    h.drawString(D(p), 36, 74).drawString(
+      'Status: ' + (A(p) ? 'Enabled' : 'Disabled'),
       36,
       100,
     );
     var a = ['Enable', 'Disable', '< Back'],
       y = 146,
-      i;
-    for (i = 0; i < 3; i++) {
-      if (i === s) Pip.shadeBox(22, y - 4, 458, y + 22);
-      h.setColor(3).drawString(a[i], 36, y);
+      k;
+    for (k = 0; k < 3; k++) {
+      if (k === s) Pip.shadeBox(22, y - 4, 458, y + 22);
+      h.setColor(3).drawString(a[k], 36, y);
       y += 36;
     }
     h.flip();
   }
   function R() {
-    var q = global.__PipCoSophiaService || global.__PipCoYesManService;
     try {
       if (!q) return 0;
       if (q.setCompanion) q.setCompanion(c.companion);
@@ -134,11 +207,7 @@
   }
   function X() {
     try {
-      if (global.__SOPHIA_UI_KNOB)
-        Pip.removeListener('knob1', global.__SOPHIA_UI_KNOB);
-    } catch (e) {}
-    try {
-      delete global.__SOPHIA_UI_KNOB;
+      Pip.removeListener('knob1', K);
     } catch (e) {}
     R();
     try {
@@ -146,42 +215,24 @@
     } catch (e) {
       try {
         Pip.changeMenu();
-      } catch (q) {}
+      } catch (z) {}
     }
   }
   function K(d) {
-    var z = p ? 3 : 6,
-      w =
-        p === 2
-          ? 'FISTO'
-          : p === 3
-            ? 'KL-E-O'
-            : p === 4
-              ? 'MK_II_STEALTH_SUIT'
-              : p === 5
-                ? 'ANDY'
-                : 'YES_MAN';
+    var z = p ? 3 : n + 1,
+      w;
     if (d) {
       s += d > 0 ? 1 : -1;
       if (s < 0) s = z - 1;
       else if (s >= z) s = 0;
       Pip.playSound('SCROLL');
-      p ? dc(w) : dm();
+      p ? dc(p) : dm();
       return;
     }
     Pip.playSound('SELECT');
     if (!p) {
-      if (s < 5) {
-        w =
-          s === 0
-            ? 'YES_MAN'
-            : s === 1
-              ? 'FISTO'
-              : s === 2
-                ? 'KL-E-O'
-                : s === 3
-                  ? 'MK_II_STEALTH_SUIT'
-                  : 'ANDY';
+      if (s < n) {
+        w = J(s);
         s = 0;
         dc(w);
         return;
@@ -190,20 +241,19 @@
       return;
     }
     if (s === 0) {
-      S(1, w);
-      dc(w);
+      S(1, p);
+      dc(p);
       return;
     }
     if (s === 1) {
-      S(0, w);
-      dc(w);
+      S(0, p);
+      dc(p);
       return;
     }
-    s = p === 2 ? 1 : p === 3 ? 2 : p === 4 ? 3 : p === 5 ? 4 : 0;
+    s = Q(p);
     p = 0;
     dm();
   }
-  global.__SOPHIA_UI_KNOB = K;
   Pip.onExclusive('knob1', K);
   dm();
   return {
@@ -211,20 +261,10 @@
     notDefault: true,
     fullscreen: true,
     remove: function () {
-      if (ot) {
-        clearTimeout(ot);
-        ot = 0;
-      }
       try {
-        if (global.__SOPHIA_UI_KNOB)
-          Pip.removeListener('knob1', global.__SOPHIA_UI_KNOB);
+        Pip.removeListener('knob1', K);
       } catch (e) {}
-      try {
-        delete global.__SOPHIA_UI_KNOB;
-      } catch (e) {}
-      if (!r) {
-        R();
-      }
+      if (!r) R();
     },
   };
 });
