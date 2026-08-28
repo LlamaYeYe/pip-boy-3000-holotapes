@@ -188,6 +188,200 @@
     "storageOptional": []
   },
   {
+    "id": "brkbnce",
+    "name": "Brick Bounce",
+    "author": "@HtheB",
+    "version": "1.0.0",
+    "description": "An original arcade brick-breaker with 50 levels, power-ups, profiles, custom levels, and unlockable bonus games.",
+    "icon": "BrickBounce/assets/BRKBNCE.IMG",
+    "previews": [
+      "BrickBounce/assets/preview.png",
+      "BrickBounce/assets/gameplay.png",
+      "BrickBounce/assets/initials.png"
+    ],
+    "type": "game",
+    "readme": "BrickBounce/README.md",
+    "storage": [
+      {
+        "name": "HOLO/BRKBNCE/APP.JS",
+        "url": "BrickBounce/assets/APP.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/MAIN.JS",
+        "url": "BrickBounce/assets/MAIN.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/SAVE.JS",
+        "url": "BrickBounce/assets/SAVE.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/SAVEW.JS",
+        "url": "BrickBounce/assets/SAVEW.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/START.JS",
+        "url": "BrickBounce/assets/START.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/GAME.JS",
+        "url": "BrickBounce/assets/GAME.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/DEMO.JS",
+        "url": "BrickBounce/assets/DEMO.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/PONG.JS",
+        "url": "BrickBounce/assets/PONG.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/SNAKE.JS",
+        "url": "BrickBounce/assets/SNAKE.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/FLOATY.JS",
+        "url": "BrickBounce/assets/FLOATY.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/RUN.JS",
+        "url": "BrickBounce/assets/RUN.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/MUSIC.JS",
+        "url": "BrickBounce/assets/MUSIC.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/CUSTOM.JS",
+        "url": "BrickBounce/assets/CUSTOM.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/VICT.JS",
+        "url": "BrickBounce/assets/VICT.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/HELP.JS",
+        "url": "BrickBounce/assets/HELP.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/NAME.JS",
+        "url": "BrickBounce/assets/NAME.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/UPLOAD.JS",
+        "url": "BrickBounce/assets/UPLOAD.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/SCORE.JS",
+        "url": "BrickBounce/assets/SCORE.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/BRICKS.JS",
+        "url": "BrickBounce/assets/BRICKS.MIN.JS"
+      },
+      {
+        "name": "HOLO/BRKBNCE/LEVELS.TXT",
+        "url": "BrickBounce/assets/LEVELS.TXT"
+      },
+      {
+        "name": "HOLO/BRKBNCE/UI1.BIN",
+        "url": "BrickBounce/assets/UI1.BIN"
+      },
+      {
+        "name": "HOLO/BRKBNCE/UI2.BIN",
+        "url": "BrickBounce/assets/UI2.BIN"
+      },
+      {
+        "name": "HOLO/BRKBNCE/UI3.BIN",
+        "url": "BrickBounce/assets/UI3.BIN"
+      },
+      {
+        "name": "HOLO/BRKBNCE/ONLINE.IMG",
+        "url": "BrickBounce/assets/ONLINE.IMG"
+      },
+      {
+        "name": "HOLO/BRKBNCE/ABOUT.AVI",
+        "url": "BrickBounce/assets/ABOUT.AVI"
+      },
+      {
+        "name": "HOLO/BRKBNCE/ABOUTC.AVI",
+        "url": "BrickBounce/assets/ABOUTC.AVI"
+      },
+      {
+        "name": "HOLO/BRKBNCE/INTRO.WAV",
+        "url": "BrickBounce/assets/INTRO.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/MUS1.WAV",
+        "url": "BrickBounce/assets/MUS1.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/MUS2.WAV",
+        "url": "BrickBounce/assets/MUS2.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/MUS3.WAV",
+        "url": "BrickBounce/assets/MUS3.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/MUS4.WAV",
+        "url": "BrickBounce/assets/MUS4.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/OVER.WAV",
+        "url": "BrickBounce/assets/OVER.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/SERVE.WAV",
+        "url": "BrickBounce/assets/SERVE.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/PAD.WAV",
+        "url": "BrickBounce/assets/PAD.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/WALL.WAV",
+        "url": "BrickBounce/assets/WALL.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/HIT.WAV",
+        "url": "BrickBounce/assets/HIT.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/BRK.WAV",
+        "url": "BrickBounce/assets/BRK.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/CLANK.WAV",
+        "url": "BrickBounce/assets/CLANK.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/LOSE.WAV",
+        "url": "BrickBounce/assets/LOSE.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/CLEAR.WAV",
+        "url": "BrickBounce/assets/CLEAR.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/GAME.WAV",
+        "url": "BrickBounce/assets/GAME.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/POWER.WAV",
+        "url": "BrickBounce/assets/POWER.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/BAD.WAV",
+        "url": "BrickBounce/assets/BAD.WAV"
+      },
+      {
+        "name": "HOLO/BRKBNCE/LIFE.WAV",
+        "url": "BrickBounce/assets/LIFE.WAV"
+      }
+    ],
+    "storageOptional": []
+  },
+  {
     "id": "checkers",
     "name": "Checkers",
     "author": "@trekker87 @CodyTolene",
@@ -317,10 +511,76 @@
     "storageOptional": []
   },
   {
+    "id": "hamcocalendar",
+    "name": "HAMCo Calendar",
+    "author": "@joemto20-tech",
+    "version": "1.0.0",
+    "description": "A native-feeling calendar with date jumping and note-taking.",
+    "icon": "HAMCoCalendar/assets/hamcal.IMG",
+    "previews": ["HAMCoCalendar/previews/AUG.bmp"],
+    "type": "app",
+    "readme": "HAMCoCalendar/README.md",
+    "storage": [
+      {
+        "name": "HOLO/CALENDAR/APP.JS",
+        "url": "HAMCoCalendar/assets/APP.MIN.JS"
+      },
+      {
+        "name": "HOLO/CALENDAR/jan.IMG",
+        "url": "HAMCoCalendar/assets/jan.IMG"
+      },
+      {
+        "name": "HOLO/CALENDAR/feb.IMG",
+        "url": "HAMCoCalendar/assets/feb.IMG"
+      },
+      {
+        "name": "HOLO/CALENDAR/mar.IMG",
+        "url": "HAMCoCalendar/assets/mar.IMG"
+      },
+      {
+        "name": "HOLO/CALENDAR/april.IMG",
+        "url": "HAMCoCalendar/assets/april.IMG"
+      },
+      {
+        "name": "HOLO/CALENDAR/may.IMG",
+        "url": "HAMCoCalendar/assets/may.IMG"
+      },
+      {
+        "name": "HOLO/CALENDAR/june.IMG",
+        "url": "HAMCoCalendar/assets/june.IMG"
+      },
+      {
+        "name": "HOLO/CALENDAR/july.IMG",
+        "url": "HAMCoCalendar/assets/july.IMG"
+      },
+      {
+        "name": "HOLO/CALENDAR/aug.IMG",
+        "url": "HAMCoCalendar/assets/aug.IMG"
+      },
+      {
+        "name": "HOLO/CALENDAR/sep.IMG",
+        "url": "HAMCoCalendar/assets/sep.IMG"
+      },
+      {
+        "name": "HOLO/CALENDAR/oct.IMG",
+        "url": "HAMCoCalendar/assets/oct.IMG"
+      },
+      {
+        "name": "HOLO/CALENDAR/nov.IMG",
+        "url": "HAMCoCalendar/assets/nov.IMG"
+      },
+      {
+        "name": "HOLO/CALENDAR/dec.IMG",
+        "url": "HAMCoCalendar/assets/dec.IMG"
+      }
+    ],
+    "storageOptional": []
+  },
+  {
     "id": "ledcolor",
     "name": "HAMCo LED Control",
     "author": "@joemto20-tech",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Radiation RGB color control and safe LED hardware tester for the Pip-Boy 3000.",
     "icon": "HAMCoLEDControl/assets/HAMCOLEDCONTROL.IMG",
     "previews": [
@@ -328,7 +588,7 @@
       "HAMCoLEDControl/previews/preview02.bmp"
     ],
     "type": "app",
-    "readme": "HAMCoLEDControl/README.txt",
+    "readme": "HAMCoLEDControl/README.md",
     "storage": [
       {
         "name": "HOLO/LEDCOLOR/APP.JS",
@@ -341,6 +601,165 @@
       {
         "name": "HOLO/LEDCOLOR/SESSION.JS",
         "url": "HAMCoLEDControl/assets/SESSION.MIN.JS"
+      }
+    ],
+    "storageOptional": []
+  },
+  {
+    "id": "hamcolock",
+    "name": "HAMCo Lock",
+    "author": "@joemto20-tech",
+    "version": "1.0.0",
+    "description": "A PIN lock screen for your Pip-Boy. Set a 4-digit access code, pick a faction logo, and choose whether it locks on startup, on wake from sleep, or both.",
+    "icon": "HamcoLock/assets/HAMCOLOCK.IMG",
+    "previews": ["HamcoLock/previews/settings.bmp"],
+    "tags": "system,tool",
+    "type": "app",
+    "readme": "HamcoLock/README.md",
+    "storage": [
+      {
+        "name": "APPINFO/HAMCOLOCK.info",
+        "url": "HamcoLock/assets/HAMCOLOCK.info"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/APP.JS",
+        "url": "HamcoLock/assets/APP.JS"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/SERVICE.JS",
+        "url": "HamcoLock/assets/SERVICE.JS"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/LOCK.JS",
+        "url": "HamcoLock/assets/LOCK.JS"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/GRANT.JS",
+        "url": "HamcoLock/assets/GRANT.JS"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/SETTINGS.JS",
+        "url": "HamcoLock/assets/SETTINGS.JS"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/SETPIN.JS",
+        "url": "HamcoLock/assets/SETPIN.JS"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/HAMCOLOCK.IMG",
+        "url": "HamcoLock/assets/HAMCOLOCK.IMG"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/A.WAV",
+        "url": "HamcoLock/assets/A.WAV"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/G.AVI",
+        "url": "HamcoLock/assets/G.AVI"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/ATOMCATS.BIN",
+        "url": "HamcoLock/assets/ATOMCATS.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/BIGMT.BIN",
+        "url": "HamcoLock/assets/BIGMT.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/BROTHERHOOD.BIN",
+        "url": "HamcoLock/assets/BROTHERHOOD.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/ENCLAVE.BIN",
+        "url": "HamcoLock/assets/ENCLAVE.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/ENCLAVE1.BIN",
+        "url": "HamcoLock/assets/ENCLAVE1.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/FIENDS.BIN",
+        "url": "HamcoLock/assets/FIENDS.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/FOLLOWERS.BIN",
+        "url": "HamcoLock/assets/FOLLOWERS.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/GREATKHANS.BIN",
+        "url": "HamcoLock/assets/GREATKHANS.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/GUNNERS.BIN",
+        "url": "HamcoLock/assets/GUNNERS.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/HAM.BIN",
+        "url": "HamcoLock/assets/HAM.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/INTERSTATE80.BIN",
+        "url": "HamcoLock/assets/INTERSTATE80.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/KINGS.BIN",
+        "url": "HamcoLock/assets/KINGS.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/LEGION.BIN",
+        "url": "HamcoLock/assets/LEGION.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/MOTHMAN.BIN",
+        "url": "HamcoLock/assets/MOTHMAN.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/NCR.BIN",
+        "url": "HamcoLock/assets/NCR.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/NCRSEAL.BIN",
+        "url": "HamcoLock/assets/NCRSEAL.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/OPERATORS.BIN",
+        "url": "HamcoLock/assets/OPERATORS.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/RANGERS.BIN",
+        "url": "HamcoLock/assets/RANGERS.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/REDTALON.BIN",
+        "url": "HamcoLock/assets/REDTALON.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/RESPONDERS.BIN",
+        "url": "HamcoLock/assets/RESPONDERS.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/SMUGGLERS.BIN",
+        "url": "HamcoLock/assets/SMUGGLERS.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/TUNNELSNAKES.BIN",
+        "url": "HamcoLock/assets/TUNNELSNAKES.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/VANGRAFFS.BIN",
+        "url": "HamcoLock/assets/VANGRAFFS.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/VAULTTEC.BIN",
+        "url": "HamcoLock/assets/VAULTTEC.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/VIPERS.BIN",
+        "url": "HamcoLock/assets/VIPERS.BIN"
+      },
+      {
+        "name": "HOLO/HAMCOLOCK/WHITEGLOVE.BIN",
+        "url": "HamcoLock/assets/WHITEGLOVE.BIN"
       }
     ],
     "storageOptional": []
@@ -371,7 +790,7 @@
     "previousId": "magic8ball",
     "name": "Magic 8 Ball+",
     "author": "@Theeohn @joemto20-tech",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "A classic and an updated Magic 8 Ball, all 20 original and plenty new responses. Plus a few rare resonses if you keep asking! Shake your pipboy or spin/press a wheel to get a new answer!",
     "icon": "Magic8BallPlus/assets/MAGIC8BALLPLUS.IMG",
     "previews": [
@@ -441,7 +860,7 @@
     "icon": "PipPong/previews/PipPong.PNG",
     "previews": ["PipPong/previews/menu.bmp", "PipPong/previews/game.bmp"],
     "type": "game",
-    "readme": "PipPong/README.md",
+    "readme": "PipPong/README.MD",
     "storage": [
       {
         "name": "HOLO/PIPPONG/APP.JS",
@@ -476,15 +895,184 @@
     "author": "@tylerjbartlett",
     "version": "1.0.0",
     "description": "A simple calculator app for the Pip-Boy 3000.",
-    "icon": "Pip-Calc/previews/pipcalc.png",
-    "previews": ["Pip-Calc/previews/calculator.bmp"],
+    "icon": "PipCalc/previews/pipcalc.png",
+    "previews": ["PipCalc/previews/calculator.bmp"],
     "tags": "tool",
     "type": "app",
-    "readme": "Pip-Calc/README.md",
+    "readme": "PipCalc/README.md",
     "storage": [
       {
         "name": "HOLO/PIPCALC/APP.js",
-        "url": "Pip-Calc/app.min.js"
+        "url": "PipCalc/app.min.js"
+      }
+    ]
+  },
+  {
+    "id": "pip-co-idle-frameworks",
+    "name": "PIP-CO Idle Frameworks",
+    "author": "@LlamaYeYe",
+    "version": "1.0.0",
+    "description": "PIP-CO Idle Frameworks adds a two-minute Pip-Boy screensaver with optional dynamic Mesmetron and Pipquarium idle-provider integration.",
+    "icon": "PipCoIdleFrameworks/assets/PIPCOIDLEFRAMEWORKS.IMG",
+    "previews": ["PipCoIdleFrameworks/previews/menu.bmp"],
+    "type": "app",
+    "readme": "PipCoIdleFrameworks/README.md",
+    "storage": [
+      {
+        "name": "HOLO/FALLOUT_SCREENSAVER/APP.JS",
+        "url": "PipCoIdleFrameworks/assets/APP.MIN.JS"
+      },
+      {
+        "name": "HOLO/FALLOUT_SCREENSAVER/IDLE.JS",
+        "url": "PipCoIdleFrameworks/assets/IDLE.JS"
+      },
+      {
+        "name": "HOLO/FALLOUT_SCREENSAVER/SERVICE.JS",
+        "url": "PipCoIdleFrameworks/assets/SERVICE.JS"
+      },
+      {
+        "name": "HOLO/FALLOUT_SCREENSAVER/BOMBRUN.JS",
+        "url": "PipCoIdleFrameworks/assets/BOMBRUN.JS"
+      },
+      {
+        "name": "HOLO/FALLOUT_SCREENSAVER/BOMB.JS",
+        "url": "PipCoIdleFrameworks/assets/BOMB.JS"
+      },
+      {
+        "name": "HOLO/FALLOUT_SCREENSAVER/CONFIG.JSON",
+        "url": "PipCoIdleFrameworks/assets/CONFIG.JSON"
+      },
+      {
+        "name": "HOLO/FALLOUT_SCREENSAVER/FALLOUT.WAV",
+        "url": "PipCoIdleFrameworks/assets/FALLOUT.WAV"
+      },
+      {
+        "name": "HOLO/FALLOUT_SCREENSAVER/LOGO.BIN",
+        "url": "PipCoIdleFrameworks/assets/LOGO.BIN"
+      },
+      {
+        "name": "HOLO/FALLOUT_SCREENSAVER/MESIDLE.JS",
+        "url": "PipCoIdleFrameworks/assets/MESIDLE.JS"
+      },
+      {
+        "name": "HOLO/FALLOUT_SCREENSAVER/PIPQIDLE.JS",
+        "url": "PipCoIdleFrameworks/assets/PIPQIDLE.JS"
+      },
+      {
+        "name": "HOLO/FALLOUT_SCREENSAVER/TITLE.BIN",
+        "url": "PipCoIdleFrameworks/assets/TITLE.BIN"
+      }
+    ],
+    "storageOptional": []
+  },
+  {
+    "id": "startup-animations",
+    "name": "PIP-CO Startup Systems",
+    "author": "@LlamaYeYe",
+    "version": "1.2.0",
+    "description": "Choose custom Pip-Boy startup animations with embedded audio, a low-memory persistent runtime, and up to five drop-in AVI-only community Custom Bootups.",
+    "icon": "PipCoStartupSystems/assets/PIP_CO_STARTUP_SYSTEMS.IMG",
+    "previews": ["PipCoStartupSystems/previews/menu.bmp"],
+    "type": "app",
+    "readme": "PipCoStartupSystems/README.md",
+    "storage": [
+      {
+        "name": "HOLO/STARTUP_ANIMATIONS/APP.JS",
+        "url": "PipCoStartupSystems/assets/APP.MIN.JS"
+      },
+      {
+        "name": "HOLO/STARTUP_ANIMATIONS/SELECT.JSON",
+        "url": "PipCoStartupSystems/assets/SELECT.JSON"
+      },
+      {
+        "name": "HOLO/STARTUP_ANIMATIONS/TITLE.BIN",
+        "url": "PipCoStartupSystems/assets/TITLE.BIN"
+      }
+    ],
+    "storageOptional": [
+      {
+        "label": "Mister Handy",
+        "name": "HOLO/STARTUP_ANIMATIONS/MISTER.AVI",
+        "sizeKB": 2143,
+        "url": "PipCoStartupSystems/assets/MISTER.AVI"
+      },
+      {
+        "label": "Vault Girl",
+        "name": "HOLO/STARTUP_ANIMATIONS/VAULTGIRL.AVI",
+        "sizeKB": 686,
+        "url": "PipCoStartupSystems/assets/VAULTGIRL.AVI"
+      },
+      {
+        "label": "Deathclaw Vault Experiment",
+        "name": "HOLO/STARTUP_ANIMATIONS/DEATHCLAW.AVI",
+        "sizeKB": 361,
+        "url": "PipCoStartupSystems/assets/DEATHCLAW.AVI"
+      },
+      {
+        "label": "Enclave PIP-BOY",
+        "name": "HOLO/STARTUP_ANIMATIONS/ENCLAVE_PIPBOY.AVI",
+        "sizeKB": 5563,
+        "url": "PipCoStartupSystems/assets/ENCLAVE_PIPBOY.AVI"
+      },
+      {
+        "label": "The Enclave",
+        "name": "HOLO/STARTUP_ANIMATIONS/ENCLAVE.AVI",
+        "sizeKB": 161,
+        "url": "PipCoStartupSystems/assets/ENCLAVE.AVI"
+      },
+      {
+        "label": "The Brotherhood of Steel",
+        "name": "HOLO/STARTUP_ANIMATIONS/BOS.AVI",
+        "sizeKB": 916,
+        "url": "PipCoStartupSystems/assets/BOS.AVI"
+      },
+      {
+        "label": "The Minutemen",
+        "name": "HOLO/STARTUP_ANIMATIONS/MINUTEMEN.AVI",
+        "sizeKB": 1668,
+        "url": "PipCoStartupSystems/assets/MINUTEMEN.AVI"
+      },
+      {
+        "label": "Mothman",
+        "name": "HOLO/STARTUP_ANIMATIONS/MOTHMAN.AVI",
+        "sizeKB": 821,
+        "url": "PipCoStartupSystems/assets/MOTHMAN.AVI"
+      },
+      {
+        "label": "YES MAN",
+        "name": "HOLO/STARTUP_ANIMATIONS/YESMAN.AVI",
+        "sizeKB": 200,
+        "url": "PipCoStartupSystems/assets/YESMAN.AVI"
+      },
+      {
+        "label": "Mr. House",
+        "name": "HOLO/STARTUP_ANIMATIONS/MRHOUSE.AVI",
+        "sizeKB": 2559,
+        "url": "PipCoStartupSystems/assets/MRHOUSE.AVI"
+      },
+      {
+        "label": "Classic Mr. House",
+        "name": "HOLO/STARTUP_ANIMATIONS/CLASSIC_MRHOUSE.AVI",
+        "sizeKB": 1875,
+        "url": "PipCoStartupSystems/assets/CLASSIC_MRHOUSE.AVI"
+      },
+      {
+        "label": "Classic Mr. House Animated",
+        "name": "HOLO/STARTUP_ANIMATIONS/CLASSIC_MRHOUSE_ANIMATED.AVI",
+        "sizeKB": 2235,
+        "url": "PipCoStartupSystems/assets/CLASSIC_MRHOUSE_ANIMATED.AVI"
+      },
+      {
+        "label": "Classic Mr. House Fully Animated",
+        "name": "HOLO/STARTUP_ANIMATIONS/CLASSIC_MRHOUSE_FULLY_ANIMATED.AVI",
+        "sizeKB": 2063,
+        "url": "PipCoStartupSystems/assets/CLASSIC_MRHOUSE_FULLY_ANIMATED.AVI"
+      },
+      {
+        "label": "Dogmeat",
+        "name": "HOLO/STARTUP_ANIMATIONS/DOGMEAT.AVI",
+        "sizeKB": 1820,
+        "url": "PipCoStartupSystems/assets/DOGMEAT.AVI"
       }
     ]
   },
@@ -575,6 +1163,24 @@
     "storageOptional": []
   },
   {
+    "id": "piphid",
+    "name": "PipHID",
+    "author": "@AidansLab",
+    "version": "1.0.0",
+    "description": "Turns the Pip-Boy into a HID (Human Interface Device) for interacting with a computer, ported from the EXT TERMINAL attachment in the Pip-Boy 3000 Mk V firmware.",
+    "icon": "PipHID/PIPHID.IMG",
+    "previews": ["PipHID/previews/preview.bmp"],
+    "type": "app",
+    "readme": "PipHID/README.md",
+    "storage": [
+      {
+        "name": "HOLO/PIPHID/APP.JS",
+        "url": "PipHID/assets/APP.MIN.JS"
+      }
+    ],
+    "storageOptional": []
+  },
+  {
     "id": "pipman",
     "name": "PIPMAN",
     "author": "@McBeefy34",
@@ -588,6 +1194,76 @@
       {
         "name": "HOLO/PIPMAN/APP.JS",
         "url": "PipMan/app.min.js"
+      }
+    ],
+    "storageOptional": []
+  },
+  {
+    "id": "pipquarium",
+    "name": "Pipquarium",
+    "author": "@AidansLab",
+    "version": "1.0.0",
+    "description": "A Pip-Boy 3000 remake of the classic Windows 95 Plus! for Kids Underwater screensaver, with real fish artwork extracted from the original screensaver.",
+    "icon": "Pipquarium/PIPQUARIUM.IMG",
+    "previews": ["Pipquarium/previews/preview.bmp"],
+    "type": "app",
+    "readme": "Pipquarium/README.md",
+    "storage": [
+      {
+        "name": "HOLO/PIPQUARIUM/APP.JS",
+        "url": "Pipquarium/assets/APP.MIN.JS"
+      },
+      {
+        "name": "HOLO/PIPQUARIUM/FISHA_L.IMG",
+        "url": "Pipquarium/assets/FISHA_L.IMG"
+      },
+      {
+        "name": "HOLO/PIPQUARIUM/FISHA_R.IMG",
+        "url": "Pipquarium/assets/FISHA_R.IMG"
+      },
+      {
+        "name": "HOLO/PIPQUARIUM/FISHB_L.IMG",
+        "url": "Pipquarium/assets/FISHB_L.IMG"
+      },
+      {
+        "name": "HOLO/PIPQUARIUM/FISHB_R.IMG",
+        "url": "Pipquarium/assets/FISHB_R.IMG"
+      },
+      {
+        "name": "HOLO/PIPQUARIUM/RAY_L.IMG",
+        "url": "Pipquarium/assets/RAY_L.IMG"
+      },
+      {
+        "name": "HOLO/PIPQUARIUM/RAY_R.IMG",
+        "url": "Pipquarium/assets/RAY_R.IMG"
+      },
+      {
+        "name": "HOLO/PIPQUARIUM/TRIG_L.IMG",
+        "url": "Pipquarium/assets/TRIG_L.IMG"
+      },
+      {
+        "name": "HOLO/PIPQUARIUM/TRIG_R.IMG",
+        "url": "Pipquarium/assets/TRIG_R.IMG"
+      },
+      {
+        "name": "HOLO/PIPQUARIUM/SEAHORSE.IMG",
+        "url": "Pipquarium/assets/SEAHORSE.IMG"
+      },
+      {
+        "name": "HOLO/PIPQUARIUM/CORAL_A.IMG",
+        "url": "Pipquarium/assets/CORAL_A.IMG"
+      },
+      {
+        "name": "HOLO/PIPQUARIUM/CORAL_B.IMG",
+        "url": "Pipquarium/assets/CORAL_B.IMG"
+      },
+      {
+        "name": "HOLO/PIPQUARIUM/BUBBLE.IMG",
+        "url": "Pipquarium/assets/BUBBLE.IMG"
+      },
+      {
+        "name": "HOLO/PIPQUARIUM/AMBIENT.WAV",
+        "url": "Pipquarium/assets/AMBIENT.WAV"
       }
     ],
     "storageOptional": []
@@ -823,10 +1499,6 @@
         "url": "RadroachRaces/assets/TITLE.MIN.JS"
       },
       {
-        "name": "HOLO/RADROACH_RACES/TITLE.JSON",
-        "url": "RadroachRaces/assets/TITLE.JSON"
-      },
-      {
         "name": "HOLO/RADROACH_RACES/TITLEIMG.BIN",
         "url": "RadroachRaces/assets/TITLEIMG.BIN"
       },
@@ -934,11 +1606,11 @@
   },
   {
     "id": "rcet",
-    "name": "RobCo Entertainment Terminal",
-    "author": "@CodyTolene",
-    "version": "2.1.0",
+    "name": "RobCo Entmt. Terminal",
+    "author": "@CodyTolene @joemto20-tech",
+    "version": "2.2.2",
     "description": "A Vault-Tec approved RobCo holotape for playing WAVs from `MUSIC/`, AVI reels from `VIDEOS/`, and images from `IMAGES/`.",
-    "icon": "RobCoEntertainmentTerminal/RCET.PNG",
+    "icon": "RobCoEntertainmentTerminal/assets/RCET.IMG",
     "previews": [
       "RobCoEntertainmentTerminal/previews/menu.bmp",
       "RobCoEntertainmentTerminal/previews/music.bmp",
@@ -952,7 +1624,11 @@
     "storage": [
       {
         "name": "HOLO/RCET/APP.JS",
-        "url": "RobCoEntertainmentTerminal/APP.MIN.JS"
+        "url": "RobCoEntertainmentTerminal/assets/APP.MIN.JS"
+      },
+      {
+        "name": "HOLO/RCET/ENGINE.JS",
+        "url": "RobCoEntertainmentTerminal/assets/ENGINE.MIN.JS"
       },
       {
         "name": "HOLO/RCET/IMAGES.JS",
@@ -980,19 +1656,6 @@
       }
     ],
     "storageOptional": [
-      {
-        "label": "Startup Intro Sound",
-        "name": "HOLO/RCET/INTRO.WAV",
-        "previewMp3": "assets/optional/INTRO.mp3",
-        "sizeKB": 31,
-        "url": "RobCoEntertainmentTerminal/assets/optional/INTRO.WAV"
-      },
-      {
-        "label": "Startup Intro Image",
-        "name": "HOLO/RCET/IMG_RCET.BIN",
-        "sizeKB": 38,
-        "url": "RobCoEntertainmentTerminal/assets/optional/IMG_RCET.BIN"
-      },
       {
         "label": "Example BIN Image",
         "name": "IMAGES/Example Full Screen BIN Image.bin",
@@ -1209,17 +1872,37 @@
   {
     "id": "vaulttimer",
     "name": "Vault-Tec Timer",
-    "author": "@trekker87",
-    "version": "1.0.0",
-    "description": "A countdown timer app for the Pip-Boy 3000. Set the number of minutes, choose your alert style, and press the knob to start. When the timer expires, the device will alert you with sound, flashing lights, or both — your choice.",
-    "icon": "VaultTecTimer/previews/vaulttectimer.png",
-    "previews": ["VaultTecTimer/previews/menu.bmp"],
+    "author": "@trekker87 @Theeohn",
+    "version": "2.0.1",
+    "description": "A countdown timer with customizable alerts, and a stopwatch with lap function.",
+    "icon": "VaultTecTimer/assets/VAULTTECTIMER.IMG",
+    "previews": [
+      "VaultTecTimer/previews/MENU.BMP",
+      "VaultTecTimer/previews/TIMER.BMP",
+      "VaultTecTimer/previews/STOPWATCH.BMP"
+    ],
     "type": "app",
     "readme": "VaultTecTimer/README.md",
     "storage": [
       {
         "name": "HOLO/VAULT_TEC_TIMER/APP.JS",
-        "url": "VaultTecTimer/app.min.js"
+        "url": "VaultTecTimer/assets/APP.MIN.JS"
+      },
+      {
+        "name": "HOLO/VAULT_TEC_TIMER/STOPWATCH.JS",
+        "url": "VaultTecTimer/assets/STOPWATCH.MIN.JS"
+      },
+      {
+        "name": "HOLO/VAULT_TEC_TIMER/TIMER.JS",
+        "url": "VaultTecTimer/assets/TIMER.MIN.JS"
+      },
+      {
+        "name": "HOLO/VAULT_TEC_TIMER/TITLE.JS",
+        "url": "VaultTecTimer/assets/TITLE.MIN.JS"
+      },
+      {
+        "name": "HOLO/VAULT_TEC_TIMER/TITLE.BIN",
+        "url": "VaultTecTimer/assets/TITLE.BIN"
       }
     ],
     "storageOptional": []
@@ -1326,6 +2009,67 @@
         "previewMp3": "assets/DICE_THROW.mp3",
         "sizeKB": 35,
         "url": "VaultsAndDeathclaws/assets/DICE_THROW.WAV"
+      }
+    ]
+  },
+  {
+    "id": "zero-escape-vault-9",
+    "name": "Zero Escape Vault 9",
+    "author": "@Johnnyjoestar987",
+    "version": "1.0.0",
+    "description": "A Nonary-style ALLY/BETRAY voting game where you and seven CPU rivals bargain, betray and race to escape Vault 9.",
+    "icon": "ZeroEscapeVault9/assets/ZERO_ESCAPE_VAULT_9.IMG",
+    "previews": [
+      "ZeroEscapeVault9/previews/menu.png",
+      "ZeroEscapeVault9/previews/vault.png",
+      "ZeroEscapeVault9/previews/results.png",
+      "ZeroEscapeVault9/previews/gameover.png"
+    ],
+    "type": "game",
+    "readme": "ZeroEscapeVault9/README.md",
+    "storage": [
+      {
+        "name": "HOLO/ZERO_ESCAPE_VAULT_9/APP.JS",
+        "url": "ZeroEscapeVault9/assets/APP.MIN.JS"
+      },
+      {
+        "name": "HOLO/ZERO_ESCAPE_VAULT_9/DATA.JSON",
+        "url": "ZeroEscapeVault9/assets/DATA.JSON"
+      }
+    ],
+    "storageOptional": [
+      {
+        "label": "Intro Image",
+        "name": "HOLO/ZERO_ESCAPE_VAULT_9/MAINSCREEN.BIN",
+        "sizeKB": 38,
+        "url": "ZeroEscapeVault9/assets/MAINSCREEN.BIN"
+      },
+      {
+        "label": "Door Opens Image",
+        "name": "HOLO/ZERO_ESCAPE_VAULT_9/DOOROPENS.BIN",
+        "sizeKB": 38,
+        "url": "ZeroEscapeVault9/assets/DOOROPENS.BIN"
+      },
+      {
+        "label": "Main Theme Music",
+        "name": "HOLO/ZERO_ESCAPE_VAULT_9/MAINTHEME.WAV",
+        "previewMp3": "assets/MAINTHEME.mp3",
+        "sizeKB": 1367,
+        "url": "ZeroEscapeVault9/assets/MAINTHEME.WAV"
+      },
+      {
+        "label": "Background Music",
+        "name": "HOLO/ZERO_ESCAPE_VAULT_9/BACKGROUND.WAV",
+        "previewMp3": "assets/BACKGROUND.mp3",
+        "sizeKB": 1099,
+        "url": "ZeroEscapeVault9/assets/BACKGROUND.WAV"
+      },
+      {
+        "label": "CRT On SFX",
+        "name": "HOLO/ZERO_ESCAPE_VAULT_9/CRT_ON.WAV",
+        "previewMp3": "assets/CRT_ON.mp3",
+        "sizeKB": 28,
+        "url": "ZeroEscapeVault9/assets/CRT_ON.WAV"
       }
     ]
   }
