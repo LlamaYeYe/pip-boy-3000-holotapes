@@ -68,15 +68,15 @@ Follow the guide below to create your own custom Holotapes for the Pip-Boy 3000!
 
    ```text
    holotapes/<YourHolotape>/
-   ├── app.js
-   ├── app.min.js
+   ├── APP.JS
+   ├── APP.MIN.JS
    ├── metadata.json
    ├── README.md
    ├── ChangeLog
    └── assets/
    ```
 
-2. Write the unminified source in `app.js`. The app must be an anonymous
+2. Write the unminified source in `APP.JS`. The app must be an anonymous
    function expression that the Pip-Boy OS invokes; do not invoke it yourself
    with a trailing `()`. It must return an uppercase alphanumeric `id` and a
    `remove` function.
@@ -167,7 +167,7 @@ Follow the guide below to create your own custom Holotapes for the Pip-Boy 3000!
      "previews": [],
      "type": "app",
      "readme": "README.md",
-     "storage": [{ "name": "HOLO/EXAMPLE/APP.JS", "url": "app.min.js" }],
+     "storage": [{ "name": "HOLO/EXAMPLE/APP.JS", "url": "APP.MIN.JS" }],
      "storageOptional": []
    }
    ```
@@ -188,7 +188,7 @@ Follow the guide below to create your own custom Holotapes for the Pip-Boy 3000!
    - Initial release
    ```
 
-6. Generate `app.min.js` from `app.js` as described in
+6. Generate `APP.MIN.JS` from `APP.JS` as described in
    [Build and minification](#build-minification). Both files must behave
    identically.
 
@@ -214,8 +214,8 @@ Follow the guide below to create your own custom Holotapes for the Pip-Boy 3000!
 4. Test your Holotape on the device using the "Save & Test" button.
 
    > ![img-info][img-info] The editor's "Encode" button can prepare code for
-   > testing. Keep the readable source as `app.js` and the encoded/minified
-   > output as `app.min.js`.
+   > testing. Keep the readable source as `APP.JS` and the encoded/minified
+   > output as `APP.MIN.JS`.
 
 5. Download your files and add them to this repository.
 </details>
@@ -258,7 +258,7 @@ Minify and Encode your Holotape here:
 
 https://www.pip-boy.com/3000/holotapes/create
 
-This will give you a proper `app.min.js` from `app.js`.
+This will give you a proper `APP.MIN.JS` from `APP.JS`.
 
 Run the repository build after adding or changing metadata:
 
@@ -269,7 +269,7 @@ npm run build
 
 This rebuilds `holotapes/registry.json`, rewrites relative file paths for the
 registry, and rejects metadata whose `type` is not `app` or `game`. It does not
-generate `app.min.js` or perform all of the submission checks for you.
+generate `APP.MIN.JS` or perform all of the submission checks for you.
 
 ### Validation <a name="validation"></a>
 
@@ -528,8 +528,8 @@ print(E.getSizeOf(this['\xFF'], 1).sort((a, b) => a.size - b.size));
    [Creating a new Holotape](#create).
 
    > ![Warn][img-warn] Submissions must include the original, human-readable
-   > source code (`app.js`). Pull requests containing only minified code
-   > (`app.min.js`) will be rejected. This is an open source project, and
+   > source code (`APP.JS`). Pull requests containing only minified code
+   > (`APP.MIN.JS`) will be rejected. This is an open source project, and
    > readable source is essential so the community can review changes, maintain
    > and update apps over time, fix bugs, and learn from each other's work.
 
@@ -550,16 +550,16 @@ print(E.getSizeOf(this['\xFF'], 1).sort((a, b) => a.size - b.size));
    ```
 
 6. Before opening a pull request, verify:
-   - The original unminified source (`app.js`) is included; minified code alone
+   - The original unminified source (`APP.JS`) is included; minified code alone
      is not accepted.
-   - `app.js` starts with `(function() {`, ends with `});`, and is not invoked.
+   - `APP.JS` starts with `(function() {`, ends with `});`, and is not invoked.
    - The return object contains a literal uppercase alphanumeric `id` and a
      `remove` function.
    - Every listener, interval, timeout, and watch is removed or cleared; audio
      is stopped if used.
    - `remove()` exits cleanly without `load()` or `E.reboot()`.
    - No unsupported language/runtime features or OS-global mutations are used.
-   - `app.min.js` exists and behaves exactly like `app.js`.
+   - `APP.MIN.JS` exists and behaves exactly like `APP.JS`.
    - Metadata uses a unique lowercase ID, semantic version, valid type, valid
      relative paths, and the matching `HOLO/<APP_ID>/` storage prefix.
    - `README.md` documents controls and `ChangeLog` contains an entry.

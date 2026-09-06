@@ -1,0 +1,31 @@
+{
+  "name": "Vault-Girl",
+  "mode": "animated",
+  "pack": "HOLO/CHARSWITCHER/chars/Vault-Girl.BIN",
+  "frameW": 204,
+  "frameH": 208,
+  "frameBpp": 2,
+  "frameSize": 10611,
+  "x": 138,
+  "y": 64,
+  "fps": 7,
+  "frameMs": 143,
+  "stateOffsets": [0, 7, 14, 21, 28, 35, 42, 49, 56, 64, 71],
+  "stateCounts": [7, 7, 7, 7, 7, 7, 7, 7, 8, 7, 7],
+  "av": {
+    "head": "perceptioncondition",
+    "tors": "endurancecondition",
+    "lArm": "leftattackcondition",
+    "rArm": "rightattackcondition",
+    "lLeg": "leftmobilitycondition",
+    "rLeg": "rightmobilitycondition"
+  },
+  "bars": {
+    "head": { "x": 240, "y": 50 },
+    "tors": { "x": 241, "y": 256 },
+    "rArm": { "x": 155, "y": 117, "rightCap": true },
+    "lArm": { "x": 323, "y": 117, "leftCap": true },
+    "rLeg": { "x": 155, "y": 205, "rightCap": true },
+    "lLeg": { "x": 323, "y": 205, "leftCap": true }
+  }
+}

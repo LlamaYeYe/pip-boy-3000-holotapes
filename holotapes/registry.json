@@ -447,6 +447,47 @@
     "storageOptional": []
   },
   {
+    "id": "charswitcher",
+    "name": "CND Character Switcher",
+    "author": "@Aidan'sLab",
+    "version": "1.0.0",
+    "description": "A character switching utility for the Pip-Boy 3000.",
+    "icon": "ConditionCharacterSwitcher/previews/charswitcher.png",
+    "previews": [
+      "ConditionCharacterSwitcher/previews/holotape.bmp",
+      "ConditionCharacterSwitcher/previews/cnd.bmp"
+    ],
+    "type": "app",
+    "readme": "ConditionCharacterSwitcher/README.md",
+    "storage": [
+      {
+        "name": "HOLO/CHARSWITCHER/APP.JS",
+        "url": "ConditionCharacterSwitcher/APP.MIN.JS"
+      },
+      {
+        "name": "HOLO/CHARSWITCHER/RENDERER.JS",
+        "url": "ConditionCharacterSwitcher/assets/RENDERER.MIN.JS"
+      },
+      {
+        "name": "HOLO/CHARSWITCHER/chars/Mk_V_Vault-Boy.json",
+        "url": "ConditionCharacterSwitcher/assets/chars/Mk_V_Vault-Boy.json"
+      },
+      {
+        "name": "HOLO/CHARSWITCHER/chars/Mk_V_Vault-Boy.BIN",
+        "url": "ConditionCharacterSwitcher/assets/chars/Mk_V_Vault-Boy.BIN"
+      },
+      {
+        "name": "HOLO/CHARSWITCHER/chars/Vault-Girl.json",
+        "url": "ConditionCharacterSwitcher/assets/chars/Vault-Girl.json"
+      },
+      {
+        "name": "HOLO/CHARSWITCHER/chars/Vault-Girl.BIN",
+        "url": "ConditionCharacterSwitcher/assets/chars/Vault-Girl.BIN"
+      }
+    ],
+    "storageOptional": []
+  },
+  {
     "id": "fanorona",
     "name": "Fanorona",
     "author": "@Theeohn",
