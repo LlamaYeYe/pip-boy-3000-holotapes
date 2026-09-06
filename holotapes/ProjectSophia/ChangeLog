@@ -1,12 +1,8 @@
-1.0.0
-- Initial public release of S.O.P.H.I.A. — Companion Pip-Boy Framework.
-- Includes YES MAN, FISTO, KL-E-O, MK II Stealth Suit, and Andy / Mister Handy.
-- Adds modular custom installation: each large companion voice bank is optional through storageOptional.
-- Companion menu dynamically shows only voice banks actually installed on the device.
-- Keeps the small 51-entry IDX files in the core so each optional website selection is one complete voice-bank choice.
-- Adds contextual companion voice responses across supported STATS, ITEMS, DATA, and mode-switch menus.
-- Uses one active companion at a time with same-visit no-repeat protection.
-- Preserves silence for MAP, STATUS RAD, RADIO/FM, and protected audio/video playback.
-- Includes the hardware-tested memory-safe launcher/service baseline and UI-responsive chunked voice extraction.
-- Keeps readable APP.JS source and a separate compact APP.MIN.JS runtime entry.
-- Removes the legacy UI-global knob callback and legacy Yes Man service alias while preserving the required resident S.O.P.H.I.A. service lifecycle.
+v1.0.0
+- Five selectable companion voice packs: YES MAN, FISTO, KL-E-O, MK II Stealth Suit, and Andy / Mister Handy.
+- Contextual companion voices across supported ITEMS, STATS, STATUS, and DATA menus.
+- Smooth handoff when leaving the S.O.P.H.I.A. holotape or switching Pip-Boy sections.
+- STATUS RAD remains silent and stops active S.O.P.H.I.A. speech while allowing normal STATUS navigation.
+- Fallout 3 / Fallout: New Vegas mode-change companion responses in DATA > Settings.
+- Detached low-memory router and transient voice-engine architecture.
+- Readable source files with separate compact device runtime files.

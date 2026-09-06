@@ -3,82 +3,98 @@
   "name": "S.O.P.H.I.A.",
   "author": "@LlamaYeYe",
   "version": "1.0.0",
-  "description": "S.O.P.H.I.A. adds selectable Fallout-themed companion voices to The Wand Company Pip-Boy 3000. Install only the companion voice banks you want; the holotape automatically shows only voices that are present on the device.",
-  "icon": "assets/SOPHIA.PNG",
+  "description": "Companion voice framework for the Wand Company Pip-Boy 3000 with five selectable companions and contextual voices across supported menus.",
+  "icon": "assets/icon.png",
   "previews": [],
   "type": "app",
   "readme": "README.md",
   "storage": [
     {
-      "name": "HOLO/Project_Sophia/APP.JS",
+      "name": "HOLO/PROJECT_SOPHIA/APP.JS",
       "url": "assets/APP.MIN.JS"
     },
     {
-      "name": "HOLO/Project_Sophia/SOPHIA_UI.JS",
-      "url": "assets/SOPHIA_UI.MIN.JS"
+      "name": "HOLO/PROJECT_SOPHIA/SOPHIA_ROUTER.JS",
+      "url": "assets/SOPHIA_ROUTER.MIN.JS"
     },
     {
-      "name": "HOLO/Project_Sophia/SOPHIA_CONFIG.JSON",
+      "name": "HOLO/PROJECT_SOPHIA/SOPHIA_VOICE_ENGINE.JS",
+      "url": "assets/SOPHIA_VOICE_ENGINE.MIN.JS"
+    },
+    {
+      "name": "HOLO/PROJECT_SOPHIA/SOPHIA_CONFIG.JSON",
       "url": "assets/SOPHIA_CONFIG.JSON"
     },
     {
-      "name": "HOLO/Project_Sophia/SOPHIA_PLAY.WAV",
+      "name": "HOLO/PROJECT_SOPHIA/SOPHIA_PLAY.WAV",
       "url": "assets/SOPHIA_PLAY.WAV"
     },
     {
-      "name": "HOLO/Project_Sophia/SOPHIA_SERVICE.JS",
-      "url": "assets/SOPHIA_SERVICE.MIN.JS"
+      "name": "HOLO/PROJECT_SOPHIA/SOPHIA_STATUS.BIN",
+      "url": "assets/SOPHIA_STATUS.BIN"
     },
     {
-      "name": "HOLO/Project_Sophia/YES_MAN_VOICE.IDX",
+      "name": "HOLO/PROJECT_SOPHIA/SOPHIA_STATUS.IDX",
+      "url": "assets/SOPHIA_STATUS.IDX"
+    },
+    {
+      "name": "HOLO/PROJECT_SOPHIA/SOPHIA_ENG.BIN",
+      "url": "assets/SOPHIA_ENG.BIN"
+    },
+    {
+      "name": "HOLO/PROJECT_SOPHIA/SOPHIA_ENG.IDX",
+      "url": "assets/SOPHIA_ENG.IDX"
+    },
+    {
+      "name": "HOLO/PROJECT_SOPHIA/YES_MAN_VOICE.IDX",
       "url": "assets/YES_MAN_VOICE.IDX"
     },
     {
-      "name": "HOLO/Project_Sophia/FISTO_VOICE.IDX",
+      "name": "HOLO/PROJECT_SOPHIA/FISTO_VOICE.IDX",
       "url": "assets/FISTO_VOICE.IDX"
     },
     {
-      "name": "HOLO/Project_Sophia/KL-E-O_VOICE.IDX",
+      "name": "HOLO/PROJECT_SOPHIA/KL-E-O_VOICE.IDX",
       "url": "assets/KL-E-O_VOICE.IDX"
     },
     {
-      "name": "HOLO/Project_Sophia/MK_II_STEALTH_SUIT_VOICE.IDX",
+      "name": "HOLO/PROJECT_SOPHIA/MK_II_STEALTH_SUIT_VOICE.IDX",
       "url": "assets/MK_II_STEALTH_SUIT_VOICE.IDX"
     },
     {
-      "name": "HOLO/Project_Sophia/ANDY_VOICE.IDX",
+      "name": "HOLO/PROJECT_SOPHIA/ANDY_VOICE.IDX",
       "url": "assets/ANDY_VOICE.IDX"
     }
   ],
   "storageOptional": [
     {
       "label": "YES MAN Voice Pack",
-      "name": "HOLO/Project_Sophia/YES_MAN_VOICE.BIN",
-      "sizeKB": 9635,
+      "name": "HOLO/PROJECT_SOPHIA/YES_MAN_VOICE.BIN",
+      "sizeKB": 6712,
       "url": "assets/YES_MAN_VOICE.BIN"
     },
     {
       "label": "FISTO Voice Pack",
-      "name": "HOLO/Project_Sophia/FISTO_VOICE.BIN",
-      "sizeKB": 7859,
+      "name": "HOLO/PROJECT_SOPHIA/FISTO_VOICE.BIN",
+      "sizeKB": 5594,
       "url": "assets/FISTO_VOICE.BIN"
     },
     {
       "label": "KL-E-O Voice Pack",
-      "name": "HOLO/Project_Sophia/KL-E-O_VOICE.BIN",
-      "sizeKB": 10348,
+      "name": "HOLO/PROJECT_SOPHIA/KL-E-O_VOICE.BIN",
+      "sizeKB": 7378,
       "url": "assets/KL-E-O_VOICE.BIN"
     },
     {
       "label": "MK II Stealth Suit Voice Pack",
-      "name": "HOLO/Project_Sophia/MK_II_STEALTH_SUIT_VOICE.BIN",
-      "sizeKB": 11422,
+      "name": "HOLO/PROJECT_SOPHIA/MK_II_STEALTH_SUIT_VOICE.BIN",
+      "sizeKB": 8108,
       "url": "assets/MK_II_STEALTH_SUIT_VOICE.BIN"
     },
     {
       "label": "Andy / Mister Handy Voice Pack",
-      "name": "HOLO/Project_Sophia/ANDY_VOICE.BIN",
-      "sizeKB": 10957,
+      "name": "HOLO/PROJECT_SOPHIA/ANDY_VOICE.BIN",
+      "sizeKB": 7836,
       "url": "assets/ANDY_VOICE.BIN"
     }
   ]
