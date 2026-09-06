@@ -16,35 +16,47 @@
             "Andy - Mister Handy"
         ],
         /*
-         * Keep the router detached from the holotape UI closure, but compile
-         * the tiny loader only after the UI has been removed and defragmented.
-         * A compile failure is caught in normal APP.JS instead of surfacing
-         * the earlier Espruino dynamic-Function parser ERROR dialog.
+         * Keep one explicit shared runtime object for the detached lifecycle.
+         * The object is passed into the router instead of exposing separate
+         * timer, loader, router, engine, and UI globals.
          */
         detachedRouterLoaderSource =
-            "global.__SLT=0;" +
+            "var st=global.__PipCoSophia;" +
+            "if(!st)return;" +
+            "st.timer=0;" +
             "if(Pip.sleeping||Pip.menuChanging){" +
-            "global.__SLT=setTimeout(global.__SLF,1800);" +
+            "st.timer=setTimeout(st.loader,1800);" +
             "return;" +
             "}" +
-            "if(global.__PipCoSophiaUi||global.__SR){" +
-            "global.__SLF=0;" +
+            "if(st.uiOpen||st.router){" +
+            "st.loader=0;" +
             "return;" +
             "}" +
             "var f=require('fs')," +
             "s=f.readFileSync('HOLO/PROJECT_SOPHIA/SOPHIA_ROUTER.JS')," +
             "q=Function('return '+s)()," +
-            "r=q();" +
+            "r=q(st);" +
             "s=q=0;" +
-            "global.__SLF=0;" +
+            "st.loader=0;" +
             "if(r&&r.kick)r.kick();";
 
-    let enabled = 0,
+    let sophiaState = global.__PipCoSophia,
+        enabled = 0,
         activeCompanion = "YES_MAN",
         menuSelection = 0,
         selectedCompanionIndex = -1,
         removed = 0,
         detachedRouterLoader = 0;
+
+    if (!sophiaState) {
+        sophiaState = {
+            uiOpen: 0,
+            timer: 0,
+            loader: 0,
+            router: 0
+        };
+        global.__PipCoSophia = sophiaState
+    }
 
     function defragMemory() {
         try {
@@ -101,37 +113,40 @@
 
     function stopBackgroundServices() {
         try {
-            if (global.__SLT) {
-                clearTimeout(global.__SLT);
-                global.__SLT = 0
+            if (sophiaState.timer) clearTimeout(sophiaState.timer)
+        } catch (error) {
+        }
+        sophiaState.timer = 0;
+
+        try {
+            if (sophiaState.router && sophiaState.router.die) {
+                sophiaState.router.die()
             }
         } catch (error) {
         }
 
-        try {
-            if (global.__SR && global.__SR.die) global.__SR.die()
-        } catch (error) {
-        }
-        global.__SR = 0;
-
-        try {
-            if (global.__SE && global.__SE.destroy) global.__SE.destroy()
-        } catch (error) {
-        }
-        global.__SE = 0;
-        global.__SLF = 0;
+        sophiaState.router = 0;
+        sophiaState.loader = 0;
 
         defragMemory()
     }
 
     function scheduleRouterStart() {
         if (!enabled || !detachedRouterLoader) {
-            global.__SLF = 0;
+            sophiaState.loader = 0;
+
+            /*
+             * Disabled means there is no background S.O.P.H.I.A. runtime
+             * that needs to survive the configuration holotape.
+             */
+            if (!enabled && global.__PipCoSophia === sophiaState) {
+                global.__PipCoSophia = 0
+            }
             return
         }
 
         try {
-            if (global.__SLT) clearTimeout(global.__SLT)
+            if (sophiaState.timer) clearTimeout(sophiaState.timer)
         } catch (error) {
         }
 
@@ -140,8 +155,8 @@
          * STATS/ITEMS/DATA button can draw without S.O.P.H.I.A. work
          * competing with the firmware transition.
          */
-        global.__SLF = detachedRouterLoader;
-        global.__SLT = setTimeout(detachedRouterLoader, 1000);
+        sophiaState.loader = detachedRouterLoader;
+        sophiaState.timer = setTimeout(detachedRouterLoader, 1000);
         detachedRouterLoader = 0
     }
 
@@ -297,7 +312,7 @@
         } catch (error) {
         }
 
-        global.__PipCoSophiaUi = 0;
+        sophiaState.uiOpen = 0;
 
         /*
          * No Function compilation and no E.defrag() happen here.
@@ -306,7 +321,7 @@
         scheduleRouterStart()
     }
 
-    global.__PipCoSophiaUi = 1;
+    sophiaState.uiOpen = 1;
 
     stopBackgroundServices();
     loadConfig();

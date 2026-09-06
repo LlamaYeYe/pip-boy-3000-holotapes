@@ -1,4 +1,6 @@
 v1.0.0
+- Navigation listener registration now tracks successful attachments, cleans up partial registration, and rethrows failures instead of silently swallowing them; listener removal only runs for listeners that were actually attached.
+- Consolidated detached runtime state into one shared S.O.P.H.I.A. object passed to the router; the voice engine is now router-owned instead of stored in a separate global.
 - Five selectable companion voice packs: YES MAN, FISTO, KL-E-O, MK II Stealth Suit, and Andy / Mister Handy.
 - Contextual companion voices across supported ITEMS, STATS, STATUS, and DATA menus.
 - Smooth handoff when leaving the S.O.P.H.I.A. holotape or switching Pip-Boy sections.

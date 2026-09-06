@@ -1,8 +1,11 @@
-(function() {
+(function(sophiaState) {
     const fs = require("fs"),
         appPath = "HOLO/PROJECT_SOPHIA/";
 
     let pendingTimer = 0,
+        voiceEngine = 0,
+        modeListenerAttached = 0,
+        menuXListenerAttached = 0,
         active = 1,
         enabled = 0,
         companionId = "YES_MAN",
@@ -75,8 +78,6 @@
     }
 
     function destroyVoiceEngine() {
-        let voiceEngine = global.__SE;
-
         if (voiceEngine && voiceEngine.destroy) {
             try {
                 voiceEngine.destroy()
@@ -85,11 +86,10 @@
         }
 
         /*
-         * Do not defragment while the firmware is entering MISC or another
-         * page. Memory is consolidated immediately before the next engine
-         * load instead.
+         * The router owns this reference. Clearing it here releases the
+         * engine without leaving a separate persistent engine global.
          */
-        global.__SE = 0
+        voiceEngine = 0
     }
 
     function loadVoiceEngine() {
@@ -101,11 +101,11 @@
 
         if (!active ||
             !enabled ||
-            global.__PipCoSophiaUi ||
+            sophiaState.uiOpen ||
             isMisc() ||
             isCustomApp() ||
             !isSupportedPage() ||
-            global.__SE) {
+            voiceEngine) {
             return
         }
 
@@ -140,12 +140,12 @@
             engineFactory = Function("return " + sourceCode) ();
             sourceCode = 0;
 
-            global.__SE = engineFactory(fs, appPath, companionId);
+            voiceEngine = engineFactory(fs, appPath, companionId);
             engineFactory = 0;
 
-            if (global.__SE && global.__SE.nav) global.__SE.nav()
+            if (voiceEngine && voiceEngine.nav) voiceEngine.nav()
         } catch (error) {
-            global.__SE = 0;
+            voiceEngine = 0;
 
             try {
                 E.defrag()
@@ -162,10 +162,11 @@
         if (!active) return;
 
         if (isTransitioning()) {
-            if (global.__SE && global.__SE.nav) {
+            if (voiceEngine && voiceEngine.nav) {
                 try {
-                    global.__SE.nav()
+                    voiceEngine.nav()
                 } catch (error) {
+                    destroyVoiceEngine()
                 }
             }
 
@@ -174,7 +175,7 @@
             return
         }
 
-        if (global.__PipCoSophiaUi || isMisc() || isCustomApp() || !enabled) {
+        if (sophiaState.uiOpen || isMisc() || isCustomApp() || !enabled) {
             clearPendingTimer();
             retryCount = 0;
             destroyVoiceEngine();
@@ -190,9 +191,9 @@
             clearPendingTimer();
             retryCount = 0;
 
-            if (global.__SE && global.__SE.nav) {
+            if (voiceEngine && voiceEngine.nav) {
                 try {
-                    global.__SE.nav()
+                    voiceEngine.nav()
                 } catch (error) {
                     destroyVoiceEngine()
                 }
@@ -216,9 +217,9 @@
             return
         }
 
-        if (global.__SE) {
+        if (voiceEngine) {
             try {
-                global.__SE.nav()
+                voiceEngine.nav()
             } catch (error) {
                 destroyVoiceEngine()
             }
@@ -234,6 +235,32 @@
         onNavigationChange()
     }
 
+    function attachNavigationListeners() {
+        if (!modeListenerAttached) {
+            Pip.on("mode", onNavigationChange);
+            modeListenerAttached = 1
+        }
+
+        if (!menuXListenerAttached) {
+            try {
+                Pip.on("menuX", onNavigationChange);
+                menuXListenerAttached = 1
+            } catch (error) {
+                /*
+                 * A partial registration is not a valid running state.
+                 * Clean up the listener that did attach, then rethrow so
+                 * Espruino exposes the real failure instead of hiding it.
+                 */
+                if (modeListenerAttached) {
+                    Pip.removeListener("mode", onNavigationChange);
+                    modeListenerAttached = 0
+                }
+
+                throw error
+            }
+        }
+    }
+
     function shutdownRouter() {
         if (!active) return;
 
@@ -242,13 +269,17 @@
         clearPendingTimer();
         destroyVoiceEngine();
 
-        try {
+        if (modeListenerAttached) {
             Pip.removeListener("mode", onNavigationChange);
-            Pip.removeListener("menuX", onNavigationChange)
-        } catch (error) {
+            modeListenerAttached = 0
         }
 
-        if (global.__SR === routerApi) global.__SR = 0
+        if (menuXListenerAttached) {
+            Pip.removeListener("menuX", onNavigationChange);
+            menuXListenerAttached = 0
+        }
+
+        if (sophiaState.router === routerApi) sophiaState.router = 0
     }
 
     const routerApi = {
@@ -256,19 +287,15 @@
         die: shutdownRouter
     };
 
-    global.__SR = routerApi;
+    sophiaState.router = routerApi;
 
     if (!enabled) {
         active = 0;
-        global.__SR = 0;
+        sophiaState.router = 0;
         return 0
     }
 
-    try {
-        Pip.on("mode", onNavigationChange);
-        Pip.on("menuX", onNavigationChange)
-    } catch (error) {
-    }
+    attachNavigationListeners();
 
     return routerApi
 });
