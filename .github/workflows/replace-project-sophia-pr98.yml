@@ -25,7 +25,7 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf /tmp/Project-S.O.P.H.I.A.
-          git clone --depth 1 --branch main https://github.com/LlamaYeYe/Project-S.O.P.H.I.A.git /tmp/Project-S.O.P.H.I.A
+          git clone --depth 1 --branch main https://github.com/LlamaYeYe/Project-S.O.P.H.I.A..git /tmp/Project-S.O.P.H.I.A
 
       - name: Replace holotape package and registry entry
         shell: bash
