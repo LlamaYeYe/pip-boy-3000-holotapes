@@ -4,7 +4,13 @@
     CHARDIR = BASE + 'chars/',
     LIVE = 'JS/STATUS_CND.JS';
   var RENDERER = BASE + 'RENDERER.JS',
-    BOOT0 = '.boot0',
+    // .boot0 always belongs to the Fallout companion app and is never
+    // read or written here. Espruino on this device supports up to 4
+    // boot-time Storage scripts (.boot0-.boot3, all run at boot), so
+    // this app claims whichever of the other three is available instead
+    // of fighting the companion app for .boot0.
+    BOOT_SLOTS = ['.boot1', '.boot2', '.boot3'],
+    BOOT_MARK = '"CNDMKV_BOOT_V1";',
     ACTIVEKEY = 'CNDMKV.active',
     RENDERKEY = 'CNDMKV.render';
 
@@ -85,6 +91,27 @@
     }
   }
 
+  // Finds whichever of BOOT_SLOTS currently holds OUR OWN patch (its
+  // content starts with BOOT_MARK). At most one slot should ever match -
+  // used to update in place on re-activate/switch, and to know exactly
+  // what to erase on uninstall, without disturbing any other mod's slot.
+  function findOwnSlot() {
+    for (var i = 0; i < BOOT_SLOTS.length; i++) {
+      var c = require('Storage').read(BOOT_SLOTS[i]);
+      if (c && c.indexOf(BOOT_MARK) === 0) return BOOT_SLOTS[i];
+    }
+    return undefined;
+  }
+
+  // First slot with nothing in it yet (some other mod may already own one
+  // of BOOT_SLOTS - that slot is left untouched and skipped over).
+  function findFreeSlot() {
+    for (var i = 0; i < BOOT_SLOTS.length; i++) {
+      if (!require('Storage').read(BOOT_SLOTS[i])) return BOOT_SLOTS[i];
+    }
+    return undefined;
+  }
+
   function activate(character) {
     try {
       var current = fs.readFileSync(RENDERER);
@@ -92,7 +119,8 @@
         require('Storage').write(RENDERKEY, current);
       }
     } catch (e) {}
-    var boot0 =
+    var patch =
+      BOOT_MARK +
       '(function(){var fs=require("fs"),D="' +
       CHARDIR +
       '";fs.writeFileSync(D+"ACTIVE.JSON",JSON.stringify({file:' +
@@ -104,17 +132,27 @@
       '",K="' +
       RENDERKEY +
       '";fs.readFileSync=function(p){if(p!==L)return orig(p);var s=require("Storage").read(K);return s!==undefined?s:orig(R);};})();';
+    var slot = findOwnSlot() || findFreeSlot();
+    if (!slot) {
+      // .boot1-.boot3 are all in use by other mods and .boot0 is
+      // reserved for the companion app - nothing safe to write to.
+      console.log(
+        'CHARSWITCHER: no free boot slot (.boot1-.boot3 all in use), character not activated',
+      );
+      return;
+    }
     try {
-      require('Storage').write(BOOT0, boot0);
+      require('Storage').write(slot, patch);
       require('Storage').write(ACTIVEKEY, character.file);
     } catch (e) {}
   }
 
   function uninstall() {
-    // No .boot0 means fs.readFileSync is never patched, so
-    // JS/STATUS_CND.JS resolves to its real, untouched content.
+    // Erases only the single slot this app claimed, if any - .boot0 and
+    // any other mod's slot are never touched.
     try {
-      require('Storage').erase(BOOT0);
+      var slot = findOwnSlot();
+      if (slot) require('Storage').erase(slot);
       require('Storage').erase(ACTIVEKEY);
       require('Storage').erase(RENDERKEY);
     } catch (e) {}
