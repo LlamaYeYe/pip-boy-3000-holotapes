@@ -2,7 +2,9 @@
 
 A configurable idle/screensaver framework for The Wand Company Pip-Boy 3000.
 
-PIP-CO Idle Frameworks can run its built-in PIP-BOY 3000 falling-bomb screensaver or dynamically use compatible screensavers from separately installed provider holotapes.
+PIP-CO Idle Frameworks can run its built-in PIP-BOY 3000 falling-bomb
+screensaver or dynamically use compatible screensavers from separately installed
+provider holotapes.
 
 ## Features
 
@@ -21,11 +23,16 @@ PIP-CO Idle Frameworks can run its built-in PIP-BOY 3000 falling-bomb screensave
 
 ### Mesmetron
 
-Mesmetron is not bundled with PIP-CO Idle Frameworks. If `HOLO/MESMETRON/TITLE.JS` is installed, PIP-CO reads Mesmetron's current screensaver list dynamically. Removing Mesmetron removes those entries from PIP-CO automatically.
+Mesmetron is not bundled with PIP-CO Idle Frameworks. If
+`HOLO/MESMETRON/TITLE.JS` is installed, PIP-CO reads Mesmetron's current
+screensaver list dynamically. Removing Mesmetron removes those entries from
+PIP-CO automatically.
 
 ### Pipquarium
 
-Pipquarium is not bundled with PIP-CO Idle Frameworks. If `HOLO/PIPQUARIUM/APP.JS` is installed, Pipquarium appears automatically as an available provider.
+Pipquarium is not bundled with PIP-CO Idle Frameworks. If
+`HOLO/PIPQUARIUM/APP.JS` is installed, Pipquarium appears automatically as an
+available provider.
 
 ## Controls
 
@@ -36,11 +43,17 @@ Pipquarium is not bundled with PIP-CO Idle Frameworks. If `HOLO/PIPQUARIUM/APP.J
 
 ## Runtime / compatibility notes
 
-Version 1.1.0 separates the settings UI from a lightweight wake watcher and transient idle service. When the holotape closes with an idle provider enabled, `WAKE.JS` watches for two minutes of inactivity and loads `IDLE.JS` only when a fullscreen screensaver actually needs to run.
+Version 1.1.0 separates the settings UI from a lightweight wake watcher and
+transient idle service. When the holotape closes with an idle provider enabled,
+`WAKE.JS` watches for two minutes of inactivity and loads `IDLE.JS` only when a
+fullscreen screensaver actually needs to run.
 
-On a true cold reboot, crash reboot, or full power-loss reset, Idle Frameworks returns to **disabled**. Normal same-session standby/off-to-on behavior preserves the configured idle provider.
+On a true cold reboot, crash reboot, or full power-loss reset, Idle Frameworks
+returns to **disabled**. Normal same-session standby/off-to-on behavior
+preserves the configured idle provider.
 
-The framework checks existing radio/audio state before starting its own built-in audio and does not replace the stock radio implementation.
+The framework checks existing radio/audio state before starting its own built-in
+audio and does not replace the stock radio implementation.
 
 ## Tested hardware
 
