@@ -437,7 +437,7 @@
     "id": "charswitcher",
     "name": "CND Character Switcher",
     "author": "@Aidan'sLab",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A character switching utility for the Pip-Boy 3000.",
     "icon": "ConditionCharacterSwitcher/previews/charswitcher.png",
     "previews": [
@@ -947,6 +947,32 @@
         "url": "PipCalc/app.min.js"
       }
     ]
+  },
+  {
+    "id": "pipcalendar",
+    "name": "Pip-Calendar",
+    "author": "@GlitchedMicrowave",
+    "version": "1.0.0",
+    "description": "A simple calendar and note-taking app for you Pip-Boy.",
+    "icon": "PipCalendar/previews/icon.png",
+    "previews": ["PipCalendar/previews/calendarpreview.bmp"],
+    "type": "app",
+    "readme": "PipCalendar/README.md",
+    "storage": [
+      {
+        "name": "HOLO/PIPCALENDAR/APP.JS",
+        "url": "PipCalendar/app.min.js"
+      },
+      {
+        "name": "HOLO/PIPCALENDAR/DAYS.IMG",
+        "url": "PipCalendar/assets/DAYS.IMG"
+      },
+      {
+        "name": "HOLO/PIPCALENDAR/ROBCO.IMG",
+        "url": "PipCalendar/assets/ROBCO.IMG"
+      }
+    ],
+    "storageOptional": []
   },
   {
     "id": "pip-co-idle-frameworks",
