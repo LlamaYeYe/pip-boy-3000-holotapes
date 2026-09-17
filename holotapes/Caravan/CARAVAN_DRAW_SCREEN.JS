@@ -4,413 +4,308 @@
  * Readable source only; installed runtime remains in the matching minified file.
  */
 (function (api) {
-  const laneX = [18, 168, 318],
-    fs = api[0],
-    basePath = api[1];
-  let graphicsFile = E.openFile(basePath + 'CARAVAN_GRAPHICS.BIN', 'r'),
-    suitData = '';
-  if (graphicsFile) {
-    graphicsFile.seek(10002);
-    suitData = graphicsFile.read(88);
-    if (graphicsFile.close) graphicsFile.close();
-  }
-  graphicsFile = 0;
-  let suitImages = [
-    suitData.substr(0, 22),
-    suitData.substr(22, 22),
-    suitData.substr(44, 22),
-    suitData.substr(66, 22),
-  ];
-  suitData = 0;
+    const laneX = [18, 168, 318],
+        fs = api[0],
+        basePath = api[1];
+    let graphicsFile = E.openFile(basePath + "CARAVAN_GRAPHICS.BIN", "r"),
+        suitData = "";
+    if (graphicsFile) {
+        graphicsFile.seek(10002);
+        suitData = graphicsFile.read(88);
+        if (graphicsFile.close) graphicsFile.close()
+    }
+    graphicsFile = 0;
+    let suitImages = [suitData.substr(0, 22), suitData.substr(22, 22), suitData.substr(44, 22), suitData
+        .substr(66, 22)];
+    suitData = 0;
 
-  // --- Card/scoring helpers ---
-  function rankText(rank) {
-    if (rank === 1) return 'A';
-    if (rank === 11) return 'J';
-    if (rank === 12) return 'Q';
-    if (rank === 13) return 'K';
-    if (rank === 14) return 'JK';
-    return String(rank);
-  }
+    // --- Card/scoring helpers ---
+    function rankText(rank) {
+        if (rank === 1) return "A";
+        if (rank === 11) return "J";
+        if (rank === 12) return "Q";
+        if (rank === 13) return "K";
+        if (rank === 14) return "JK";
+        return String(rank)
+    }
 
-  function total(cards) {
-    let cardIndex = 0,
-      value = 0,
-      groupValue,
-      rankValue;
-    while (cardIndex < cards.length) {
-      rankValue = cards[cardIndex] & 15;
-      if (rankValue <= 10) {
-        groupValue = rankValue;
-        cardIndex++;
-        while (cardIndex < cards.length && (cards[cardIndex] & 15) > 10) {
-          if ((cards[cardIndex] & 15) === 13) groupValue <<= 1;
-          cardIndex++;
+    function total(cards) {
+        let cardIndex = 0,
+            value = 0,
+            groupValue,
+            rankValue;
+        while (cardIndex < cards.length) {
+            rankValue = cards[cardIndex] & 15;
+            if (rankValue <= 10) {
+                groupValue = rankValue;
+                cardIndex++;
+                while (cardIndex < cards.length && (cards[cardIndex] & 15) > 10) {
+                    if ((cards[cardIndex] & 15) === 13) groupValue <<= 1;
+                    cardIndex++
+                }
+                value += groupValue
+            } else cardIndex++
         }
-        value += groupValue;
-      } else cardIndex++;
+        return value
     }
-    return value;
-  }
 
-  // --- Drawing primitives ---
-  function box(x1, y1, x2, y2, erase) {
-    h.setColor(erase ? 0 : 3)
-      .drawRect(x1, y1, x2, y2)
-      .drawRect(x1 + 1, y1 + 1, x2 - 1, y2 - 1)
-      .setColor(3);
-  }
+    // --- Drawing primitives ---
+    function box(x1, y1, x2, y2, erase) {
+        h.setColor(erase ? 0 : 3).drawRect(x1, y1, x2, y2).drawRect(x1 + 1, y1 + 1, x2 - 1, y2 - 1)
+            .setColor(3)
+    }
 
-  function spacedBold(text, x, y, scale, align) {
-    const step = 6 * scale + 1,
-      width = text.length ? text.length * step - 1 : 0;
-    let drawX =
-      align === 0 ? x - Math.floor(width / 2) : align === 1 ? x - width : x;
-    h.setFont('6x8', scale).setFontAlign(-1, -1);
-    for (
-      let characterIndex = 0;
-      characterIndex < text.length;
-      characterIndex++
-    ) {
-      h.drawString(text[characterIndex], drawX, y).drawString(
-        text[characterIndex],
-        drawX + 1,
-        y,
-      );
-      drawX += step;
+    function spacedBold(text, x, y, scale, align) {
+        const step = 6 * scale + 1,
+            width = text.length ? text.length * step - 1 : 0;
+        let drawX = align === 0 ? x - Math.floor(width / 2) : align === 1 ? x - width : x;
+        h.setFont("6x8", scale).setFontAlign(-1, -1);
+        for (let characterIndex = 0; characterIndex < text.length; characterIndex++) {
+            h.drawString(text[characterIndex],
+                drawX,
+                y).drawString(text[characterIndex],
+                drawX + 1,
+                y);
+            drawX += step
+        }
     }
-  }
 
-  function card(cardValue, x, y, handCard, selected) {
-    const rankValue = cardValue & 15,
-      suit = (cardValue >> 4) & 3,
-      rankLabel = rankText(rankValue),
-      suitLabel = suit === 0 ? 'S' : suit === 1 ? 'H' : suit === 2 ? 'D' : 'C';
-    if (handCard) {
-      h.setColor(3)
-        .drawRect(x, y, x + 54, y + 53)
-        .drawRect(x + 1, y + 1, x + 53, y + 52)
-        .setFont('6x8', 2)
-        .drawString(rankLabel, x + 5, y + 4)
-        .drawString(rankLabel, x + 6, y + 4);
-      if (rankValue === 14) spacedBold('JOKER', x + 27, y + 28, 1, 0);
-      else {
-        if (suitImages[suit]) h.drawImage(suitImages[suit], x + 21, y + 22);
-        h.setFont('6x8', 2).drawString(suitLabel, x + 39, y + 33);
-      }
-      if (selected) box(x - 3, y - 3, x + 57, y + 56, 0);
-      return;
+    function card(cardValue, x, y, handCard, selected) {
+        const rankValue = cardValue & 15,
+            suit = cardValue >> 4 & 3,
+            rankLabel = rankText(rankValue),
+            suitLabel = suit === 0 ? "S" : suit === 1 ? "H" : suit === 2 ? "D" : "C";
+        if (handCard) {
+            h.setColor(3).drawRect(x, y, x + 54, y + 53).drawRect(x + 1, y + 1, x + 53, y + 52)
+                .setFont("6x8", 2)
+                .drawString(rankLabel, x + 5, y + 4).drawString(rankLabel, x + 6, y + 4);
+            if (rankValue === 14) spacedBold("JOKER", x + 27, y + 28, 1, 0);
+            else {
+                if (suitImages[suit]) h.drawImage(suitImages[suit], x + 21, y + 22);
+                h.setFont("6x8", 2).drawString(suitLabel, x + 39, y + 33)
+            }
+            if (selected) box(x - 3, y - 3, x + 57, y + 56, 0);
+            return
+        }
+        h.setColor(3).drawRect(x, y, x + 31, y + 41).drawRect(x + 1, y + 1, x + 30, y + 40).setFont("6x8", 1)
+            .drawString(rankLabel, x + (rankLabel.length > 1 ? 2 : 3), y + 3)
+                .drawString(rankLabel, x + (rankLabel
+            .length > 1 ? 3 : 4), y + 3).drawString(rankLabel, x + (rankLabel.length > 1 ? 2 : 3), y + 4)
+            .drawString(rankLabel, x + (rankLabel.length > 1 ? 3 : 4), y + 4);
+        if (rankValue === 14) {
+            h.drawString("*", x + 13, y + 17);
+            return
+        }
+        if (suitImages[suit]) h.drawImage(suitImages[suit], x + 10, y + 15);
+        h.setFont("6x8", 1).drawString(suitLabel, x + (suit === 0 ? 21 : 23), y + 29)
+            .drawString(suitLabel, x + (suit === 0 ? 22 : 24), y + 29)
+            .drawString(suitLabel, x + (suit === 0 ? 21 : 23), y + 30).drawString(suitLabel, x
+                + (suit === 0 ? 22 : 24), y + 30)
     }
-    h.setColor(3)
-      .drawRect(x, y, x + 31, y + 41)
-      .drawRect(x + 1, y + 1, x + 30, y + 40)
-      .setFont('6x8', 1)
-      .drawString(rankLabel, x + (rankLabel.length > 1 ? 2 : 3), y + 3)
-      .drawString(rankLabel, x + (rankLabel.length > 1 ? 3 : 4), y + 3)
-      .drawString(rankLabel, x + (rankLabel.length > 1 ? 2 : 3), y + 4)
-      .drawString(rankLabel, x + (rankLabel.length > 1 ? 3 : 4), y + 4);
-    if (rankValue === 14) {
-      h.drawString('*', x + 13, y + 17);
-      return;
-    }
-    if (suitImages[suit]) h.drawImage(suitImages[suit], x + 10, y + 15);
-    h.setFont('6x8', 1)
-      .drawString(suitLabel, x + (suit === 0 ? 21 : 23), y + 29)
-      .drawString(suitLabel, x + (suit === 0 ? 22 : 24), y + 29)
-      .drawString(suitLabel, x + (suit === 0 ? 21 : 23), y + 30)
-      .drawString(suitLabel, x + (suit === 0 ? 22 : 24), y + 30);
-  }
 
-  // --- Caravan and hand layout ---
-  function handStart(index, count, override) {
-    const maxStart = count > 5 ? count - 5 : 0;
-    let start =
-      override !== undefined && override >= 0
-        ? override
-        : index > 2
-          ? index - 2
-          : 0;
-    if (start > maxStart) start = maxStart;
-    return start;
-  }
+    // --- Caravan and hand layout ---
+    function handStart(index, count, override) {
+        const maxStart = count > 5 ? count - 5 : 0;
+        let start = override !== undefined && override >= 0 ? override : index > 2 ? index - 2 : 0;
+        if (start > maxStart) start = maxStart;
+        return start
+    }
 
-  function caravan(cards, otherCards, x, y, selected, selectedCard) {
-    let start,
-      maxStart,
-      drawX,
-      value = total(cards),
-      otherValue = otherCards ? total(otherCards) : -1;
-    h.setColor(3).drawRect(x, y, x + 132, y + 69);
-    spacedBold(String(value), x + 120, y + 6, 2, 1);
-    if (
-      value >= 21 &&
-      value <= 26 &&
-      (otherValue < 21 || otherValue > 26 || value > otherValue)
-    )
-      spacedBold('SOLD', x + 66, y + 8, 1, 0);
-    else if (value > 26) spacedBold('BUST', x + 66, y + 8, 1, 0);
-    maxStart = cards.length > 4 ? cards.length - 4 : 0;
-    start = maxStart;
-    if (selectedCard >= 0) {
-      start = selectedCard > 1 ? selectedCard - 1 : 0;
-      if (start > maxStart) start = maxStart;
+    function caravan(cards, otherCards, x, y, selected, selectedCard) {
+        let start,
+            maxStart,
+            drawX,
+            value = total(cards),
+            otherValue = otherCards ? total(otherCards) : -1;
+        h.setColor(3).drawRect(x, y, x + 132, y + 69);
+        spacedBold(String(value), x + 120, y + 6, 2, 1);
+        if (value >= 21 && value <= 26 && (otherValue < 21 || otherValue > 26
+            || value > otherValue)) spacedBold("SOLD", x + 66, y + 8, 1, 0);
+        else if (value > 26) spacedBold("BUST", x + 66, y + 8, 1, 0);
+        maxStart = cards.length > 4 ? cards.length - 4 : 0;
+        start = maxStart;
+        if (selectedCard >= 0) {
+            start = selectedCard > 1 ? selectedCard - 1 : 0;
+            if (start > maxStart) start = maxStart
+        }
+        drawX = x + 5;
+        for (let cardIndex = start; cardIndex < cards.length && cardIndex < start + 4; cardIndex++) {
+            card(cards[cardIndex],
+                drawX,
+                y + 20,
+                0,
+                0);
+            if (cardIndex === selectedCard) box(drawX - 2, y + 18, drawX + 33, y + 63, 0);
+            drawX += 31
+        }
+        if (!cards.length) spacedBold("EMPTY", x + 66, y + 35, 1, 0);
+        if (selected) box(x - 3, y - 3, x + 135, y + 72, 0)
     }
-    drawX = x + 5;
-    for (
-      let cardIndex = start;
-      cardIndex < cards.length && cardIndex < start + 4;
-      cardIndex++
-    ) {
-      card(cards[cardIndex], drawX, y + 20, 0, 0);
-      if (cardIndex === selectedCard)
-        box(drawX - 2, y + 18, drawX + 33, y + 63, 0);
-      drawX += 31;
-    }
-    if (!cards.length) spacedBold('EMPTY', x + 66, y + 35, 1, 0);
-    if (selected) box(x - 3, y - 3, x + 135, y + 72, 0);
-  }
 
-  function hand(state) {
-    let start = handStart(state[4], state[1].length, state[15]),
-      end = Math.min(start + 5, state[1].length),
-      x = 14;
-    h.setColor(0).fillRect(0, 215, 479, 279).setColor(3);
-    for (let cardIndex = start; cardIndex < end; cardIndex++) {
-      card(state[1][cardIndex], x, 223, 1, cardIndex === state[4]);
-      x += 91;
+    function hand(state) {
+        let start = handStart(state[4], state[1].length, state[15]),
+            end = Math.min(start + 5, state[1].length),
+            x = 14;
+        h.setColor(0).fillRect(0, 215, 479, 279).setColor(3);
+        for (let cardIndex = start; cardIndex < end; cardIndex++) {
+            card(state[1][cardIndex],
+                x,
+                223,
+                1,
+                cardIndex === state[4]);
+            x += 91
+        }
     }
-  }
 
-  function handScroller(state) {
-    const count = state[1].length,
-      trackX1 = 178,
-      trackX2 = 302,
-      trackY = 300,
-      thumbWidth = 28,
-      travel = trackX2 - trackX1 - thumbWidth + 1;
-    let thumbX;
-    h.setColor(3)
-      .drawLine(trackX1, trackY, trackX2, trackY)
-      .drawLine(trackX1, trackY - 2, trackX1, trackY + 2)
-      .drawLine(trackX2, trackY - 2, trackX2, trackY + 2);
-    thumbX =
-      count < 2
-        ? trackX1 + Math.floor(travel / 2)
-        : trackX1 + Math.floor((travel * state[4]) / (count - 1));
-    h.fillRect(thumbX, trackY - 3, thumbX + thumbWidth - 1, trackY + 3);
-  }
+    function handScroller(state) {
+        const count = state[1].length,
+            trackX1 = 178,
+            trackX2 = 302,
+            trackY = 300,
+            thumbWidth = 28,
+            travel = trackX2 - trackX1 - thumbWidth + 1;
+        let thumbX;
+        h.setColor(3).drawLine(trackX1, trackY, trackX2, trackY).drawLine(trackX1, trackY - 2,
+            trackX1, trackY + 2)
+            .drawLine(trackX2, trackY - 2, trackX2, trackY + 2);
+        thumbX = count < 2 ? trackX1 + Math.floor(travel / 2) : trackX1 + Math
+            .floor(travel * state[4] / (count - 1));
+        h.fillRect(thumbX, trackY - 3, thumbX + thumbWidth - 1, trackY + 3)
+    }
 
-  // --- Incremental redraws ---
-  function redrawHandSelection(state, previous) {
-    const count = state[1].length,
-      oldStart = handStart(previous, count, state[15]),
-      newStart = handStart(state[4], count, state[15]);
-    let x;
-    if (oldStart !== newStart) {
-      hand(state);
-      h.setColor(0).fillRect(174, 296, 306, 304).setColor(3);
-      handScroller(state);
-      return;
+    // --- Incremental redraws ---
+    function redrawHandSelection(state, previous) {
+        const count = state[1].length,
+            oldStart = handStart(previous, count, state[15]),
+            newStart = handStart(state[4], count, state[15]);
+        let x;
+        if (oldStart !== newStart) {
+            hand(state);
+            h.setColor(0).fillRect(174, 296, 306, 304).setColor(3);
+            handScroller(state);
+            return
+        }
+        if (previous >= oldStart && previous < oldStart + 5 && previous < count) {
+            x = 14 + (previous - oldStart) * 91;
+            box(x - 3, 220, x + 57, 279, 1)
+        }
+        if (state[4] >= newStart && state[4] < newStart + 5 && state[4] < count) {
+            x = 14 + (state[4] - newStart) * 91;
+            box(x - 3, 220, x + 57, 279, 0)
+        }
+        h.setColor(0).fillRect(174, 296, 306, 304).setColor(3);
+        handScroller(state)
     }
-    if (previous >= oldStart && previous < oldStart + 5 && previous < count) {
-      x = 14 + (previous - oldStart) * 91;
-      box(x - 3, 220, x + 57, 279, 1);
-    }
-    if (state[4] >= newStart && state[4] < newStart + 5 && state[4] < count) {
-      x = 14 + (state[4] - newStart) * 91;
-      box(x - 3, 220, x + 57, 279, 0);
-    }
-    h.setColor(0).fillRect(174, 296, 306, 304).setColor(3);
-    handScroller(state);
-  }
 
-  function redrawTargetSelection(state, previous) {
-    let x;
-    if (previous >= 0 && previous < 3) {
-      x = laneX[previous];
-      box(x - 3, 139, x + 135, 214, 1);
+    function redrawTargetSelection(state, previous) {
+        let x;
+        if (previous >= 0 && previous < 3) {
+            x = laneX[previous];
+            box(x - 3, 139, x + 135, 214, 1)
+        }
+        if (state[5] >= 0 && state[5] < 3) {
+            x = laneX[state[5]];
+            box(x - 3, 139, x + 135, 214, 0)
+        }
     }
-    if (state[5] >= 0 && state[5] < 3) {
-      x = laneX[state[5]];
-      box(x - 3, 139, x + 135, 214, 0);
-    }
-  }
 
-  // --- Action and face-target popups ---
-  function actionRow(text, row, selected) {
-    const y = 101 + row * 27;
-    h.setColor(0)
-      .fillRect(128, y - 3, 352, y + 20)
-      .setColor(3)
-      .setFontAlign(0, -1);
-    spacedBold(text, 240, y, 2, 0);
-    if (selected) h.drawRect(132, y - 3, 348, y + 20);
-    h.setFontAlign(-1, -1);
-  }
-
-  function popup(state, face, previous) {
-    if (previous !== undefined) {
-      actionRow(
-        face
-          ? previous === 0
-            ? 'Player Board'
-            : previous === 1
-              ? 'Opponent Board'
-              : 'Back'
-          : previous === 0
-            ? 'Play Card'
-            : previous === 1
-              ? 'Discard Card'
-              : previous === 2
-                ? 'Disband Caravan'
-                : 'Back',
-        previous,
-        0,
-      );
-      actionRow(
-        face
-          ? state[8] === 0
-            ? 'Player Board'
-            : state[8] === 1
-              ? 'Opponent Board'
-              : 'Back'
-          : state[8] === 0
-            ? 'Play Card'
-            : state[8] === 1
-              ? 'Discard Card'
-              : state[8] === 2
-                ? 'Disband Caravan'
-                : 'Back',
-        state[8],
-        1,
-      );
-      return;
+    // --- Action and face-target popups ---
+    function actionRow(text, row, selected) {
+        const y = 101 + row * 27;
+        h.setColor(0).fillRect(128, y - 3, 352, y + 20).setColor(3).setFontAlign(0, -1);
+        spacedBold(text, 240, y, 2, 0);
+        if (selected) h.drawRect(132, y - 3, 348, y + 20);
+        h.setFontAlign(-1, -1)
     }
-    h.setColor(0)
-      .fillRect(122, 70, 358, 208)
-      .setColor(3)
-      .drawRect(122, 70, 358, 208)
-      .drawRect(124, 72, 356, 206)
-      .setFontAlign(0, -1);
-    spacedBold(face ? 'TARGET BOARD' : 'CARD ACTION', 240, 80, 1, 0);
-    actionRow(face ? 'Player Board' : 'Play Card', 0, state[8] === 0);
-    actionRow(face ? 'Opponent Board' : 'Discard Card', 1, state[8] === 1);
-    if (!face) actionRow('Disband Caravan', 2, state[8] === 2);
-    actionRow('Back', face ? 2 : 3, state[8] === (face ? 2 : 3));
-  }
 
-  function redrawFaceTargetSelection(state, previousLane) {
-    let x, cards;
-    if (previousLane >= 0 && previousLane < 3) {
-      x = laneX[previousLane];
-      cards = state[10] ? state[3][previousLane] : state[2][previousLane];
-      h.setColor(0)
-        .fillRect(
-          x - 3,
-          (state[10] ? 48 : 142) - 3,
-          x + 135,
-          (state[10] ? 48 : 142) + 72,
-        )
-        .setColor(3);
-      caravan(
-        cards,
-        state[10] ? state[2][previousLane] : state[3][previousLane],
-        x,
-        state[10] ? 48 : 142,
-        0,
-        previousLane === state[11] ? state[12] : -1,
-      );
+    function popup(state, face, previous) {
+        if (previous !== undefined) {
+            actionRow(face ? previous === 0 ? "Player Board" : previous === 1 ? "Opponent Board" : "Back"
+                : previous === 0 ? "Play Card" : previous === 1 ? "Discard Card" : previous === 2
+                ? "Disband Caravan" : "Back", previous, 0);
+            actionRow(face ? state[8] === 0 ? "Player Board" : state[8] === 1 ? "Opponent Board" : "Back"
+                : state[8] === 0 ? "Play Card" : state[8] === 1 ? "Discard Card" : state[8] === 2
+                ? "Disband Caravan" : "Back", state[8], 1);
+            return
+        }
+        h.setColor(0).fillRect(122, 70, 358, 208).setColor(3).drawRect(122, 70, 358, 208)
+            .drawRect(124, 72, 356, 206)
+            .setFontAlign(0, -1);
+        spacedBold(face ? "TARGET BOARD" : "CARD ACTION", 240, 80, 1, 0);
+        actionRow(face ? "Player Board" : "Play Card", 0, state[8] === 0);
+        actionRow(face ? "Opponent Board" : "Discard Card", 1, state[8] === 1);
+        if (!face) actionRow("Disband Caravan", 2, state[8] === 2);
+        actionRow("Back", face ? 2 : 3, state[8] === (face ? 2 : 3))
     }
-    if (previousLane !== state[11]) {
-      x = laneX[state[11]];
-      cards = state[10] ? state[3][state[11]] : state[2][state[11]];
-      h.setColor(0)
-        .fillRect(
-          x - 3,
-          (state[10] ? 48 : 142) - 3,
-          x + 135,
-          (state[10] ? 48 : 142) + 72,
-        )
-        .setColor(3);
-      caravan(
-        cards,
-        state[10] ? state[2][state[11]] : state[3][state[11]],
-        x,
-        state[10] ? 48 : 142,
-        0,
-        state[12],
-      );
-    }
-  }
 
-  // --- Status/footer drawing ---
-  function redrawStatusTitle(state) {
-    h.setColor(0).fillRect(16, 0, 464, 21).setColor(3);
-    spacedBold(state[14], 240, 4, 2, 0);
-    h.drawLine(16, 22, 464, 22);
-  }
-
-  function footer(state) {
-    h.setColor(0)
-      .fillRect(0, 282, 479, 319)
-      .setColor(3)
-      .drawLine(16, 282, 464, 282);
-    spacedBold('HAND', 240, 285, 1, 0);
-    handScroller(state);
-    spacedBold('Total Cards = ' + state[13], 456, 286, 1, 1);
-    if (state[7] || state[9] === 1)
-      spacedBold('L1 Scroll/Select', 22, 300, 1, -1);
-    else if (state[9] === 2) spacedBold('L1 Scroll/Place', 22, 300, 1, -1);
-    else {
-      spacedBold('L1 caravan/play', 22, 300, 1, -1);
-      spacedBold('R1 Scroll Cards', 456, 300, 1, 1);
+    function redrawFaceTargetSelection(state, previousLane) {
+        let x,
+            cards;
+        if (previousLane >= 0 && previousLane < 3) {
+            x = laneX[previousLane];
+            cards = state[10] ? state[3][previousLane] : state[2][previousLane];
+            h.setColor(0).fillRect(x - 3, (state[10] ? 48 : 142) - 3, x + 135, (state[10] ? 48 : 142) + 72)
+                .setColor(3);
+            caravan(cards, state[10] ? state[2][previousLane] : state[3][previousLane], x,
+                state[10] ? 48 : 142, 0, previousLane === state[11] ? state[12] : -1)
+        }
+        if (previousLane !== state[11]) {
+            x = laneX[state[11]];
+            cards = state[10] ? state[3][state[11]] : state[2][state[11]];
+            h.setColor(0).fillRect(x - 3, (state[10] ? 48 : 142) - 3, x + 135, (state[10] ? 48 : 142) + 72)
+                .setColor(3);
+            caravan(cards, state[10] ? state[2][state[11]] : state[3][state[11]], x, state[10]
+                ? 48 : 142, 0, state[12])
+        }
     }
-  }
 
-  // --- Full-screen render ---
-  function draw(state) {
-    h.clear().setColor(3).drawLine(16, 22, 464, 22);
-    spacedBold(state[14], 240, 4, 2, 0);
-    spacedBold(state[0], 22, 26, 2, -1);
-    spacedBold('YOU', 22, 119, 2, -1);
-    spacedBold('CPU CARAVANS', 360, 28, 1, -1);
-    spacedBold('YOUR CARAVANS', 350, 122, 1, -1);
-    for (let laneIndex = 0; laneIndex < 3; laneIndex++) {
-      caravan(
-        state[3][laneIndex],
-        state[2][laneIndex],
-        laneX[laneIndex],
-        48,
-        0,
-        state[9] === 2 && state[10] === 1 && laneIndex === state[11]
-          ? state[12]
-          : -1,
-      );
-      caravan(
-        state[2][laneIndex],
-        state[3][laneIndex],
-        laneX[laneIndex],
-        142,
-        !state[6] && !state[9] && laneIndex === state[5],
-        state[9] === 2 && state[10] === 0 && laneIndex === state[11]
-          ? state[12]
-          : -1,
-      );
+    // --- Status/footer drawing ---
+    function redrawStatusTitle(state) {
+        h.setColor(0).fillRect(16, 0, 464, 21).setColor(3);
+        spacedBold(state[14], 240, 4, 2, 0);
+        h.drawLine(16, 22, 464, 22)
     }
-    hand(state);
-    footer(state);
-    if (state[7]) popup(state, 0);
-    else if (state[9] === 1) popup(state, 1);
-  }
-  return [
-    draw,
-    redrawHandSelection,
-    redrawTargetSelection,
-    redrawStatusTitle,
-    popup,
-    redrawFaceTargetSelection,
-    function () {
-      suitImages = [];
-    },
-  ];
+
+    function footer(state) {
+        h.setColor(0).fillRect(0, 282, 479, 319).setColor(3).drawLine(16, 282, 464, 282);
+        spacedBold("HAND", 240, 285, 1, 0);
+        handScroller(state);
+        spacedBold("Total Cards = " + state[13], 456, 286, 1, 1);
+        if (state[7] || state[9] === 1) spacedBold("L1 Scroll/Select", 22, 300, 1, -1);
+        else if (state[9] === 2) spacedBold("L1 Scroll/Place", 22, 300, 1, -1);
+        else {
+            spacedBold("L1 caravan/play", 22, 300, 1, -1);
+            spacedBold("R1 Scroll Cards", 456, 300, 1, 1)
+        }
+    }
+
+    // --- Full-screen render ---
+    function draw(state) {
+        h.clear().setColor(3).drawLine(16, 22, 464, 22);
+        spacedBold(state[14], 240, 4, 2, 0);
+        spacedBold(state[0], 22, 26, 2, -1);
+        spacedBold("YOU", 22, 119, 2, -1);
+        spacedBold("CPU CARAVANS", 360, 28, 1, -1);
+        spacedBold("YOUR CARAVANS", 350, 122, 1, -1);
+        for (let laneIndex = 0; laneIndex < 3; laneIndex++) {
+            caravan(state[3][laneIndex],
+                state[2][laneIndex],
+                laneX[laneIndex],
+                48,
+                0,
+                state[9] === 2 && state[10] === 1 && laneIndex === state[11] ? state[12] : -1);
+            caravan(state[2][laneIndex], state[3][laneIndex], laneX[laneIndex], 142, !state[6]
+                && !state[9] && laneIndex === state[5], state[9] === 2 && state[10] === 0
+                && laneIndex === state[11] ? state[12] : -1)
+        }
+        hand(state);
+        footer(state);
+        if (state[7]) popup(state, 0);
+        else if (state[9] === 1) popup(state, 1)
+    }
+    return [draw, redrawHandSelection, redrawTargetSelection, redrawStatusTitle, popup,
+        redrawFaceTargetSelection,
+        function () {
+        suitImages = []
+    }]
 });
