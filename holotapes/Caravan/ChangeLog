@@ -1,0 +1,5 @@
+1.0.0 (2026-09-16)
+https://github.com/LlamaYeYe/CARAVAN
+- Initial public release of Caravan for the Wand Company Pip-Boy 3000.
+- Added player-vs-CPU Caravan with randomized Fallout: New Vegas opponents, face cards, Jokers, betting, tutorial, configurable audio, resident-runtime rematches, and animated cap results.
+- Added low-memory lifecycle logging for firmware 1.1.6 hardware testing.
