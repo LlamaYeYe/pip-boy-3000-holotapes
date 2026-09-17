@@ -3,14 +3,18 @@
   "name": "Caravan",
   "author": "@LlamaYeYe",
   "version": "1.0.0",
-  "description": "Playable Fallout: New Vegas Caravan for the Wand Company Pip-Boy 3000 with CPU opponents, tutorial, configurable audio, resident-runtime rematches, and cap results.",
+  "description": "Caravan resident-runtime build: Engine, Renderer, and Game Audio stay loaded across rematches while only match data is rebuilt.",
   "previews": [],
   "type": "game",
   "readme": "README.md",
   "storage": [
     {
+      "name": "APPINFO/CARAVAN.info",
+      "url": "APPINFO/CARAVAN.info"
+    },
+    {
       "name": "HOLO/CARAVAN/APP.JS",
-      "url": "app.min.js"
+      "url": "APP.MIN.JS"
     },
     {
       "name": "HOLO/CARAVAN/CARAVAN_MENU_INTERFACE.MIN.JS",
