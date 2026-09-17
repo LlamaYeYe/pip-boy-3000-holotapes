@@ -1,0 +1,61 @@
+name: Update Caravan PR 110
+
+on:
+  push:
+    branches:
+      - caravan-v1.0.0
+    paths:
+      - ".github/workflows/update-caravan-pr110.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  update-caravan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out PR branch
+        uses: actions/checkout@v5
+        with:
+          ref: caravan-v1.0.0
+          fetch-depth: 0
+
+      - name: Replace Caravan package and rebuild registry
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git clone --quiet https://github.com/LlamaYeYe/CARAVAN.git /tmp/caravan-source
+          git -C /tmp/caravan-source checkout --quiet af9adf764f1a5b0481df2ad5670e469e939e516b
+
+          test "$(find /tmp/caravan-source -type f -not -path '*/.git/*' | wc -l)" -eq 39
+          test -f /tmp/caravan-source/APP.JS
+          test -f /tmp/caravan-source/APP.MIN.JS
+          test -f /tmp/caravan-source/APPINFO/CARAVAN.info
+          test ! -e /tmp/caravan-source/LOGGING_SYSTEM_DEV_ONLY
+          ! grep -R -n -E 'CARAVAN\.LOG|Pip\.log' /tmp/caravan-source --include='*.JS' --include='*.js'
+
+          rm -rf holotapes/Caravan
+          mkdir -p holotapes/Caravan
+          rsync -a --exclude='.git' /tmp/caravan-source/ holotapes/Caravan/
+
+          npm ci
+          npm run build
+
+          test -f holotapes/Caravan/APP.JS
+          test -f holotapes/Caravan/APP.MIN.JS
+          test -f holotapes/Caravan/APPINFO/CARAVAN.info
+          test ! -e holotapes/Caravan/app.js
+          test ! -e holotapes/Caravan/app.min.js
+          test ! -e holotapes/Caravan/LOGGING_SYSTEM_DEV_ONLY
+          test "$(find holotapes/Caravan -type f | wc -l)" -eq 39
+          grep -q '"url": "Caravan/APP.MIN.JS"' holotapes/registry.json
+          grep -q '"url": "Caravan/APPINFO/CARAVAN.info"' holotapes/registry.json
+
+          rm -f .github/workflows/update-caravan-pr110.yml
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Update Caravan v1.0.0 package"
+          git push origin HEAD:caravan-v1.0.0
