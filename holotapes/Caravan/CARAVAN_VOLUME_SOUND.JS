@@ -172,11 +172,13 @@
     function drawList() {
         if (selectedRow < 0 || selectedRow > 4) selectedRow = 0;
         drawHeader();
-        h.drawString("SOUND EFFECTS", 42, 44).drawLine(42, 68, 438, 68);
+        h.drawString("SOUND EFFECTS - Will Be Applied In-Game", 42, 44)
+            .drawLine(42, 68, 438, 68);
         drawRow("Playing Card", 76, selectedRow === 0);
         drawRow("Discard", 104, selectedRow === 1);
         drawRow("Bottle Cap", 132, selectedRow === 2);
-        h.drawString("BACKGROUND MUSIC", 42, 168).drawLine(42, 192, 438, 192);
+        h.drawString("BACKGROUND MUSIC - Will Be Applied In-Game", 42, 168)
+            .drawLine(42, 192, 438, 192);
         drawRow("Lazy Day - Tired", 200, selectedRow === 3);
         drawRow("< Back", 238, selectedRow === 4)
     }
