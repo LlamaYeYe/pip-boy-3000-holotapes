@@ -14,6 +14,8 @@
         outcome = "DRAW",
         delta = 0,
         opponent = "Ringo",
+        canContinue = 1,
+        opponentCanContinue = 1,
         rematchCallback = 0,
         newOpponentCallback = 0,
         backCallback = 0,
@@ -89,6 +91,18 @@
     // --- Result animation and input ---
     function drawChoices() {
         h.setColor(0).fillRect(20, 220, 460, 319).setColor(3).setFontMonofonto16().setFontAlign(-1, -1);
+        if (!canContinue) {
+            h.drawString("Not enough bottle caps to play...EXIT GAME!", 42, 258)
+                .drawRect(28, 253, 452, 281);
+            return
+        }
+        if (!opponentCanContinue) {
+            h.drawString("Challenge New Opponent", 42, 258);
+            if (selection === 0) h.drawRect(28, 253, 452, 281);
+            h.drawString("Back", 42, 290);
+            if (selection === 1) h.drawRect(28, 285, 452, 313);
+            return
+        }
         h.drawString("Rematch", 42, 226);
         if (selection === 0) h.drawRect(28, 221, 452, 249);
         h.drawString("Challenge New Opponent", 42, 258);
@@ -120,15 +134,33 @@
 
     function onKnob1(direction) {
         if (!shown || !ready) return;
+        if (!canContinue) {
+            if (!direction) {
+                Pip.playSound("SELECT");
+                if (backCallback) backCallback()
+            }
+            return
+        }
         if (direction) {
             selection += direction > 0 ? 1 : -1;
-            if (selection < 0) selection = 2;
-            if (selection > 2) selection = 0;
+            if (!opponentCanContinue) {
+                if (selection < 0) selection = 1;
+                if (selection > 1) selection = 0
+            } else {
+                if (selection < 0) selection = 2;
+                if (selection > 2) selection = 0
+            }
             Pip.playSound("SCROLL");
             drawChoices();
             return
         }
         Pip.playSound("SELECT");
+        if (!opponentCanContinue) {
+            if (selection === 0) {
+                if (newOpponentCallback) newOpponentCallback(pickOpponent(opponent))
+            } else if (backCallback) backCallback();
+            return
+        }
         if (selection === 0) {
             if (rematchCallback) rematchCallback()
         } else if (selection === 1) {
@@ -171,6 +203,8 @@
         outcome = state.outcome || "DRAW";
         delta = state.delta || 0;
         opponent = state.opponent || "Ringo";
+        canContinue = state.funds === undefined || state.funds >= 10;
+        opponentCanContinue = state.opponentFunds === undefined || state.opponentFunds >= 10;
         rematchCallback = state.onRematch || 0;
         newOpponentCallback = state.onNewOpponent || 0;
         backCallback = state.onBack || 0;
@@ -179,23 +213,25 @@
             .drawLine(18, 34, 462, 34).setFontAlign(-1, -1);
         if (outcome === "PLAYER") {
             strong("YOU WIN", 240, 56);
-            capOffset = 3334
+            capOffset = 2140
         } else if (outcome === "CPU") {
             strong(opponent + " WINS", 240, 46);
             strong("YOU LOSE", 240, 66);
-            capOffset = 6668
+            capOffset = 4280
         } else strong("DRAW", 240, 56);
         try {
-            if (process.memory().free > 500) {
-                graphicsFile = E.openFile(basePath + "CARAVAN_GRAPHICS.BIN", "r");
+            process.memory(true);
+            E.defrag();
+            if (process.memory().free > 350) {
+                graphicsFile = E.openFile(basePath + "CARAVAN_RESULT_CAPS.BIN", "r");
                 if (graphicsFile) {
                     graphicsFile.seek(capOffset);
-                    capImage = graphicsFile.read(3334);
+                    capImage = graphicsFile.read(2140);
                     if (graphicsFile.close) graphicsFile.close();
                     graphicsFile = 0
                 }
                 if (capImage) h.setColor(3).drawImage(capImage, 148, 100, {
-                    scale: 0.9
+                    scale: 1.125
                 })
             }
         } catch (imageError) {
