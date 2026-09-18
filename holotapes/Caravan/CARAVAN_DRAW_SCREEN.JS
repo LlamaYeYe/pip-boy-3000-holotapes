@@ -87,20 +87,22 @@
             if (selected) box(x - 3, y - 3, x + 57, y + 56, 0);
             return
         }
-        h.setColor(3).drawRect(x, y, x + 31, y + 41).drawRect(x + 1, y + 1, x + 30, y + 40).setFont("6x8", 1)
-            .drawString(rankLabel, x + (rankLabel.length > 1 ? 2 : 3), y + 3)
-                .drawString(rankLabel, x + (rankLabel
-            .length > 1 ? 3 : 4), y + 3).drawString(rankLabel, x + (rankLabel.length > 1 ? 2 : 3), y + 4)
-            .drawString(rankLabel, x + (rankLabel.length > 1 ? 3 : 4), y + 4);
+        const rankX = x + (rankLabel.length > 1 ? 2 : 3),
+            clipRight = x + (rankLabel.length > 1 ? 22 : 16);
+        h.setColor(3).drawRect(x, y, x + 31, y + 41).drawRect(x + 1, y + 1, x + 30, y + 40)
+            .setClipRect(x + 1, y + 1, clipRight, y + 15)
+            .setFont("6x8", 2)
+            .drawString(rankLabel, rankX, y + 2)
+            .setClipRect(0, 0, 479, 319);
         if (rankValue === 14) {
-            h.drawString("*", x + 13, y + 17);
+            h.setFont("6x8", 1).drawString("*", x + 13, y + 20);
             return
         }
-        if (suitImages[suit]) h.drawImage(suitImages[suit], x + 10, y + 15);
-        h.setFont("6x8", 1).drawString(suitLabel, x + (suit === 0 ? 21 : 23), y + 29)
-            .drawString(suitLabel, x + (suit === 0 ? 22 : 24), y + 29)
-            .drawString(suitLabel, x + (suit === 0 ? 21 : 23), y + 30).drawString(suitLabel, x
-                + (suit === 0 ? 22 : 24), y + 30)
+        if (suitImages[suit]) h.drawImage(suitImages[suit], x + 10, y + 18);
+        h.setFont("6x8", 1).drawString(suitLabel, x + (suit === 0 ? 21 : 23), y + 31)
+            .drawString(suitLabel, x + (suit === 0 ? 22 : 24), y + 31)
+            .drawString(suitLabel, x + (suit === 0 ? 21 : 23), y + 32).drawString(suitLabel, x
+                + (suit === 0 ? 22 : 24), y + 32)
     }
 
     // --- Caravan and hand layout ---
