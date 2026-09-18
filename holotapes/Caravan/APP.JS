@@ -13,6 +13,7 @@
         removed = 0,
         ante = 50,
         funds = 500,
+        opponentFunds = 500,
         opponent = "",
         savedIdleTimeout = 0,
         idleDisabled = 0;
@@ -88,6 +89,7 @@
             menuSelection: 0,
             ante: ante,
             funds: funds,
+            opponentFunds: opponentFunds,
             opponent: opponent,
             resultOutcome: "DRAW",
             resultDelta: 0,
@@ -102,6 +104,7 @@
         if (removed) return;
         ante = state.ante;
         funds = state.funds;
+        if (state.opponentFunds !== undefined) opponentFunds = state.opponentFunds;
         opponent = state.opponent || opponent;
         clearTimer();
         timer = setTimeout(beginGame, 1)
@@ -138,17 +141,23 @@
     }
 
     function finishGame(outcome) {
-        let delta = 0;
+        let delta = 0,
+            maxAnte = 0;
         if (removed) return;
         if (outcome === "PLAYER") {
             delta = ante;
-            funds += ante
+            funds += ante;
+            opponentFunds -= ante;
+            if (opponentFunds < 0) opponentFunds = 0
         } else if (outcome === "CPU") {
             delta = -ante;
             funds -= ante;
-            if (funds < 0) funds = 0
+            if (funds < 0) funds = 0;
+            opponentFunds += ante
         }
-        if (ante > funds && funds > 0) ante = funds;
+        maxAnte = funds < opponentFunds ? funds : opponentFunds;
+        if (funds < 10 || maxAnte < 10) ante = 0;
+        else if (ante > maxAnte) ante = maxAnte;
         clearTimer();
         timer = setTimeout(function () {
             timer = 0;
@@ -158,6 +167,8 @@
                 outcome: outcome,
                 delta: delta,
                 opponent: opponent,
+                funds: funds,
+                opponentFunds: opponentFunds,
                 onRematch: rematch,
                 onNewOpponent: rematch,
                 onBack: resultBack
@@ -166,8 +177,16 @@
     }
 
     function rematch(newOpponent) {
-        if (removed || !gameModule) return;
-        if (newOpponent) opponent = newOpponent;
+        let maxAnte = 0;
+        if (removed || !gameModule || funds < 10) return;
+        if (newOpponent) {
+            opponent = newOpponent;
+            opponentFunds = 500
+        } else if (opponentFunds < 10) return;
+        maxAnte = funds < opponentFunds ? funds : opponentFunds;
+        if (maxAnte < 10) return;
+        if (ante < 10) ante = Math.min(50, maxAnte);
+        else if (ante > maxAnte) ante = maxAnte;
         timer = setTimeout(function () {
             timer = 0;
             if (removed || !gameModule) return;
