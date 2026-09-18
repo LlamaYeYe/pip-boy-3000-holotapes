@@ -33,3 +33,19 @@ v1.0.0 test - guaranteed card SFX block stream / Results renderer headroom
 - Renderer is released before Results and reloaded only on Rematch.
 
 - Test rules pass: Disband Caravan action, opening discard/redraw, deck-exhaustion loss, tutorial/rules updates.
+- Increased the readability of the small top-left rank/letter text on placed caravan cards only, while keeping the larger suit art clear and avoiding overlap.
+- Reduced the placed-card corner rank/letter enlargement to a middle-size treatment after hardware readability testing; hand cards and suit graphics remain unchanged.
+- Reworked placed-card top-left rank rendering to be crisp and readable instead of overdrawn/blurry, while keeping hand cards unchanged.
+- Trimmed the crisp placed-card top-left rank rendering by about 2 pixels while keeping the cleaner sharp look.
+- Added "Will Be Applied In-Game" notes beside the Sound Effects and Background Music headings in Volume Adjustment.
+- Matched the full Volume Adjustment heading notes to the same Monofonto16 font and size as SOUND EFFECTS and BACKGROUND MUSIC.
+- Added zero-funds Caravan bankroll handling: rematch/challenge lockout, highlighted reset flow back to 500 total funds, and hard bet caps so wagers can never exceed available funds.
+- Zero-cap Results now has exactly one highlighted option in every result path: "Not enough bottle caps to play...EXIT GAME!"; no separate Back option is shown.
+- Reset Total Ante popup now overlays the CARAVAN - BET screen instead of clearing the full display, leaving the Play Caravan background visible around the popup.
+- Centered the highlighted "Reset Total Ante" text horizontally inside the RESET popup.
+- Added a live opponent bankroll: opponents now start at 500 caps, gain/lose the exact wager opposite the player, can reach 1000 if they win the player's full 500, and wagers are capped by both sides' remaining caps.
+- Restored the bottle-cap graphic on the results screen by reclaiming/defragmenting before the low-memory image load and avoiding the previous over-conservative skip.
+- Reset Total Ante now resets both the player and the current opponent bankrolls to 500 before returning to the normal bet controls.
+- Reduced results-screen cap-image memory usage with a dedicated compact result-cap bank to prevent LOW_MEMORY during later matches.
+- Preserved bottle-cap result audio for all loss amounts, including losing the full remaining bankroll.
+- Reset Total Ante continues to restore both player and current opponent bankrolls to 500.
