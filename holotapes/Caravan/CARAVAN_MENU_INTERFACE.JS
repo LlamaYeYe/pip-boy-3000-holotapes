@@ -15,6 +15,7 @@
         menuSelection = api.menuSelection || 0,
         ante = api.ante === undefined ? 50 : api.ante,
         funds = api.funds === undefined ? 500 : api.funds,
+        opponentFunds = api.opponentFunds === undefined ? 500 : api.opponentFunds,
         opponent = api.opponent || pickOpponent(),
         demoModule = 0,
         resultsModule = 0,
@@ -58,16 +59,37 @@
         drawMenuRow("< Back", 4, menuSelection === 4)
     }
 
+    function betLimit() {
+        return funds < opponentFunds ? funds : opponentFunds
+    }
+
     function drawBetMenu() {
-        if (menuSelection < 0 || menuSelection > 3) menuSelection = 0;
+        if (funds < 10) {
+            ante = 0;
+            menuSelection = 0
+        } else if (menuSelection < 0 || menuSelection > 3) menuSelection = 0;
         drawHeader("CARAVAN - BET");
-        h.drawRect(22, 48, 458, 138).drawString(opponent + "'s Current Ante: " + ante, 38, 60)
+        h.drawRect(22, 48, 458, 138).drawString(opponent + "'s Current Ante: " + opponentFunds, 38, 60)
             .drawString("Your Current Ante: " + ante, 38, 86)
             .drawString("Your Total Funds: " + funds, 38, 112);
+        if (funds < 10) {
+            drawMenuRow("Not enough bottle caps to play...CLICK HERE!", 3, 1);
+            return
+        }
         drawMenuRow("Auto-Match", 2, menuSelection === 0);
         drawMenuRow("Raise", 3, menuSelection === 1);
         drawMenuRow("Accept", 4, menuSelection === 2);
         drawMenuRow("Exit", 5, menuSelection === 3)
+    }
+
+    function drawResetPopup() {
+        drawBetMenu();
+        h.setColor(0).fillRect(70, 70, 410, 200)
+            .setColor(3).drawRect(70, 70, 410, 200)
+            .setFontMonofonto16().setFontAlign(0, -1).drawString("RESET", 240, 82)
+            .drawLine(90, 108, 390, 108)
+            .drawString("Reset Total Ante", 240, 138)
+            .setFontAlign(-1, -1).drawRect(104, 131, 376, 165)
     }
 
     function drawDeckMenu() {
@@ -114,19 +136,19 @@
     function drawStaticResult() {
         let image = 0,
             graphicsFile = 0,
-            capOffset = resultOutcome === "PLAYER" ? 3334 : resultOutcome === "CPU" ? 6668 : 0,
+            capOffset = resultOutcome === "PLAYER" ? 2140 : resultOutcome === "CPU" ? 4280 : 0,
             amount = Math.abs(resultDelta),
             counter = !amount ? "0" : resultDelta < 0 ? "-" + amount : "+" + amount;
         try {
-            graphicsFile = E.openFile(appPath + "CARAVAN_GRAPHICS.BIN", "r");
+            graphicsFile = E.openFile(appPath + "CARAVAN_RESULT_CAPS.BIN", "r");
             if (graphicsFile) {
                 graphicsFile.seek(capOffset);
-                image = graphicsFile.read(3334);
+                image = graphicsFile.read(2140);
                 if (graphicsFile.close) graphicsFile.close();
                 graphicsFile = 0
             }
             if (image) h.setColor(3).drawImage(image, 148, 100, {
-                scale: 0.9
+                scale: 1.125
             })
         } catch (error) {
             try {
@@ -142,10 +164,15 @@
     }
 
     function drawResults() {
-        if (menuSelection < 0 || menuSelection > 1) menuSelection = 0;
+        if (funds < 10) menuSelection = 0;
+        else if (menuSelection < 0 || menuSelection > 1) menuSelection = 0;
         drawHeader("CARAVAN - RESULTS");
         drawResultFallback();
         if (resultReady) drawStaticResult();
+        if (funds < 10) {
+            drawMenuRow("Not enough bottle caps to play...EXIT GAME!", 2, 1);
+            return
+        }
         drawMenuRow("Rematch", 2, menuSelection === 0);
         drawMenuRow("< Back", 3, menuSelection === 1)
     }
@@ -165,7 +192,8 @@
         if (screen === 1) return selection === 0 ? "Auto-Match" : selection === 1 ? "Raise"
             : selection === 2 ? "Accept" : "Exit";
         if (screen === 2) return selection === 0 ? "Play Caravan" : "< Back";
-        if (screen === 3) return selection === 0 ? "Rematch" : "< Back";
+        if (screen === 3) return funds < 10 ? "Not enough bottle caps to play...EXIT GAME!"
+            : selection === 0 ? "Rematch" : "< Back";
         return "< Back"
     }
 
@@ -183,7 +211,7 @@
     }
 
     function redrawBetValues() {
-        h.clearRect(30, 54, 448, 132).setColor(3).drawString(opponent + "'s Current Ante: " + ante, 38, 60)
+        h.clearRect(30, 54, 448, 132).setColor(3).drawString(opponent + "'s Current Ante: " + opponentFunds, 38, 60)
             .drawString("Your Current Ante: " + ante, 38, 86).drawString("Your Total Funds: "
                 + funds, 38, 112)
     }
@@ -193,6 +221,7 @@
         else if (screen === 1) drawBetMenu();
         else if (screen === 2) drawDeckMenu();
         else if (screen === 3) drawResults();
+        else if (screen === 5) drawResetPopup();
         else drawRules()
     }
 
@@ -217,6 +246,7 @@
         api.onStartGame({
             ante: ante,
             funds: funds,
+            opponentFunds: opponentFunds,
             opponent: opponent
         })
     }
@@ -366,7 +396,7 @@
         let sourceCode = 0,
             applyFactory = 0,
             applyModule = 0;
-        if (removed) return;
+        if (removed || funds < 10 || opponentFunds < 10 || ante < 10 || ante > betLimit()) return;
         unloadResults(0);
         unloadSoundMenu(0);
         detachMenuListeners();
@@ -440,10 +470,12 @@
     }
 
     function onKnob2(direction) {
-        if (screen !== 1 || !direction) return;
+        let maxAnte;
+        if (screen !== 1 || !direction || funds < 10 || opponentFunds < 10) return;
+        maxAnte = betLimit();
         ante += direction > 0 ? 10 : -10;
         if (ante < 10) ante = 10;
-        if (ante > funds) ante = funds;
+        if (ante > maxAnte) ante = maxAnte;
         Pip.playSound("SCROLL");
         redrawBetValues()
     }
@@ -452,7 +484,8 @@
         let optionCount;
         if (direction) {
             const previousSelection = menuSelection;
-            optionCount = screen === 0 ? 5 : screen === 1 ? 4 : screen === 2 ? 2 : screen === 3 ? 2 : 1;
+            optionCount = screen === 0 ? 5 : screen === 1 ? (funds < 10 ? 1 : 4)
+                : screen === 2 ? 2 : screen === 3 ? (funds < 10 ? 1 : 2) : 1;
             menuSelection += direction > 0 ? 1 : -1;
             if (menuSelection < 0) menuSelection = optionCount - 1;
             if (menuSelection >= optionCount) menuSelection = 0;
@@ -489,18 +522,31 @@
                 return
             }
         } else if (screen === 1) {
-            if (menuSelection === 0) {
-                ante = Math.min(50, funds)
+            if (funds < 10) {
+                screen = 5;
+                menuSelection = 0
+            } else if (menuSelection === 0) {
+                ante = Math.min(50, betLimit())
             } else if (menuSelection === 1) {
                 ante += 10;
-                if (ante > funds) ante = funds
+                if (ante > betLimit()) ante = betLimit()
             } else if (menuSelection === 2) {
+                if (ante < 10 || ante > betLimit()) {
+                    drawBetMenu();
+                    return
+                }
                 screen = 2;
                 menuSelection = 0
             } else {
                 screen = 0;
                 menuSelection = 0
             }
+        } else if (screen === 5) {
+            funds = 500;
+            opponentFunds = 500;
+            ante = Math.min(50, betLimit());
+            screen = 1;
+            menuSelection = 0
         } else if (screen === 2) {
             if (menuSelection === 0) {
                 startGame();
@@ -509,13 +555,18 @@
             screen = 1;
             menuSelection = 2
         } else if (screen === 3) {
-            if (menuSelection === 0) {
+            if (funds < 10) {
+                unloadResults(1);
+                screen = 0;
+                menuSelection = 0
+            } else if (menuSelection === 0) {
                 startGame();
                 return
+            } else {
+                unloadResults(1);
+                screen = 0;
+                menuSelection = 0
             }
-            unloadResults(1);
-            screen = 0;
-            menuSelection = 0
         } else {
             screen = 0;
             menuSelection = 1
