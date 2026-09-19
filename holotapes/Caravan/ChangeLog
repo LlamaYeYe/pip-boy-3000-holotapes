@@ -1,10 +1,9 @@
 
-Caravan v1.0.0 opponent roster test - 2026-09-15
+v1.0.0
 - Added all 14 Fallout: New Vegas Caravan players to the real-match randomized opponent pool.
 - Results now offers Rematch, Challenge New Opponent, and Back.
 - Rematch preserves the current opponent; Challenge New Opponent selects a different player and reuses the resident game runtime instead of reloading Engine/Renderer/Audio.
 - Kept Tutorial fixed to Ringo.
-Caravan v1.0.0 - 2026-09-13
 - Removed the custom screen-off/wake-resume system and all Caravan `Pip.wakeUp`/framebuffer/LCD interception. Manual Power sleep now follows stock firmware behavior and does not preserve a live match.
 - Disabled automatic idle sleep only while a match is active; the user's original idle timeout is restored on every game cleanup path.
 - Removed the game's suspended/pending wake state and gameplay-audio suspend/resume code to reduce resident memory and lifecycle complexity.
@@ -15,23 +14,18 @@ Caravan v1.0.0 - 2026-09-13
 - Re-minified the installed APP.JS runtime identifiers aggressively after the reviewer-facing cleanup so descriptive source names do not consume extra Espruino memory during match launch.
 - Removed the pre-launch full-screen clear; the renderer now clears only when the game has successfully reached its first draw, preventing a failed/low-memory launch from leaving a permanent black screen.
 - Removed manual DAC power/mode forcing between Results and Rematch; audio now resets through the normal Pip audio API to prevent stale/scratchy SFX after idle result screens.
-
 - Added invisible every-match Rematch cleanup/defrag and permanent opening-complete state to prevent late 5-to-4 hand regression.
 - Added a file-audio roundabout diagnostic after the third-match scratch survived both every-match cleanup and `Pip.initDAC()`.
 - Playing Card and Discard now materialize their exact selected-volume gameplay slices as tiny WAV files and play through `Pip.audioStart()`; no custom gameplay `audioStartVar()` path remains.
 - Bottle-cap Results audio now uses a normal WAV file instead of custom variable-audio queue pumping.
 - Temporarily disabled active-match Lazy Days playback for the three-match long-Rematch isolation test; music preview/settings are retained.
 - Removed the failed native DAC reset from Rematch; normal cleanup/defrag remains.
-
-Test build note (2026-09-14):
 - File-audio roundabout Play/Discard WAVs now retain one quiet ADPCM block before and after each active effect to remove the low click/thump heard at card playback startup/shutdown.
 - CARD_SFX.APPLIED marker schema advanced so existing generated WAVs are rebuilt automatically.
-
-v1.0.0 test - guaranteed card SFX block stream / Results renderer headroom
+- guaranteed card SFX block stream / Results renderer headroom
 - Play/Discard stream in 256-byte native ADPCM blocks over continuous music.
 - One flat 256-byte block is reserved between callbacks; no full card SFX is resident.
 - Renderer is released before Results and reloaded only on Rematch.
-
 - Test rules pass: Disband Caravan action, opening discard/redraw, deck-exhaustion loss, tutorial/rules updates.
 - Increased the readability of the small top-left rank/letter text on placed caravan cards only, while keeping the larger suit art clear and avoiding overlap.
 - Reduced the placed-card corner rank/letter enlargement to a middle-size treatment after hardware readability testing; hand cards and suit graphics remain unchanged.
