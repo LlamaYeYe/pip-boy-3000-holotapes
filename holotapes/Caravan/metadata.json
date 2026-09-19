@@ -3,13 +3,24 @@
   "name": "Caravan",
   "author": "@LlamaYeYe",
   "version": "1.0.0",
-  "description": "Caravan resident-runtime build: Engine, Renderer, and Game Audio stay loaded across rematches while only match data is rebuilt.",
+  "description": "Playable Fallout: New Vegas Caravan for The Wand Company Pip-Boy 3000, with low-memory resident Engine/Audio runtime for stable repeated play.",
   "icon": "assets/CARAVAN.IMG",
   "previews": [],
   "type": "game",
   "readme": "README.md",
   "storage": [
-    { "name": "HOLO/CARAVAN/APP.JS", "url": "assets/APP.MIN.JS" },
+    {
+      "name": "APPINFO/CARAVAN.info",
+      "url": "APPINFO/CARAVAN.info"
+    },
+    {
+      "name": "HOLO/CARAVAN/APP.JS",
+      "url": "assets/APP.MIN.JS"
+    },
+    {
+      "name": "HOLO/CARAVAN/BOTTLE_CAP_PREVIEW.WAV",
+      "url": "assets/BOTTLE_CAP_PREVIEW.WAV"
+    },
     {
       "name": "HOLO/CARAVAN/BOTTLE_CAP_RESULT1.WAV",
       "url": "assets/BOTTLE_CAP_RESULT1.WAV"
@@ -22,7 +33,14 @@
       "name": "HOLO/CARAVAN/BOTTLE_CAP_RESULT3.WAV",
       "url": "assets/BOTTLE_CAP_RESULT3.WAV"
     },
-    { "name": "HOLO/CARAVAN/CARAVAN.IMG", "url": "assets/CARAVAN.IMG" },
+    {
+      "name": "HOLO/CARAVAN/CARAVAN.IMG",
+      "url": "assets/CARAVAN.IMG"
+    },
+    {
+      "name": "HOLO/CARAVAN/CARAVAN_CONTROLS.MIN.JS",
+      "url": "assets/CARAVAN_CONTROLS.MIN.JS"
+    },
     {
       "name": "HOLO/CARAVAN/CARAVAN_DRAW_SCREEN.MIN.JS",
       "url": "assets/CARAVAN_DRAW_SCREEN.MIN.JS"
@@ -48,6 +66,10 @@
       "url": "assets/CARAVAN_MENU_INTERFACE.MIN.JS"
     },
     {
+      "name": "HOLO/CARAVAN/CARAVAN_PLAY_MENU.MIN.JS",
+      "url": "assets/CARAVAN_PLAY_MENU.MIN.JS"
+    },
+    {
       "name": "HOLO/CARAVAN/CARAVAN_RESULT_CAPS.BIN",
       "url": "assets/CARAVAN_RESULT_CAPS.BIN"
     },
@@ -55,8 +77,18 @@
       "name": "HOLO/CARAVAN/CARAVAN_RESULT_MENU.MIN.JS",
       "url": "assets/CARAVAN_RESULT_MENU.MIN.JS"
     },
-    { "name": "HOLO/CARAVAN/CARAVAN_SFX.BIN", "url": "assets/CARAVAN_SFX.BIN" },
-    { "name": "HOLO/CARAVAN/CARAVAN_SFX.IDX", "url": "assets/CARAVAN_SFX.IDX" },
+    {
+      "name": "HOLO/CARAVAN/CARAVAN_RETURN_MENU.MIN.JS",
+      "url": "assets/CARAVAN_RETURN_MENU.MIN.JS"
+    },
+    {
+      "name": "HOLO/CARAVAN/CARAVAN_SFX.BIN",
+      "url": "assets/CARAVAN_SFX.BIN"
+    },
+    {
+      "name": "HOLO/CARAVAN/CARAVAN_SFX.IDX",
+      "url": "assets/CARAVAN_SFX.IDX"
+    },
     {
       "name": "HOLO/CARAVAN/CARAVAN_SFX_ENGINE.MIN.JS",
       "url": "assets/CARAVAN_SFX_ENGINE.MIN.JS"
@@ -80,6 +112,14 @@
     {
       "name": "HOLO/CARAVAN/CARAVAN_VOLUME_SOUND.MIN.JS",
       "url": "assets/CARAVAN_VOLUME_SOUND.MIN.JS"
+    },
+    {
+      "name": "HOLO/CARAVAN/CARAVAN_WIN_AUDIO.MIN.JS",
+      "url": "assets/CARAVAN_WIN_AUDIO.MIN.JS"
+    },
+    {
+      "name": "HOLO/CARAVAN/GAME_OVER_WIN.WAV",
+      "url": "assets/GAME_OVER_WIN.WAV"
     },
     {
       "name": "HOLO/CARAVAN/LAZY_DAYS-TIRED_PREVIEW.WAV",
