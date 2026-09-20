@@ -323,6 +323,25 @@ Rules:
 - An empty knob handler is legitimate: registering one claims the exclusive slot
   for a wheel the app deliberately ignores.
 
+#### Keyboard and date/time overlays
+
+Firmware 1.1.4 and later provides
+`Pip.createKeyboard(initialText, description, callback)`. It claims both knobs
+and returns an object with `draw()` and `remove()`. The keyboard does not close
+itself: call `.remove()` in its callback or cleanup path before drawing the next
+screen. Its `remove()` detaches both knob listeners and clears its cursor timer.
+
+Pre-1.1.4 firmware has no global keyboard API. To support it, provide a local
+text-entry scene modelled on the firmware's `showTextEntry`: a 4-row by
+14-column lower/upper `KEYMAP`, with `\b` for backspace, `\x02` for shift, and
+`\x03` for enter. Knob2 selects the column and knob1 selects the row and types
+on press. Clear the cursor-blink interval and remove both knob listeners when
+the scene closes.
+
+`Pip.createDateTimePicker(date, includeDate, title, callback)` is also available
+on firmware 1.1.4 and later. It edits the supplied `Date` in place and likewise
+returns an object whose `remove()` must be called explicitly.
+
 ### 5.4 Timing and directives
 
 - Drive animation with `setInterval` at the target frame rate, commonly 50ms.
@@ -355,6 +374,33 @@ Rules:
 - Audio is 16kHz mono WAV, PCM or ADPCM. Video is MS RLE AVI only; an mpeg4 AVI
   will not decode.
 
+Media conversion requirements:
+
+- WAV audio must be mono at 16kHz. PCM (`pcm_s16le`) works; prefer IMA ADPCM
+  (`adpcm_ima_wav`) when file size matters.
+- AVI video must be no wider than 480 pixels, grayscale, 12fps, MS RLE, and
+  8-bit paletted. Its audio must be mono 16kHz IMA ADPCM.
+- MS RLE compresses flat runs well but performs badly on noise and dithering.
+  Limit video to about 16 gray levels and disable dithering.
+
+```sh
+# PCM WAV
+ffmpeg -i "input.mp3" -ac 1 -ar 16000 -sample_fmt s16 \
+  -c:a pcm_s16le -f wav output.wav
+
+# Device-compatible AVI
+ffmpeg -i "input.mp4" \
+  -vf "scale=480:-1,format=gray,split[a][b];[a]palettegen=max_colors=16:reserve_transparent=0[p];[b][p]paletteuse=dither=none" \
+  -r 12 -c:v msrle -pix_fmt pal8 \
+  -c:a adpcm_ima_wav -ac 1 -ar 16000 output.AVI
+```
+
+Video playback is non-blocking. Pair `Pip.videoStart()` with a removable
+`videoStopped` listener and provide a knob-press skip path because a clip that
+fails to decode may never emit the event. For a manual skip, remove the listener
+before calling `Pip.videoStop()` so a synchronous stop cannot run the transition
+twice.
+
 ### 5.6 Settings the app changes
 
 If the app changes brightness or volume, capture the live values on load
@@ -384,6 +430,7 @@ the source tree.
 ```json
 {
   "id": "myholotape",
+  "previousId": "old-holotape-id",
   "name": "My Holotape Name",
   "author": "@your-username",
   "version": "1.0.0",
@@ -397,19 +444,27 @@ the source tree.
 }
 ```
 
-| Field             | Rules                                                                                                      |
-| ----------------- | ---------------------------------------------------------------------------------------------------------- |
-| `id`              | Lowercase alphanumeric and hyphens only. Unique in the registry.                                           |
-| `name`            | Human-readable name shown on pip-boy.com.                                                                  |
-| `author`          | GitHub username(s) prefixed with `@`, space separated.                                                     |
-| `version`         | [Semver](https://semver.org).                                                                              |
-| `description`     | One sentence.                                                                                              |
-| `icon`            | Transparent 120x120 PNG/IMG directly under `storage/`.                                                     |
-| `previews`        | PNG, MP4, or GIF files directly under `previews/`.                                                         |
-| `type`            | Exactly `app` or `game`. Nothing else.                                                                     |
-| `readme`          | Usually `README.md`.                                                                                       |
-| `storage`         | `{ pipboy, source }` pairs. `pipboy` is the on-device path; `source` is the repo file (`.ts` for scripts). |
-| `storageOptional` | Same shape, for files the user can choose to install.                                                      |
+| Field             | Rules                                                                                                                   |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `id`              | Lowercase alphanumeric and hyphens only. Unique in the registry.                                                        |
+| `previousId`      | Optional. When `id` changes, preserve the former registry id so the website can find old files for uninstall/reinstall. |
+| `name`            | Human-readable name shown on pip-boy.com.                                                                               |
+| `author`          | GitHub username(s) prefixed with `@`, space separated.                                                                  |
+| `version`         | [Semver](https://semver.org).                                                                                           |
+| `description`     | One sentence.                                                                                                           |
+| `icon`            | Transparent 120x120 PNG/IMG directly under `storage/`.                                                                  |
+| `previews`        | PNG, MP4, or GIF files directly under `previews/`.                                                                      |
+| `type`            | Exactly `app` or `game`. Nothing else.                                                                                  |
+| `readme`          | Usually `README.md`.                                                                                                    |
+| `storage`         | `{ pipboy, source }` pairs. `pipboy` is the on-device path; `source` is the repo file (`.ts` for scripts).              |
+| `storageOptional` | Same shape, for files the user can choose to install.                                                                   |
+
+`previousId` is migration metadata, not an alias for a new holotape. Omit it for
+a holotape that has never changed id. When renaming an existing id, copy the
+former value exactly, including its casing; historical ids are not necessarily
+valid under today's lowercase `id` rule. Do not remove or replace it merely to
+match the new id: pip-boy.com uses it to locate files installed under the old
+registry entry during uninstall and reinstall.
 
 `pipboy` paths follow `HOLO/<APP_ID>/<FILENAME>`, where `<APP_ID>` is the
 metadata `id` uppercased with underscores replacing hyphens. That prefix is a
@@ -424,8 +479,9 @@ development team's on-device convention.
 
 ## 7. Review and audit
 
-When reviewing a change, check every mandatory item and report failures by rule
-ID.
+When reviewing a change, first list all changed files and identify every new or
+modified holotape. Run every mandatory and recommended check for each affected
+holotape, report failures by rule ID, and give each holotape its own verdict.
 
 ### 7.1 Mandatory
 
@@ -444,7 +500,7 @@ ID.
 | R11 | No unsupported runtime features: `async`/`await`, modules, template literals, `fetch`.                                                               |
 | R12 | `Math.randInt(n)` rather than `Math.floor(Math.random() * n)`.                                                                                       |
 | R13 | No OS global is deleted or reassigned, except a documented, restored patch.                                                                          |
-| R14 | `metadata.json` has a unique lowercase id, semver version, and `type` of `app` or `game`.                                                            |
+| R14 | `metadata.json` has a unique lowercase id, semver version, and `type` of `app` or `game`; an id rename preserves the former value in `previousId`.   |
 | R15 | Storage `pipboy` paths use the `HOLO/<APP_ID>/` prefix matching the metadata id.                                                                     |
 | R16 | Every file in `storage` exists in the production artifact after `npm run build`.                                                                     |
 | R17 | Every file the app loads at runtime has a `storage` entry, or it fails with `NO_FILE`.                                                               |
@@ -560,6 +616,24 @@ Under `dist/pip-boy-3000-holotapes/`:
 Script `metadata` `source` values point at `.ts` in the repo. The production
 artifact rewrites those `source` paths to `.MIN.JS`. `pipboy` stays the
 on-device `.JS` path.
+
+#### Terser name-mangling hazard
+
+Terser follows standard JavaScript block scoping and may legitimately reuse a
+name in an inner block. Espruino does not block-scope `let` or `const`, so
+minification can turn otherwise distinct source names into one function-scoped
+name. A loop variable can then overwrite a parameter or local that is used after
+the loop, causing hardware-only failures such as `Function not found!`. R08
+catches collisions already present in source but cannot catch collisions
+introduced by the minifier.
+
+Build tooling must not enable name mangling for an eval-loaded scene or data
+builder unless it proves that the generated names are safe under Espruino's flat
+scoping. When changing Terser options, add a regression case containing a
+function parameter, a nested `for (let ...)` loop, and a use of the parameter
+after the loop. Verify that the production output does not reuse the parameter's
+name for the loop variable. After minifying an eval-loaded file, also verify
+that it still evaluates to a bare function expression.
 
 ### 9.3 CI
 
