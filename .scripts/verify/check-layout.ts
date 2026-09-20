@@ -1,6 +1,7 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
+import { execFileSync } from 'node:child_process';
 import { PNG } from 'pngjs';
 
 interface StorageEntry {
@@ -81,6 +82,28 @@ function directChild(value: unknown, directory: string): value is string {
 function isUppercaseBasename(relativePath: string): boolean {
   const base = relativePath.split('/').pop() ?? '';
   return base.length > 0 && base === base.toUpperCase();
+}
+
+/** Validate casing as recorded by Git, which can differ from disk on Windows. */
+function validateTrackedFilenameCasing(problems: string[]): void {
+  const trackedFiles = execFileSync(
+    'git',
+    ['ls-files', '-z', '--', 'holotapes'],
+    { cwd: rootDirectory, encoding: 'utf8' },
+  ).split('\0');
+
+  for (const trackedFile of trackedFiles) {
+    const segments = trackedFile.split('/');
+    const contentDirectoryIndex = segments.findIndex((segment) =>
+      ['storage', 'optional', 'previews'].includes(segment),
+    );
+
+    if (contentDirectoryIndex >= 0 && !isUppercaseBasename(trackedFile)) {
+      problems.push(
+        `${trackedFile}: Git index filename must be fully uppercase (force a two-step rename on case-insensitive filesystems)`,
+      );
+    }
+  }
 }
 
 async function validateIcon(
@@ -294,6 +317,7 @@ async function validateHolotape(
 
 async function main(): Promise<void> {
   const problems: string[] = [];
+  validateTrackedFilenameCasing(problems);
   const entries = await fs.readdir(holotapesDirectory, {
     withFileTypes: true,
   });
