@@ -4,24 +4,63 @@
   "author": "@joemto20-tech",
   "version": "1.0.0",
   "description": "A native-feeling calendar with date jumping and note-taking.",
-  "icon": "assets/hamcal.IMG",
-  "previews": ["previews/AUG.bmp"],
+  "icon": "storage/HAMCAL.IMG",
+  "previews": ["previews/AUG.BMP"],
   "type": "app",
   "readme": "README.md",
   "storage": [
-    { "name": "HOLO/CALENDAR/APP.JS", "url": "assets/APP.MIN.JS" },
-    { "name": "HOLO/CALENDAR/jan.IMG", "url": "assets/jan.IMG" },
-    { "name": "HOLO/CALENDAR/feb.IMG", "url": "assets/feb.IMG" },
-    { "name": "HOLO/CALENDAR/mar.IMG", "url": "assets/mar.IMG" },
-    { "name": "HOLO/CALENDAR/april.IMG", "url": "assets/april.IMG" },
-    { "name": "HOLO/CALENDAR/may.IMG", "url": "assets/may.IMG" },
-    { "name": "HOLO/CALENDAR/june.IMG", "url": "assets/june.IMG" },
-    { "name": "HOLO/CALENDAR/july.IMG", "url": "assets/july.IMG" },
-    { "name": "HOLO/CALENDAR/aug.IMG", "url": "assets/aug.IMG" },
-    { "name": "HOLO/CALENDAR/sep.IMG", "url": "assets/sep.IMG" },
-    { "name": "HOLO/CALENDAR/oct.IMG", "url": "assets/oct.IMG" },
-    { "name": "HOLO/CALENDAR/nov.IMG", "url": "assets/nov.IMG" },
-    { "name": "HOLO/CALENDAR/dec.IMG", "url": "assets/dec.IMG" }
+    {
+      "pipboy": "HOLO/CALENDAR/APP.JS",
+      "source": "storage/APP.TS"
+    },
+    {
+      "pipboy": "HOLO/CALENDAR/JAN.IMG",
+      "source": "storage/JAN.IMG"
+    },
+    {
+      "pipboy": "HOLO/CALENDAR/FEB.IMG",
+      "source": "storage/FEB.IMG"
+    },
+    {
+      "pipboy": "HOLO/CALENDAR/MAR.IMG",
+      "source": "storage/MAR.IMG"
+    },
+    {
+      "pipboy": "HOLO/CALENDAR/APRIL.IMG",
+      "source": "storage/APRIL.IMG"
+    },
+    {
+      "pipboy": "HOLO/CALENDAR/MAY.IMG",
+      "source": "storage/MAY.IMG"
+    },
+    {
+      "pipboy": "HOLO/CALENDAR/JUNE.IMG",
+      "source": "storage/JUNE.IMG"
+    },
+    {
+      "pipboy": "HOLO/CALENDAR/JULY.IMG",
+      "source": "storage/JULY.IMG"
+    },
+    {
+      "pipboy": "HOLO/CALENDAR/AUG.IMG",
+      "source": "storage/AUG.IMG"
+    },
+    {
+      "pipboy": "HOLO/CALENDAR/SEP.IMG",
+      "source": "storage/SEP.IMG"
+    },
+    {
+      "pipboy": "HOLO/CALENDAR/OCT.IMG",
+      "source": "storage/OCT.IMG"
+    },
+    {
+      "pipboy": "HOLO/CALENDAR/NOV.IMG",
+      "source": "storage/NOV.IMG"
+    },
+    {
+      "pipboy": "HOLO/CALENDAR/DEC.IMG",
+      "source": "storage/DEC.IMG"
+    }
   ],
   "storageOptional": []
 }

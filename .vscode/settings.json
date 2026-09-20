@@ -9,5 +9,11 @@
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "workbench.editor.enablePreview": false,
-  "workbench.editor.wrapTabs": true
+  "workbench.editor.wrapTabs": true,
+  "files.associations": {
+    "*.TS": "typescript",
+    "*.D.TS": "typescript"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }
