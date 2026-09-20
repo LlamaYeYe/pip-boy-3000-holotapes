@@ -4,34 +4,34 @@
   "author": "@trekker87 @Theeohn",
   "version": "2.0.1",
   "description": "A countdown timer with customizable alerts, and a stopwatch with lap function.",
-  "icon": "storage/VAULTTECTIMER.IMG",
+  "icon": "storage/VAULTTECTIMER.img",
   "previews": [
-    "previews/MENU.BMP",
-    "previews/TIMER.BMP",
-    "previews/STOPWATCH.BMP"
+    "previews/MENU.bmp",
+    "previews/TIMER.bmp",
+    "previews/STOPWATCH.bmp"
   ],
   "type": "app",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/VAULT_TEC_TIMER/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/VAULT_TEC_TIMER/STOPWATCH.JS",
-      "source": "storage/STOPWATCH.TS"
+      "source": "storage/STOPWATCH.ts"
     },
     {
       "pipboy": "HOLO/VAULT_TEC_TIMER/TIMER.JS",
-      "source": "storage/TIMER.TS"
+      "source": "storage/TIMER.ts"
     },
     {
       "pipboy": "HOLO/VAULT_TEC_TIMER/TITLE.JS",
-      "source": "storage/TITLE.TS"
+      "source": "storage/TITLE.ts"
     },
     {
       "pipboy": "HOLO/VAULT_TEC_TIMER/TITLE.BIN",
-      "source": "storage/TITLE.BIN"
+      "source": "storage/TITLE.bin"
     }
   ],
   "storageOptional": []

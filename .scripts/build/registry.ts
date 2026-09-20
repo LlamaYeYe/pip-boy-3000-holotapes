@@ -86,13 +86,11 @@ function prefixAssetPath(
 
 /**
  * Maps a repo source path to the artifact that ships in the production zip.
- * TypeScript scripts become the Espruino-tokenised `.MIN.JS` (or `.min.js`);
+ * TypeScript scripts become the Espruino-tokenised `.MIN.JS`;
  * assets are left alone. The on-device destination stays in `pipboy`.
  */
 function toProductionSource(source: string): string {
-  return source.replace(/\.ts$/i, (ext) =>
-    ext === '.TS' ? '.MIN.JS' : '.min.js',
-  );
+  return source.replace(/\.ts$/, '.MIN.JS');
 }
 
 function rewriteStorage(

@@ -4,7 +4,7 @@
  * Scene files are uninvoked function expressions. Keep annotations erasable.
  */
 
-/** CONFIG.JSON shape used by the settings UI (APP.TS). */
+/** CONFIG.JSON shape used by the settings UI (APP.ts). */
 interface PipCoIdleAppConfig {
   enabled: number;
   mesEnabled: number;

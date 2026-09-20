@@ -4,106 +4,106 @@
   "author": "@CodyTolene",
   "version": "4.1.0",
   "description": "Stack, rotate, and clear falling blocks in this Tetris inspired mini-game. Simple, addictive, and perfect for idle moments between scavenging runs or stimpak breaks.",
-  "icon": "storage/PIPTRIS.PNG",
+  "icon": "storage/PIPTRIS.png",
   "previews": [
-    "previews/INTRO.BMP",
-    "previews/MENU.BMP",
-    "previews/INSTRUCTIONS.BMP",
-    "previews/GAME.BMP"
+    "previews/INTRO.bmp",
+    "previews/MENU.bmp",
+    "previews/INSTRUCTIONS.bmp",
+    "previews/GAME.bmp"
   ],
   "type": "game",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/PIPTRIS/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/PIPTRIS/BLOCK.JSON",
-      "source": "storage/BLOCK.JSON"
+      "source": "storage/BLOCK.json"
     },
     {
       "pipboy": "HOLO/PIPTRIS/EXPL_01.WAV",
-      "source": "storage/EXPL_01.WAV"
+      "source": "storage/EXPL_01.wav"
     },
     {
       "pipboy": "HOLO/PIPTRIS/EXPL_02.WAV",
-      "source": "storage/EXPL_02.WAV"
+      "source": "storage/EXPL_02.wav"
     },
     {
       "pipboy": "HOLO/PIPTRIS/EXPL_03.WAV",
-      "source": "storage/EXPL_03.WAV"
+      "source": "storage/EXPL_03.wav"
     },
     {
       "pipboy": "HOLO/PIPTRIS/EXPL_04.WAV",
-      "source": "storage/EXPL_04.WAV"
+      "source": "storage/EXPL_04.wav"
     },
     {
       "pipboy": "HOLO/PIPTRIS/GAME.JS",
-      "source": "storage/GAME.TS"
+      "source": "storage/GAME.ts"
     },
     {
       "pipboy": "HOLO/PIPTRIS/GAME.RAW",
-      "source": "storage/GAME.RAW"
+      "source": "storage/GAME.raw"
     },
     {
       "pipboy": "HOLO/PIPTRIS/GAME_OVER.JS",
-      "source": "storage/GAME_OVER.TS"
+      "source": "storage/GAME_OVER.ts"
     },
     {
       "pipboy": "HOLO/PIPTRIS/INST.JS",
-      "source": "storage/INST.TS"
+      "source": "storage/INST.ts"
     },
     {
       "pipboy": "HOLO/PIPTRIS/INTRO.JS",
-      "source": "storage/INTRO.TS"
+      "source": "storage/INTRO.ts"
     },
     {
       "pipboy": "HOLO/PIPTRIS/INTRO.RAW",
-      "source": "storage/INTRO.RAW"
+      "source": "storage/INTRO.raw"
     },
     {
       "pipboy": "HOLO/PIPTRIS/MENU.JS",
-      "source": "storage/MENU.TS"
+      "source": "storage/MENU.ts"
     },
     {
       "pipboy": "HOLO/PIPTRIS/MENU.RAW",
-      "source": "storage/MENU.RAW"
+      "source": "storage/MENU.raw"
     },
     {
       "pipboy": "HOLO/PIPTRIS/NUKE.JSON",
-      "source": "storage/NUKE.JSON"
+      "source": "storage/NUKE.json"
     },
     {
       "pipboy": "HOLO/PIPTRIS/PRELOAD.JS",
-      "source": "storage/PRELOAD.TS"
+      "source": "storage/PRELOAD.ts"
     },
     {
       "pipboy": "HOLO/PIPTRIS/SETTINGS.JS",
-      "source": "storage/SETTINGS.TS"
+      "source": "storage/SETTINGS.ts"
     }
   ],
   "storageOptional": [
     {
       "label": "Electro Swing (Music)",
-      "previewMp3": "previews/PIPTRIS-ELECTRO-SWING.MP3",
+      "previewMp3": "previews/PIPTRIS-ELECTRO-SWING.mp3",
       "sizeKB": 1150,
       "pipboy": "PIPTRIS/PIPTRIS-ELECTRO-SWING.WAV",
-      "source": "optional/PIPTRIS-ELECTRO-SWING.WAV"
+      "source": "optional/PIPTRIS-ELECTRO-SWING.wav"
     },
     {
       "label": "Symphony (Music)",
-      "previewMp3": "previews/PIPTRIS-SYMPHONY.MP3",
+      "previewMp3": "previews/PIPTRIS-SYMPHONY.mp3",
       "sizeKB": 1614,
       "pipboy": "PIPTRIS/PIPTRIS-SYMPHONY.WAV",
-      "source": "optional/PIPTRIS-SYMPHONY.WAV"
+      "source": "optional/PIPTRIS-SYMPHONY.wav"
     },
     {
       "label": "Whimsical (Music)",
-      "previewMp3": "previews/PIPTRIS-WHIMSICAL.MP3",
+      "previewMp3": "previews/PIPTRIS-WHIMSICAL.mp3",
       "sizeKB": 1635,
       "pipboy": "PIPTRIS/PIPTRIS-WHIMSICAL.WAV",
-      "source": "optional/PIPTRIS-WHIMSICAL.WAV"
+      "source": "optional/PIPTRIS-WHIMSICAL.wav"
     }
   ]
 }

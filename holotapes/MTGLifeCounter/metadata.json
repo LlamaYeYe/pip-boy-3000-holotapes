@@ -4,15 +4,15 @@
   "author": "@tylerjbartlett",
   "version": "1.0.1",
   "description": "A Pip-powered life counter for Magic the Gathering with standard 20 life games and 40/21 life Commander games for 1-4 players. 1-2 players recommended.",
-  "icon": "storage/MTGTRACKER.PNG",
-  "previews": ["previews/MENU.BMP", "previews/START.BMP"],
+  "icon": "storage/MTGTRACKER.png",
+  "previews": ["previews/MENU.bmp", "previews/START.bmp"],
   "tags": "game,tool",
   "type": "app",
   "readme": "README.md",
   "storage": [
     {
-      "pipboy": "HOLO/MTGTRACKER/APP.js",
-      "source": "storage/APP.TS"
+      "pipboy": "HOLO/MTGTRACKER/APP.JS",
+      "source": "storage/APP.ts"
     }
   ]
 }

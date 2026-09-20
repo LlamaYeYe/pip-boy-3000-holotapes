@@ -4,66 +4,66 @@
   "author": "@AidansLab",
   "version": "1.0.0",
   "description": "A Pip-Boy 3000 remake of the classic Windows 95 Plus! for Kids Underwater screensaver, with real fish artwork extracted from the original screensaver.",
-  "icon": "storage/PIPQUARIUM.IMG",
-  "previews": ["previews/PREVIEW.BMP"],
+  "icon": "storage/PIPQUARIUM.img",
+  "previews": ["previews/PREVIEW.bmp"],
   "type": "app",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/PIPQUARIUM/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/PIPQUARIUM/FISHA_L.IMG",
-      "source": "storage/FISHA_L.IMG"
+      "source": "storage/FISHA_L.img"
     },
     {
       "pipboy": "HOLO/PIPQUARIUM/FISHA_R.IMG",
-      "source": "storage/FISHA_R.IMG"
+      "source": "storage/FISHA_R.img"
     },
     {
       "pipboy": "HOLO/PIPQUARIUM/FISHB_L.IMG",
-      "source": "storage/FISHB_L.IMG"
+      "source": "storage/FISHB_L.img"
     },
     {
       "pipboy": "HOLO/PIPQUARIUM/FISHB_R.IMG",
-      "source": "storage/FISHB_R.IMG"
+      "source": "storage/FISHB_R.img"
     },
     {
       "pipboy": "HOLO/PIPQUARIUM/RAY_L.IMG",
-      "source": "storage/RAY_L.IMG"
+      "source": "storage/RAY_L.img"
     },
     {
       "pipboy": "HOLO/PIPQUARIUM/RAY_R.IMG",
-      "source": "storage/RAY_R.IMG"
+      "source": "storage/RAY_R.img"
     },
     {
       "pipboy": "HOLO/PIPQUARIUM/TRIG_L.IMG",
-      "source": "storage/TRIG_L.IMG"
+      "source": "storage/TRIG_L.img"
     },
     {
       "pipboy": "HOLO/PIPQUARIUM/TRIG_R.IMG",
-      "source": "storage/TRIG_R.IMG"
+      "source": "storage/TRIG_R.img"
     },
     {
       "pipboy": "HOLO/PIPQUARIUM/SEAHORSE.IMG",
-      "source": "storage/SEAHORSE.IMG"
+      "source": "storage/SEAHORSE.img"
     },
     {
       "pipboy": "HOLO/PIPQUARIUM/CORAL_A.IMG",
-      "source": "storage/CORAL_A.IMG"
+      "source": "storage/CORAL_A.img"
     },
     {
       "pipboy": "HOLO/PIPQUARIUM/CORAL_B.IMG",
-      "source": "storage/CORAL_B.IMG"
+      "source": "storage/CORAL_B.img"
     },
     {
       "pipboy": "HOLO/PIPQUARIUM/BUBBLE.IMG",
-      "source": "storage/BUBBLE.IMG"
+      "source": "storage/BUBBLE.img"
     },
     {
       "pipboy": "HOLO/PIPQUARIUM/AMBIENT.WAV",
-      "source": "storage/AMBIENT.WAV"
+      "source": "storage/AMBIENT.wav"
     }
   ],
   "storageOptional": []

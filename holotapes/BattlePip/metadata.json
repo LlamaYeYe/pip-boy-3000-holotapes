@@ -4,54 +4,54 @@
   "author": "@Theeohn",
   "version": "1.0.0",
   "description": "Place your airships, and blow up the enemies with the fog of war hiding them from you!",
-  "icon": "storage/AIRSHIP.IMG",
-  "previews": ["previews/MENU.BMP", "previews/GAME.BMP"],
+  "icon": "storage/AIRSHIP.img",
+  "previews": ["previews/MENU.bmp", "previews/GAME.bmp"],
   "type": "game",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/BATTLEPIP/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/BATTLEPIP/GOLOSE.WAV",
-      "source": "storage/GOLOSE.WAV"
+      "source": "storage/GOLOSE.wav"
     },
     {
       "pipboy": "HOLO/BATTLEPIP/GOWIN.WAV",
-      "source": "storage/GOWIN.WAV"
+      "source": "storage/GOWIN.wav"
     },
     {
       "pipboy": "HOLO/BATTLEPIP/HIT.WAV",
-      "source": "storage/HIT.WAV"
+      "source": "storage/HIT.wav"
     },
     {
       "pipboy": "HOLO/BATTLEPIP/LOSE.WAV",
-      "source": "storage/LOSE.WAV"
+      "source": "storage/LOSE.wav"
     },
     {
       "pipboy": "HOLO/BATTLEPIP/MISS.WAV",
-      "source": "storage/MISS.WAV"
+      "source": "storage/MISS.wav"
     },
     {
       "pipboy": "HOLO/BATTLEPIP/SONAR1.WAV",
-      "source": "storage/SONAR1.WAV"
+      "source": "storage/SONAR1.wav"
     },
     {
       "pipboy": "HOLO/BATTLEPIP/SONAR2.WAV",
-      "source": "storage/SONAR2.WAV"
+      "source": "storage/SONAR2.wav"
     },
     {
       "pipboy": "HOLO/BATTLEPIP/TITLE.BIN",
-      "source": "storage/TITLE.BIN"
+      "source": "storage/TITLE.bin"
     },
     {
       "pipboy": "HOLO/BATTLEPIP/TITLE.WAV",
-      "source": "storage/TITLE.WAV"
+      "source": "storage/TITLE.wav"
     },
     {
       "pipboy": "HOLO/BATTLEPIP/WIN.WAV",
-      "source": "storage/WIN.WAV"
+      "source": "storage/WIN.wav"
     }
   ],
   "storageOptional": []

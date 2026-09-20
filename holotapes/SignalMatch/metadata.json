@@ -4,14 +4,14 @@
   "author": "@Radiomaru7",
   "version": "1.0.0",
   "description": "Watch the sequence of numbered panels light up, then repeat it back.",
-  "icon": "storage/SIGNAL-MATCH.IMG",
-  "previews": ["previews/GAME01.BMP", "previews/GAME02.BMP"],
+  "icon": "storage/SIGNAL-MATCH.img",
+  "previews": ["previews/GAME01.bmp", "previews/GAME02.bmp"],
   "type": "game",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/SIGNAL_MATCH/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     }
   ],
   "storageOptional": []

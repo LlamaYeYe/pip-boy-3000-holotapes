@@ -4,23 +4,23 @@
   "author": "@Johnnyjoestar987",
   "version": "1.0.0",
   "description": "A Nonary-style ALLY/BETRAY voting game where you and seven CPU rivals bargain, betray and race to escape Vault 9.",
-  "icon": "storage/ZERO_ESCAPE_VAULT_9.IMG",
+  "icon": "storage/ZERO_ESCAPE_VAULT_9.img",
   "previews": [
-    "previews/MENU.PNG",
-    "previews/VAULT.PNG",
-    "previews/RESULTS.PNG",
-    "previews/GAMEOVER.PNG"
+    "previews/MENU.png",
+    "previews/VAULT.png",
+    "previews/RESULTS.png",
+    "previews/GAMEOVER.png"
   ],
   "type": "game",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/ZERO_ESCAPE_VAULT_9/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/ZERO_ESCAPE_VAULT_9/DATA.JSON",
-      "source": "storage/DATA.JSON"
+      "source": "storage/DATA.json"
     }
   ],
   "storageOptional": [
@@ -28,34 +28,34 @@
       "label": "Intro Image",
       "sizeKB": 38,
       "pipboy": "HOLO/ZERO_ESCAPE_VAULT_9/MAINSCREEN.BIN",
-      "source": "optional/MAINSCREEN.BIN"
+      "source": "optional/MAINSCREEN.bin"
     },
     {
       "label": "Door Opens Image",
       "sizeKB": 38,
       "pipboy": "HOLO/ZERO_ESCAPE_VAULT_9/DOOROPENS.BIN",
-      "source": "optional/DOOROPENS.BIN"
+      "source": "optional/DOOROPENS.bin"
     },
     {
       "label": "Main Theme Music",
-      "previewMp3": "previews/MAINTHEME.MP3",
+      "previewMp3": "previews/MAINTHEME.mp3",
       "sizeKB": 1367,
       "pipboy": "HOLO/ZERO_ESCAPE_VAULT_9/MAINTHEME.WAV",
-      "source": "optional/MAINTHEME.WAV"
+      "source": "optional/MAINTHEME.wav"
     },
     {
       "label": "Background Music",
-      "previewMp3": "previews/BACKGROUND.MP3",
+      "previewMp3": "previews/BACKGROUND.mp3",
       "sizeKB": 1099,
       "pipboy": "HOLO/ZERO_ESCAPE_VAULT_9/BACKGROUND.WAV",
-      "source": "optional/BACKGROUND.WAV"
+      "source": "optional/BACKGROUND.wav"
     },
     {
       "label": "CRT On SFX",
-      "previewMp3": "previews/CRT_ON.MP3",
+      "previewMp3": "previews/CRT_ON.mp3",
       "sizeKB": 28,
       "pipboy": "HOLO/ZERO_ESCAPE_VAULT_9/CRT_ON.WAV",
-      "source": "optional/CRT_ON.WAV"
+      "source": "optional/CRT_ON.wav"
     }
   ]
 }

@@ -52,9 +52,9 @@ Every holotape lives in its own directory:
 
 ```text
 holotapes/<YourHolotape>/
-  storage/          Required files, uppercase .TS sources, metadata icon (120x120)
-    APP.TS          Main source
-    TYPES.D.TS      Local types, when needed
+  storage/          Required files, uppercase stems, lowercase extensions
+    APP.ts          Main source
+    TYPES.d.ts      Local types, when needed
   optional/         storageOptional files, when used
   previews/         Preview media, when used
   metadata.json     Registration entry (hand-written)
@@ -73,16 +73,17 @@ Rules:
   entry yourself and say so in your summary, because the developer is the only
   one who knows whether a file is required or optional and what it should be
   called on the device. The same applies to icons, `README.md`, and `ChangeLog`.
-- All `.TS`/`.JS` filenames are uppercase. `storage/APP.TS` emits
-  `storage/APP.JS` and `storage/APP.MIN.JS`. Uppercase names match the Pip-Boy
-  development team's on-device file pattern (SD card paths are all uppercase).
+- Repository files under `storage/`, `optional/`, and `previews/` use uppercase
+  filename stems and lowercase extensions. `storage/APP.ts` emits
+  `storage/APP.JS` and `storage/APP.MIN.JS`. On-device paths remain fully
+  uppercase to match the Pip-Boy development team's SD card convention.
 - Every metadata `storage` `source` is directly under `storage/`, every
   `storageOptional` `source` is directly under `optional/`, and every preview is
   directly under `previews/`. The metadata icon is directly under `storage/` (no
   `assets/` folder).
 - Every holotape has exactly one metadata icon: a transparent PNG or IMG that is
   exactly 120 by 120 pixels. Layout validation rejects anything else.
-- Types used by one holotape go in that holotape's `TYPES.D.TS`. Only things the
+- Types used by one holotape go in that holotape's `TYPES.d.ts`. Only things the
   device itself provides belong in the shared `types/`.
 - `ChangeLog` entries are:
 
@@ -106,7 +107,7 @@ Interfaces, type aliases, generics, and annotations are all fine.
 
 `@ts-nocheck`, bare `@ts-ignore`, unexplained `@ts-expect-error`, `any`, and
 `unknown` are rejected by ESLint. Declare a concrete type (or a named interface
-in a local `TYPES.D.TS`). Return types on functions are required and are
+in a local `TYPES.d.ts`). Return types on functions are required and are
 erasable.
 
 ### 3.3 Type syntax is free, code changes are not
@@ -141,7 +142,7 @@ Useful erasable idioms:
 ### 3.4 Never use `any` or `unknown`
 
 Both are banned under `holotapes/**` and the linter enforces it. Declare a
-concrete type or a named interface in a local `TYPES.D.TS`. For eval'd scene
+concrete type or a named interface in a local `TYPES.d.ts`. For eval'd scene
 factories, cast to a named factory type - do not leave the value as `unknown`.
 
 ### 3.5 Type the shapes, not just the leaves
@@ -387,11 +388,11 @@ the source tree.
   "author": "@your-username",
   "version": "1.0.0",
   "description": "A brief description of the holotape.",
-  "icon": "storage/ICON.PNG",
-  "previews": ["previews/SCREEN.PNG"],
+  "icon": "storage/ICON.png",
+  "previews": ["previews/SCREEN.png"],
   "type": "game",
   "readme": "README.md",
-  "storage": [{ "pipboy": "HOLO/MYAPP/APP.JS", "source": "storage/APP.TS" }],
+  "storage": [{ "pipboy": "HOLO/MYAPP/APP.JS", "source": "storage/APP.ts" }],
   "storageOptional": []
 }
 ```
@@ -407,17 +408,17 @@ the source tree.
 | `previews`        | PNG, MP4, or GIF files directly under `previews/`.                                                         |
 | `type`            | Exactly `app` or `game`. Nothing else.                                                                     |
 | `readme`          | Usually `README.md`.                                                                                       |
-| `storage`         | `{ pipboy, source }` pairs. `pipboy` is the on-device path; `source` is the repo file (`.TS` for scripts). |
+| `storage`         | `{ pipboy, source }` pairs. `pipboy` is the on-device path; `source` is the repo file (`.ts` for scripts). |
 | `storageOptional` | Same shape, for files the user can choose to install.                                                      |
 
 `pipboy` paths follow `HOLO/<APP_ID>/<FILENAME>`, where `<APP_ID>` is the
 metadata `id` uppercased with underscores replacing hyphens. That prefix is a
 filesystem convention only; it has no relationship to any variable in the code.
-Script `source` entries point at uppercase TypeScript (e.g. `storage/APP.TS`).
-The build emits `APP.JS` / `APP.MIN.JS` and rewrites production
-metadata/registry `source` values to the `.MIN.JS` artifact; `pipboy` stays the
-on-device `.JS` name. Uppercase filenames match the Pip-Boy development team's
-on-device convention.
+Script `source` entries use uppercase stems and lowercase extensions (e.g.
+`storage/APP.ts`). The build emits `APP.JS` / `APP.MIN.JS` and rewrites
+production metadata/registry `source` values to the `.MIN.JS` artifact; `pipboy`
+stays the on-device `.JS` name. Uppercase filenames match the Pip-Boy
+development team's on-device convention.
 
 -
 
@@ -428,32 +429,32 @@ ID.
 
 ### 7.1 Mandatory
 
-| #   | Check                                                                                                                                                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| R01 | Source is a function expression, not invoked, no trailing `()`.                                                                                              |
-| R02 | Return object has a literal uppercase `id` and a `remove` function.                                                                                          |
-| R03 | Every `Pip.on`/`onExclusive` listener is removed in `remove()`.                                                                                              |
-| R04 | Every `setInterval`/`setTimeout` handle is cleared in `remove()`.                                                                                            |
-| R05 | Every `setWatch` handle is cleared in `remove()`.                                                                                                            |
-| R06 | `remove()` does not call `load()` or `E.reboot()`.                                                                                                           |
-| R07 | No function is referenced before its declaration line (4.4).                                                                                                 |
-| R08 | No `let`/`const` name is reused inside a block while the outer value is still needed.                                                                        |
-| R09 | No `any` or `unknown`. Use concrete types / local `TYPES.D.TS` interfaces.                                                                                   |
-| R10 | Only erasable TypeScript syntax is used.                                                                                                                     |
-| R11 | No unsupported runtime features: `async`/`await`, modules, template literals, `fetch`.                                                                       |
-| R12 | `Math.randInt(n)` rather than `Math.floor(Math.random() * n)`.                                                                                               |
-| R13 | No OS global is deleted or reassigned, except a documented, restored patch.                                                                                  |
-| R14 | `metadata.json` has a unique lowercase id, semver version, and `type` of `app` or `game`.                                                                    |
-| R15 | Storage `pipboy` paths use the `HOLO/<APP_ID>/` prefix matching the metadata id.                                                                             |
-| R16 | Every file in `storage` exists in the production artifact after `npm run build`.                                                                             |
-| R17 | Every file the app loads at runtime has a `storage` entry, or it fails with `NO_FILE`.                                                                       |
-| R18 | `README.md` documents the controls; `ChangeLog` has an entry for the change.                                                                                 |
-| R19 | `npm run verify` passes and no generated `.js`, `.min.js`, or registry is committed.                                                                         |
-| R20 | All files under `storage/`, `optional/`, and `previews/` use fully uppercase filenames (name + extension). TypeScript lives under `storage/` or `optional/`. |
-| R21 | Every `storage` `source` is directly under `storage/`.                                                                                                       |
-| R22 | Every `storageOptional` `source` is directly under `optional/`.                                                                                              |
-| R23 | Every preview is directly under `previews/`; the metadata icon is directly under `storage/`.                                                                 |
-| R24 | The icon is a transparent PNG or IMG and exactly 120x120 pixels.                                                                                             |
+| #   | Check                                                                                                                                                |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| R01 | Source is a function expression, not invoked, no trailing `()`.                                                                                      |
+| R02 | Return object has a literal uppercase `id` and a `remove` function.                                                                                  |
+| R03 | Every `Pip.on`/`onExclusive` listener is removed in `remove()`.                                                                                      |
+| R04 | Every `setInterval`/`setTimeout` handle is cleared in `remove()`.                                                                                    |
+| R05 | Every `setWatch` handle is cleared in `remove()`.                                                                                                    |
+| R06 | `remove()` does not call `load()` or `E.reboot()`.                                                                                                   |
+| R07 | No function is referenced before its declaration line (4.4).                                                                                         |
+| R08 | No `let`/`const` name is reused inside a block while the outer value is still needed.                                                                |
+| R09 | No `any` or `unknown`. Use concrete types / local `TYPES.d.ts` interfaces.                                                                           |
+| R10 | Only erasable TypeScript syntax is used.                                                                                                             |
+| R11 | No unsupported runtime features: `async`/`await`, modules, template literals, `fetch`.                                                               |
+| R12 | `Math.randInt(n)` rather than `Math.floor(Math.random() * n)`.                                                                                       |
+| R13 | No OS global is deleted or reassigned, except a documented, restored patch.                                                                          |
+| R14 | `metadata.json` has a unique lowercase id, semver version, and `type` of `app` or `game`.                                                            |
+| R15 | Storage `pipboy` paths use the `HOLO/<APP_ID>/` prefix matching the metadata id.                                                                     |
+| R16 | Every file in `storage` exists in the production artifact after `npm run build`.                                                                     |
+| R17 | Every file the app loads at runtime has a `storage` entry, or it fails with `NO_FILE`.                                                               |
+| R18 | `README.md` documents the controls; `ChangeLog` has an entry for the change.                                                                         |
+| R19 | `npm run verify` passes and no generated `.js`, `.min.js`, or registry is committed.                                                                 |
+| R20 | Files under `storage/`, `optional/`, and `previews/` use uppercase stems and lowercase extensions. TypeScript lives under `storage/` or `optional/`. |
+| R21 | Every `storage` `source` is directly under `storage/`.                                                                                               |
+| R22 | Every `storageOptional` `source` is directly under `optional/`.                                                                                      |
+| R23 | Every preview is directly under `previews/`; the metadata icon is directly under `storage/`.                                                         |
+| R24 | The icon is a transparent PNG or IMG and exactly 120x120 pixels.                                                                                     |
 
 ### 7.2 Recommended
 
@@ -556,7 +557,7 @@ Under `dist/pip-boy-3000-holotapes/`:
 - `APP.MIN.JS` - Terser + Espruino pretokenise (binary; never hand-edit)
 - `holotapes/registry.json` - generated from every `metadata.json`
 
-Script `metadata` `source` values point at `.TS` in the repo. The production
+Script `metadata` `source` values point at `.ts` in the repo. The production
 artifact rewrites those `source` paths to `.MIN.JS`. `pipboy` stays the
 on-device `.JS` path.
 

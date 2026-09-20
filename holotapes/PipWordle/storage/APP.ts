@@ -32,7 +32,7 @@
 
   function loadWordBlob(len: number): string {
     try {
-      const raw = fs.readFile(WORD_DIR + 'words_' + len + '.txt');
+      const raw = fs.readFile(WORD_DIR + 'WORDS_' + len + '.TXT');
       const blob = raw.replace(/[^A-Z]/g, '');
       if (blob.length >= len && blob.length % len === 0) return blob;
     } catch (e) {}

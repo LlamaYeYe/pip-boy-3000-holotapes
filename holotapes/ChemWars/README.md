@@ -82,7 +82,7 @@ In the amount picker, confirming at 0 cancels.
 
 ## Manual Install
 
-- `storage/APP.TS` (build emits `APP.MIN.JS`) installs as
+- `storage/APP.ts` (build emits `APP.MIN.JS`) installs as
   `HOLO/CHEM_WARS/APP.JS`
 - `TEXT.TXT` → `HOLO/CHEM_WARS/TEXT.TXT` (all game text, loaded at runtime to
   keep the interpreted code small — the app requires it)

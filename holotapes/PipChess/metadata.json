@@ -4,14 +4,14 @@
   "author": "@OrionMissesRust",
   "version": "1.0.0",
   "description": "Chess on the Pip-Boy!",
-  "icon": "storage/PIPCHESS.PNG",
-  "previews": ["previews/MENU.BMP", "previews/GAME.BMP"],
+  "icon": "storage/PIPCHESS.png",
+  "previews": ["previews/MENU.bmp", "previews/GAME.bmp"],
   "type": "game",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/PIPCHESS/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     }
   ],
   "storageOptional": []

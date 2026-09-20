@@ -4,34 +4,34 @@
   "author": "@JLDenson",
   "version": "1.0.1",
   "description": "A Fallout-themed take on the classic Flappy Bird. Guide a Radroach through the Wasteland, dodging every obstacle in its path.",
-  "icon": "storage/FLAPPYROACH.PNG",
-  "previews": ["previews/MENU.BMP", "previews/GAME.BMP"],
+  "icon": "storage/FLAPPYROACH.png",
+  "previews": ["previews/MENU.bmp", "previews/GAME.bmp"],
   "type": "game",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/FLAPPY/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/FLAPPY/BEETLEFLYING.WAV",
-      "source": "storage/BEETLEFLYING.WAV"
+      "source": "storage/BEETLEFLYING.wav"
     },
     {
       "pipboy": "HOLO/FLAPPY/GAMEOVER.WAV",
-      "source": "storage/GAMEOVER.WAV"
+      "source": "storage/GAMEOVER.wav"
     },
     {
       "pipboy": "HOLO/FLAPPY/HITGROUND.WAV",
-      "source": "storage/HITGROUND.WAV"
+      "source": "storage/HITGROUND.wav"
     },
     {
       "pipboy": "HOLO/FLAPPY/SPLATONPIPE.WAV",
-      "source": "storage/SPLATONPIPE.WAV"
+      "source": "storage/SPLATONPIPE.wav"
     },
     {
       "pipboy": "HOLO/FLAPPY/STARTGAME.WAV",
-      "source": "storage/STARTGAME.WAV"
+      "source": "storage/STARTGAME.wav"
     }
   ],
   "storageOptional": []

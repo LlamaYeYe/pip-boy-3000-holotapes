@@ -54,7 +54,7 @@
   try {
     fsMod = require('fs');
   } catch (e) {
-    fsMod = null;
+    fsMod = null as never;
   }
   // Minimal fallback so the text screens still work if the file is ever missing.
   const TXT_FALLBACK = {

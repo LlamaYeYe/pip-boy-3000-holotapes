@@ -1,32 +1,32 @@
 // MESMETRON title/menu screen.
 //
-// This is the SINGLE list of available screensavers - app.js has no list of
+// This is the SINGLE list of available screensavers - APP.JS has no list of
 // its own, it just reads .file off of whichever item is currently selected.
 // That means adding a new screensaver only ever requires editing ONE file:
 // this one. See the ITEMS array below.
 
 (function () {
   // To add your own screensaver:
-  //   1. Copy an existing module file (e.g. web.js) as a template, following
+  //   1. Copy an existing module file (e.g. WEB.JS) as a template, following
   //      its { init(variant), draw(h) } shape.
   //   2. Add one line below: { name: "YOUR NAME", file: "YOURFILE.JS" }.
   //      Order doesn't matter - insert it anywhere in the list.
-  //   3. That's it. app.js will load "YOURFILE.JS" automatically once your
-  //      entry is selected - nothing in app.js needs to change.
-  // If the file named here doesn't actually exist on disk, app.js catches
+  //   3. That's it. APP.JS will load "YOURFILE.JS" automatically once your
+  //      entry is selected - nothing in APP.JS needs to change.
+  // If the file named here doesn't actually exist on disk, APP.JS catches
   // that when you select it - it shows Pip's standard error box instead of
   // crashing, and drops you back at this menu so you can try something else.
   const ITEMS = [
-    { name: 'BOUNCER', file: 'bouncer.js' },
-    { name: 'BURST', file: 'burst.js' },
-    { name: 'FIREWORKS', file: 'fireworks.js' },
-    { name: 'MATRIX', file: 'matrix.js' },
-    { name: 'RIBBON', file: 'ribbon.js' },
-    { name: 'SPIRAL', file: 'spiral.js' },
-    { name: 'SHAPES', file: 'shapes.js' },
-    { name: 'VORTEX', file: 'vortex.js' },
-    { name: 'WARP', file: 'warp.js' },
-    { name: 'WEB', file: 'web.js' },
+    { name: 'BOUNCER', file: 'BOUNCER.JS' },
+    { name: 'BURST', file: 'BURST.JS' },
+    { name: 'FIREWORKS', file: 'FIREWORKS.JS' },
+    { name: 'MATRIX', file: 'MATRIX.JS' },
+    { name: 'RIBBON', file: 'RIBBON.JS' },
+    { name: 'SPIRAL', file: 'SPIRAL.JS' },
+    { name: 'SHAPES', file: 'SHAPES.JS' },
+    { name: 'VORTEX', file: 'VORTEX.JS' },
+    { name: 'WARP', file: 'WARP.JS' },
+    { name: 'WEB', file: 'WEB.JS' },
   ];
   const BX1 = 90,
     BY1 = 138,

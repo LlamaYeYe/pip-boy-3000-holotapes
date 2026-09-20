@@ -24,7 +24,7 @@ export type RawMetadata = Partial<Metadata>;
 export interface StorageEntry {
   /** On-device destination path (e.g. HOLO/MYAPP/APP.JS). */
   pipboy: string;
-  /** Repo source path (e.g. storage/APP.TS). */
+  /** Repo source path (e.g. storage/APP.ts). */
   source: string;
   label?: string;
   sizeKB?: number;

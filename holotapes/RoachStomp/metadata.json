@@ -4,82 +4,82 @@
   "author": "@tylerjbartlett",
   "version": "1.0.0",
   "description": "Radroaches are swarming the vault and all you've got is your trusty boot. Stomp the roaches and save the vault!",
-  "icon": "storage/ROACHSTOMP.PNG",
+  "icon": "storage/ROACHSTOMP.png",
   "previews": [
-    "previews/PREVIEW01.PNG",
-    "previews/PREVIEW02.PNG",
-    "previews/CFW-GENERAL.PNG"
+    "previews/PREVIEW01.png",
+    "previews/PREVIEW02.png",
+    "previews/CFW-GENERAL.png"
   ],
   "type": "game",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/ROACHSTOMP/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/BOOT1.JSON",
-      "source": "storage/BOOT1.JSON"
+      "source": "storage/BOOT1.json"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/HEART_EMPTY.JSON",
-      "source": "storage/HEART_EMPTY.JSON"
+      "source": "storage/HEART_EMPTY.json"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/HEART_FULL.JSON",
-      "source": "storage/HEART_FULL.JSON"
+      "source": "storage/HEART_FULL.json"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/ROACH1.JSON",
-      "source": "storage/ROACH1.JSON"
+      "source": "storage/ROACH1.json"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/ROACH2.JSON",
-      "source": "storage/ROACH2.JSON"
+      "source": "storage/ROACH2.json"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/SPLAT1.JSON",
-      "source": "storage/SPLAT1.JSON"
+      "source": "storage/SPLAT1.json"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/TITLE.IMG",
-      "source": "storage/TITLE.IMG"
+      "source": "storage/TITLE.img"
     },
     {
       "pipboy": "SETTINGS/ROACHSTOMP.JSON",
-      "source": "storage/ROACHSTOMP.JSON"
+      "source": "storage/ROACHSTOMP.json"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/SPLAT.WAV",
-      "source": "storage/SPLAT.WAV"
+      "source": "storage/SPLAT.wav"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/WHOOSH.WAV",
-      "source": "storage/WHOOSH.WAV"
+      "source": "storage/WHOOSH.wav"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/GRUNT.WAV",
-      "source": "storage/GRUNT.WAV"
+      "source": "storage/GRUNT.wav"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/GAMEOVER.WAV",
-      "source": "storage/GAMEOVER.WAV"
+      "source": "storage/GAMEOVER.wav"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/TITLE.WAV",
-      "source": "storage/TITLE.WAV"
+      "source": "storage/TITLE.wav"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/HISS-01.WAV",
-      "source": "storage/HISS-01.WAV"
+      "source": "storage/HISS-01.wav"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/HISS-02.WAV",
-      "source": "storage/HISS-02.WAV"
+      "source": "storage/HISS-02.wav"
     },
     {
       "pipboy": "HOLO/ROACHSTOMP/HISS-03.WAV",
-      "source": "storage/HISS-03.WAV"
+      "source": "storage/HISS-03.wav"
     }
   ]
 }

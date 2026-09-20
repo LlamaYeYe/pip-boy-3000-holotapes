@@ -19,7 +19,7 @@ interface MesmetronModule {
   remove: () => void;
 }
 
-/** TITLE.JS menu module (extra helpers used by APP.TS). */
+/** TITLE.JS menu module (extra helpers used by APP.ts). */
 interface MesmetronTitleModule extends MesmetronModule {
   move: (dir: number) => void;
   getSelected: () => number;
@@ -27,7 +27,7 @@ interface MesmetronTitleModule extends MesmetronModule {
   repaint?: () => void;
 }
 
-/** One in-progress spiral generation (SPIRAL.TS). */
+/** One in-progress spiral generation (SPIRAL.ts). */
 interface MesmetronSpiralGen {
   tick: number;
   phase: number;

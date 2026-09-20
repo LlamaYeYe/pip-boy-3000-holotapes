@@ -47,7 +47,7 @@ const artifactRoot = path.join(distRoot, 'pip-boy-3000-holotapes');
  * Derives the emitted JavaScript paths for a TypeScript source.
  *
  * File name casing is preserved because it is part of the on-device storage
- * convention: `storage/APP.TS` emits `storage/APP.JS` and
+ * convention: `storage/APP.ts` emits `storage/APP.JS` and
  * `storage/APP.MIN.JS`.
  */
 function outputPaths(tsPath: string): { js: string; min: string } {
@@ -95,7 +95,7 @@ async function compileSource(
 }
 
 /**
- * Rewrites `source` paths in dist metadata from `.TS` to `.MIN.JS` so
+ * Rewrites script `source` paths in dist metadata from `.ts` to `.MIN.JS` so
  * check-files and installers resolve production artifacts, not TypeScript.
  */
 async function rewriteDistMetadataSources(
@@ -119,9 +119,7 @@ async function rewriteDistMetadataSources(
           continue;
         const record = entry as Record<string, unknown>;
         if (typeof record.source !== 'string') continue;
-        const next = record.source.replace(/\.ts$/i, (ext: string) =>
-          ext === '.TS' ? '.MIN.JS' : '.min.js',
-        );
+        const next = record.source.replace(/\.ts$/, '.MIN.JS');
         if (next !== record.source) {
           record.source = next;
           changed = true;

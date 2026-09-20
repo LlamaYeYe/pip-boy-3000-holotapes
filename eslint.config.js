@@ -20,7 +20,7 @@ export default defineConfig([
     ],
   },
   {
-    files: ['**/*.{ts,TS}'],
+    files: ['**/*.ts'],
     extends: [
       js.configs.recommended,
       ...tseslint.configs.recommended,
@@ -31,7 +31,6 @@ export default defineConfig([
         projectService: true,
         tsconfigRootDir: path.resolve(__dirname),
         allowDefaultProject: true,
-        extraFileExtensions: ['.TS'],
       },
     },
     rules: {
@@ -223,7 +222,7 @@ export default defineConfig([
     // nobody can safely act on is worse than no warning. Modernising an
     // app's style is a deliberate change to make in its own commit, with a
     // device test behind it.
-    files: ['holotapes/**/*.TS'],
+    files: ['holotapes/**/*.ts'],
     rules: {
       // --- Espruino platform ---------------------------------------------
       // Bit twiddling is the normal way to pack pixel, tile, and flag data
@@ -236,14 +235,12 @@ export default defineConfig([
       'no-eval': 'off',
       // require("fs") is how the device exposes the SD card.
       '@typescript-eslint/no-require-imports': 'off',
-      // Uppercase .TS is an Espruino storage convention and is registered as
-      // an extra parser extension. TypeScript performs the corresponding
-      // global-name checks; ESLint's JavaScript-only rule cannot distinguish
-      // ambient device declarations and type-only names in that extension.
+      // TypeScript performs the corresponding global-name checks; ESLint's
+      // JavaScript-only rule cannot distinguish ambient device declarations
+      // and type-only names in holotape sources.
       'no-undef': 'off',
-      // The same extra-extension path applies JavaScript's function-scope
-      // redeclaration model to TypeScript declarations. Leave this to the
-      // TypeScript check so existing device-tested sources are not rewritten.
+      // Leave redeclaration checking to TypeScript so existing device-tested
+      // sources are not rewritten.
       'no-redeclare': 'off',
       // The "ram" and "jit" directives are bare string expressions, and
       // stripping them silently costs the performance they buy.
@@ -331,7 +328,7 @@ export default defineConfig([
   },
   // Holotape sources: no any / unknown escapes.
   {
-    files: ['holotapes/**/*.{ts,TS}'],
+    files: ['holotapes/**/*.ts'],
     rules: {
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-restricted-types': [

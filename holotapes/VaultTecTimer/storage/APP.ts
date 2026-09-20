@@ -10,7 +10,7 @@
 
   function goTo(file: string): void {
     if (screen && screen.remove) screen.remove();
-    screen = null;
+    screen = null as never;
     h.reset();
     try {
       screen = eval(require('fs').readFileSync(file))(goTo);

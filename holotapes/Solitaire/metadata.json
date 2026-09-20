@@ -4,62 +4,62 @@
   "author": "@Theeohn",
   "version": "1.0.0",
   "description": "One of the most famous single-player card games, now playable on the Pip-Boy!",
-  "icon": "storage/SOLITAIRE.IMG",
-  "previews": ["previews/MENU.BMP", "previews/GAME.BMP"],
+  "icon": "storage/SOLITAIRE.img",
+  "previews": ["previews/MENU.bmp", "previews/GAME.bmp"],
   "type": "game",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/SOLITAIRE/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/SOLITAIRE/13.JSON",
-      "source": "storage/13.JSON"
+      "source": "storage/13.json"
     },
     {
       "pipboy": "HOLO/SOLITAIRE/ATOMIC.JSON",
-      "source": "storage/ATOMIC.JSON"
+      "source": "storage/ATOMIC.json"
     },
     {
       "pipboy": "HOLO/SOLITAIRE/BISON.JSON",
-      "source": "storage/BISON.JSON"
+      "source": "storage/BISON.json"
     },
     {
       "pipboy": "HOLO/SOLITAIRE/GOMORRAH.JSON",
-      "source": "storage/GOMORRAH.JSON"
+      "source": "storage/GOMORRAH.json"
     },
     {
       "pipboy": "HOLO/SOLITAIRE/LUCKY.JSON",
-      "source": "storage/LUCKY.JSON"
+      "source": "storage/LUCKY.json"
     },
     {
       "pipboy": "HOLO/SOLITAIRE/PEBBLES.JSON",
-      "source": "storage/PEBBLES.JSON"
+      "source": "storage/PEBBLES.json"
     },
     {
       "pipboy": "HOLO/SOLITAIRE/SIERRA.JSON",
-      "source": "storage/SIERRA.JSON"
+      "source": "storage/SIERRA.json"
     },
     {
       "pipboy": "HOLO/SOLITAIRE/SILVER.JSON",
-      "source": "storage/SILVER.JSON"
+      "source": "storage/SILVER.json"
     },
     {
       "pipboy": "HOLO/SOLITAIRE/TOPS.JSON",
-      "source": "storage/TOPS.JSON"
+      "source": "storage/TOPS.json"
     },
     {
       "pipboy": "HOLO/SOLITAIRE/ULTRA.JSON",
-      "source": "storage/ULTRA.JSON"
+      "source": "storage/ULTRA.json"
     },
     {
       "pipboy": "HOLO/SOLITAIRE/VAULTB.JSON",
-      "source": "storage/VAULTB.JSON"
+      "source": "storage/VAULTB.json"
     },
     {
       "pipboy": "HOLO/SOLITAIRE/WILD.JSON",
-      "source": "storage/WILD.JSON"
+      "source": "storage/WILD.json"
     }
   ],
   "storageOptional": []

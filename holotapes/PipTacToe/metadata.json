@@ -4,42 +4,42 @@
   "author": "@pip-4111 @JLDenson",
   "version": "1.0.0",
   "description": "A Fallout-themed take on the classic Tic-Tac-Toe. Challenge a friend in 2-Player mode or take on the CPU.",
-  "icon": "storage/PIPTACTOE.PNG",
-  "previews": ["previews/MENU.BMP", "previews/GAME.BMP"],
+  "icon": "storage/PIPTACTOE.png",
+  "previews": ["previews/MENU.bmp", "previews/GAME.bmp"],
   "type": "game",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/PIPTACTOE/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/PIPTACTOE/LOSER.WAV",
-      "source": "storage/LOSER.WAV"
+      "source": "storage/LOSER.wav"
     },
     {
       "pipboy": "HOLO/PIPTACTOE/PLACEO.WAV",
-      "source": "storage/PLACEO.WAV"
+      "source": "storage/PLACEO.wav"
     },
     {
       "pipboy": "HOLO/PIPTACTOE/PLACEX.WAV",
-      "source": "storage/PLACEX.WAV"
+      "source": "storage/PLACEX.wav"
     },
     {
       "pipboy": "HOLO/PIPTACTOE/STARTGAME.WAV",
-      "source": "storage/STARTGAME.WAV"
+      "source": "storage/STARTGAME.wav"
     },
     {
       "pipboy": "HOLO/PIPTACTOE/STARTPLAY.WAV",
-      "source": "storage/STARTPLAY.WAV"
+      "source": "storage/STARTPLAY.wav"
     },
     {
       "pipboy": "HOLO/PIPTACTOE/TIED.WAV",
-      "source": "storage/TIED.WAV"
+      "source": "storage/TIED.wav"
     },
     {
       "pipboy": "HOLO/PIPTACTOE/WINNER.WAV",
-      "source": "storage/WINNER.WAV"
+      "source": "storage/WINNER.wav"
     }
   ],
   "storageOptional": []

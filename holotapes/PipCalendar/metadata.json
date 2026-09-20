@@ -4,22 +4,22 @@
   "author": "@GlitchedMicrowave",
   "version": "1.0.1",
   "description": "A simple calendar and note-taking app for you Pip-Boy.",
-  "icon": "storage/ICON.PNG",
-  "previews": ["previews/CALENDARPREVIEW.BMP"],
+  "icon": "storage/ICON.png",
+  "previews": ["previews/CALENDARPREVIEW.bmp"],
   "type": "app",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/PIPCALENDAR/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/PIPCALENDAR/DAYS.IMG",
-      "source": "storage/DAYS.IMG"
+      "source": "storage/DAYS.img"
     },
     {
       "pipboy": "HOLO/PIPCALENDAR/ROBCO.IMG",
-      "source": "storage/ROBCO.IMG"
+      "source": "storage/ROBCO.img"
     }
   ],
   "storageOptional": []

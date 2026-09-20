@@ -5,6 +5,7 @@ import { execFileSync } from 'node:child_process';
 import { PNG } from 'pngjs';
 
 interface StorageEntry {
+  pipboy?: unknown;
   source?: unknown;
   previewMp3?: unknown;
   previewMp4?: unknown;
@@ -78,9 +79,28 @@ function directChild(value: unknown, directory: string): value is string {
   );
 }
 
-/** storage/optional/previews file basenames must be fully uppercase. */
-function isUppercaseBasename(relativePath: string): boolean {
+/** Content filenames use an uppercase stem and a lowercase extension. */
+function hasValidSourceFilename(relativePath: string): boolean {
   const base = relativePath.split('/').pop() ?? '';
+  if (base.endsWith('.d.ts')) {
+    const declarationStem = base.slice(0, -'.d.ts'.length);
+    return (
+      declarationStem.length > 0 &&
+      declarationStem === declarationStem.toUpperCase()
+    );
+  }
+  const extension = path.extname(base);
+  const stem = extension.length > 0 ? base.slice(0, -extension.length) : base;
+  return (
+    stem.length > 0 &&
+    stem === stem.toUpperCase() &&
+    extension === extension.toLowerCase()
+  );
+}
+
+/** The final filename in an on-device path must be fully uppercase. */
+function hasUppercaseDeviceFilename(devicePath: string): boolean {
+  const base = devicePath.split('/').pop() ?? '';
   return base.length > 0 && base === base.toUpperCase();
 }
 
@@ -98,9 +118,9 @@ function validateTrackedFilenameCasing(problems: string[]): void {
       ['storage', 'optional', 'previews'].includes(segment),
     );
 
-    if (contentDirectoryIndex >= 0 && !isUppercaseBasename(trackedFile)) {
+    if (contentDirectoryIndex >= 0 && !hasValidSourceFilename(trackedFile)) {
       problems.push(
-        `${trackedFile}: Git index filename must be fully uppercase (force a two-step rename on case-insensitive filesystems)`,
+        `${trackedFile}: Git index filename must have an uppercase stem and lowercase extension (force a two-step rename on case-insensitive filesystems)`,
       );
     }
   }
@@ -215,9 +235,16 @@ async function validateHolotape(
       problems.push(
         `${relative(metadataPath)}: storage source must be storage/<FILE>: ${String(entry.source)}`,
       );
-    } else if (!isUppercaseBasename(entry.source)) {
+    } else if (!hasValidSourceFilename(entry.source)) {
       problems.push(
-        `${relative(metadataPath)}: storage source filename must be fully uppercase: ${entry.source}`,
+        `${relative(metadataPath)}: storage source filename must have an uppercase stem and lowercase extension: ${entry.source}`,
+      );
+    } else if (
+      typeof entry.pipboy !== 'string' ||
+      !hasUppercaseDeviceFilename(entry.pipboy)
+    ) {
+      problems.push(
+        `${relative(metadataPath)}: storage pipboy filename must be fully uppercase: ${String(entry.pipboy)}`,
       );
     }
   }
@@ -228,9 +255,16 @@ async function validateHolotape(
       problems.push(
         `${relative(metadataPath)}: storageOptional source must be optional/<FILE>: ${String(entry.source)}`,
       );
-    } else if (!isUppercaseBasename(entry.source)) {
+    } else if (!hasValidSourceFilename(entry.source)) {
       problems.push(
-        `${relative(metadataPath)}: storageOptional source filename must be fully uppercase: ${entry.source}`,
+        `${relative(metadataPath)}: storageOptional source filename must have an uppercase stem and lowercase extension: ${entry.source}`,
+      );
+    } else if (
+      typeof entry.pipboy !== 'string' ||
+      !hasUppercaseDeviceFilename(entry.pipboy)
+    ) {
+      problems.push(
+        `${relative(metadataPath)}: storageOptional pipboy filename must be fully uppercase: ${String(entry.pipboy)}`,
       );
     }
   }
@@ -241,9 +275,9 @@ async function validateHolotape(
       problems.push(
         `${relative(metadataPath)}: preview must be previews/<FILE>: ${String(preview)}`,
       );
-    } else if (!isUppercaseBasename(preview)) {
+    } else if (!hasValidSourceFilename(preview)) {
       problems.push(
-        `${relative(metadataPath)}: preview filename must be fully uppercase: ${String(preview)}`,
+        `${relative(metadataPath)}: preview filename must have an uppercase stem and lowercase extension: ${String(preview)}`,
       );
     }
   }
@@ -257,6 +291,13 @@ async function validateHolotape(
         problems.push(
           `${relative(metadataPath)}: ${field} must be previews/<FILE>: ${String(entry[field])}`,
         );
+      } else if (
+        entry[field] !== undefined &&
+        !hasValidSourceFilename(entry[field])
+      ) {
+        problems.push(
+          `${relative(metadataPath)}: ${field} filename must have an uppercase stem and lowercase extension: ${String(entry[field])}`,
+        );
       }
     }
   }
@@ -265,9 +306,9 @@ async function validateHolotape(
     problems.push(
       `${relative(metadataPath)}: icon must be storage/<FILE>: ${String(metadata.icon)}`,
     );
-  } else if (!isUppercaseBasename(metadata.icon)) {
+  } else if (!hasValidSourceFilename(metadata.icon)) {
     problems.push(
-      `${relative(metadataPath)}: icon filename must be fully uppercase: ${metadata.icon}`,
+      `${relative(metadataPath)}: icon filename must have an uppercase stem and lowercase extension: ${metadata.icon}`,
     );
   } else if (!(await existsExact(holotapeDirectory, metadata.icon))) {
     problems.push(`${relative(metadataPath)}: icon does not exist exactly`);
@@ -290,9 +331,9 @@ async function validateHolotape(
       );
     }
 
-    if (underSourceDirs && fileName !== fileName.toUpperCase()) {
+    if (underSourceDirs && !hasValidSourceFilename(fileName)) {
       problems.push(
-        `${relative(filePath)}: filename must be fully uppercase (name and extension)`,
+        `${relative(filePath)}: filename must have an uppercase stem and lowercase extension`,
       );
     }
 

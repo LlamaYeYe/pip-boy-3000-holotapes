@@ -100,7 +100,7 @@
           "minLength": 1
         },
         "source": {
-          "description": "Repo-relative file under storage/ or optional/. Script entries point at the .TS source; the build emits .JS/.MIN.JS for production.",
+          "description": "Repo-relative file under storage/ or optional/. Script entries point at the .ts source; the build emits .JS/.MIN.JS for production.",
           "$ref": "#/definitions/relativePath"
         },
         "label": {

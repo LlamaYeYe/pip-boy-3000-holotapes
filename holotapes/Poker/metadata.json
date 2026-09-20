@@ -4,14 +4,14 @@
   "author": "@Theeohn",
   "version": "1.0.0",
   "description": "A single-player Poker game for the Pip-Boy 3000. Play against the dealer using a single shuffled deck, with variable betting and 4 rulesets, 5 card draw, 7 card draw, 5 card hold and 7 card hold.",
-  "icon": "storage/POKER.PNG",
-  "previews": ["previews/MENU.BMP", "previews/GAME.BMP", "previews/START.BMP"],
+  "icon": "storage/POKER.png",
+  "previews": ["previews/MENU.bmp", "previews/GAME.bmp", "previews/START.bmp"],
   "type": "game",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/POKER/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     }
   ],
   "storageOptional": []

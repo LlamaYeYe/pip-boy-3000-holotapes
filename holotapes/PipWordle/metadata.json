@@ -4,18 +4,18 @@
   "author": "@amogus-67",
   "version": "1.0.0",
   "description": "A Wordle clone for the Pip-Boy 3000.",
-  "icon": "storage/WORDLE.PNG",
-  "previews": ["previews/MENU.BMP", "previews/GAME.BMP"],
+  "icon": "storage/WORDLE.png",
+  "previews": ["previews/MENU.bmp", "previews/GAME.bmp"],
   "type": "game",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/PIP_WORDLE/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
-      "pipboy": "HOLO/PIP_WORDLE/words_5.TXT",
-      "source": "storage/WORDS_5.TXT"
+      "pipboy": "HOLO/PIP_WORDLE/WORDS_5.TXT",
+      "source": "storage/WORDS_5.txt"
     }
   ],
   "storageOptional": []

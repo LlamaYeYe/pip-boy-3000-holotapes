@@ -4,34 +4,34 @@
   "author": "@Aidan'sLab",
   "version": "1.0.2",
   "description": "A character switching utility for the Pip-Boy 3000.",
-  "icon": "storage/CHARSWITCHER.PNG",
-  "previews": ["previews/HOLOTAPE.BMP", "previews/CND.BMP"],
+  "icon": "storage/CHARSWITCHER.png",
+  "previews": ["previews/HOLOTAPE.bmp", "previews/CND.bmp"],
   "type": "app",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/CHARSWITCHER/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/CHARSWITCHER/RENDERER.JS",
-      "source": "storage/RENDERER.TS"
+      "source": "storage/RENDERER.ts"
     },
     {
       "pipboy": "HOLO/CHARSWITCHER/chars/MK_V_VAULT-BOY.JSON",
-      "source": "storage/MK_V_VAULT-BOY.JSON"
+      "source": "storage/MK_V_VAULT-BOY.json"
     },
     {
       "pipboy": "HOLO/CHARSWITCHER/chars/MK_V_VAULT-BOY.BIN",
-      "source": "storage/MK_V_VAULT-BOY.BIN"
+      "source": "storage/MK_V_VAULT-BOY.bin"
     },
     {
       "pipboy": "HOLO/CHARSWITCHER/chars/VAULT-GIRL.JSON",
-      "source": "storage/VAULT-GIRL.JSON"
+      "source": "storage/VAULT-GIRL.json"
     },
     {
       "pipboy": "HOLO/CHARSWITCHER/chars/VAULT-GIRL.BIN",
-      "source": "storage/VAULT-GIRL.BIN"
+      "source": "storage/VAULT-GIRL.bin"
     }
   ],
   "storageOptional": []

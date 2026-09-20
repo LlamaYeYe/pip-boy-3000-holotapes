@@ -51,7 +51,7 @@
 
 Pip-Boy 3000 Holotapes by the community, for the community.
 
-This repo is written in **TypeScript**. Write `.TS` under `storage/`.
+This repo is written in **TypeScript**. Write `.ts` under `storage/`.
 `npm run build` strips the types and emits the Espruino `.JS` / `.MIN.JS` the
 device runs (minified and pretokenised for you).
 
@@ -71,8 +71,8 @@ Agent / review rules live in [agents.md](agents.md).
 
    ```bash
    holotapes/<YourHolotape>/
-     storage/           # Required files + uppercase .TS sources + icon
-       APP.TS           # Main TypeScript source for the Holotape
+     storage/           # Required files + uppercase stems, lowercase extensions
+       APP.ts           # Main TypeScript source for the Holotape
      optional/          # Optional install files, if any
      previews/          # Preview images, if any
      metadata.json      # Metadata for the Holotape
@@ -81,12 +81,11 @@ Agent / review rules live in [agents.md](agents.md).
    ```
 
    > ![img-info][img-info] Every file under `storage/`, `optional/`, and
-   > `previews/` must use a fully uppercase filename (name and extension), for
-   > example `APP.TS`, `DATA.JSON`, `ICON.PNG`. That matches the Pip-Boy
-   > development team's on-device file pattern, where paths on the SD card are
-   > all uppercase. `npm run verify` enforces it (layout step).
+   > `previews/` must use an uppercase filename stem and lowercase extension,
+   > for example `APP.ts`, `DATA.json`, `ICON.png`. On-device `pipboy` paths
+   > remain fully uppercase. `npm run verify` enforces both conventions.
 
-2. Write `storage/APP.TS`. The app is an anonymous function expression the
+2. Write `storage/APP.ts`. The app is an anonymous function expression the
    Pip-Boy OS invokes; do not call it with a trailing `()`. It must return an
    uppercase alphanumeric `id` and a `remove` function.
 
@@ -164,7 +163,7 @@ Agent / review rules live in [agents.md](agents.md).
 
 3. Add `metadata.json`. Paths are relative to the Holotape directory. `pipboy`
    is the on-device path; `source` is the file in this repo. Script sources
-   point at `.TS`; the build emits `.MIN.JS` into the production artifact.
+   point at `.ts`; the build emits `.MIN.JS` into the production artifact.
 
    ```json
    {
@@ -173,37 +172,40 @@ Agent / review rules live in [agents.md](agents.md).
      "author": "@your-github-username @another-github-username",
      "version": "1.0.0",
      "description": "A short, one-sentence description.",
-     "icon": "storage/ICON.IMG",
+     "icon": "storage/ICON.img",
      "previews": [],
      "type": "app",
      "readme": "README.md",
      "storage": [
-       { "pipboy": "HOLO/EXAMPLE/APP.JS", "source": "storage/APP.TS" }
-       { "pipboy": "HOLO/EXAMPLE/CONFIG.JSON", "source": "storage/CONFIG.JSON" },
-       { "pipboy": "HOLO/EXAMPLE/IMAGE.IMG", "source": "storage/IMAGE.IMG" },
-       { "pipboy": "HOLO/EXAMPLE/OTHER.JS", "source": "storage/OTHER.TS" }
+       { "pipboy": "HOLO/EXAMPLE/APP.JS", "source": "storage/APP.ts" },
+       {
+         "pipboy": "HOLO/EXAMPLE/CONFIG.JSON",
+         "source": "storage/CONFIG.json"
+       },
+       { "pipboy": "HOLO/EXAMPLE/IMAGE.IMG", "source": "storage/IMAGE.img" },
+       { "pipboy": "HOLO/EXAMPLE/OTHER.JS", "source": "storage/OTHER.ts" }
      ],
      "storageOptional": [
        {
          "label": "Example BIN Image",
          "sizeKB": 38,
          "pipboy": "HOLO/EXAMPLE/IMAGE.BIN",
-         "source": "optional/IMAGE.BIN"
+         "source": "optional/IMAGE.bin"
        },
        {
          "label": "Example AVI Video",
          "sizeKB": 1234,
          "pipboy": "HOLO/EXAMPLE/VIDEO.AVI",
-         "previewMp4": "optional/VIDEO.MP4",
-         "source": "optional/VIDEO.AVI"
+         "previewMp4": "previews/VIDEO.mp4",
+         "source": "optional/VIDEO.avi"
        },
        {
          "label": "Example WAV Audio",
          "sizeKB": 543,
          "pipboy": "HOLO/EXAMPLE/AUDIO.WAV",
-         "previewMp3": "optional/AUDIO.MP3",
-         "source": "optional/AUDIO.WAV"
-       },
+         "previewMp3": "previews/AUDIO.mp3",
+         "source": "optional/AUDIO.wav"
+       }
      ]
    }
    ```
@@ -487,8 +489,9 @@ print(E.getSizeOf(this['\xFF'], 1).sort((a, b) => a.size - b.size));
    - Every listener, interval, timeout, and watch is cleared; audio stopped if
      used.
    - No `any` / `unknown`; use real interfaces (see [agents.md](agents.md)).
-   - Metadata: unique lowercase id, semver, valid type, matching
-     `HOLO/<APP_ID>/` `pipboy` paths, `source` pointing at `.TS` for scripts.
+   - Metadata: unique lowercase id, semver, valid type, matching fully uppercase
+     `HOLO/<APP_ID>/` `pipboy` paths, with `source` pointing at `.ts` for
+     scripts.
    - `README.md` documents controls; `ChangeLog` has an entry.
    - App opens, closes, and reopens cleanly on hardware.
 

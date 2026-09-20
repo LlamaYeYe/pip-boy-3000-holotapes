@@ -4,66 +4,66 @@
   "author": "@LlamaYeYe",
   "version": "1.2.0",
   "description": "Adds a 2-minute Pip-Boy idle screensaver you can point at the built-in PIP-BOY 3000 animation, or hand off to an installed Mesmetron item or Pipquarium, with a live preview for whichever is selected.",
-  "icon": "storage/PIPCOIDLEFRAMEWORKS.IMG",
-  "previews": ["previews/MENU.BMP"],
+  "icon": "storage/PIPCOIDLEFRAMEWORKS.img",
+  "previews": ["previews/MENU.bmp"],
   "type": "app",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/BOMB.BIN",
-      "source": "storage/BOMB.BIN"
+      "source": "storage/BOMB.bin"
     },
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/BOMBRUN.JS",
-      "source": "storage/BOMBRUN.TS"
+      "source": "storage/BOMBRUN.ts"
     },
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/CONFIG.JSON",
-      "source": "storage/CONFIG.JSON"
+      "source": "storage/CONFIG.json"
     },
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/FALLOUT.WAV",
-      "source": "storage/FALLOUT.WAV"
+      "source": "storage/FALLOUT.wav"
     },
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/IDLE.JS",
-      "source": "storage/IDLE.TS"
+      "source": "storage/IDLE.ts"
     },
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/LOGO.BIN",
-      "source": "storage/LOGO.BIN"
+      "source": "storage/LOGO.bin"
     },
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/MESIDLE.JS",
-      "source": "storage/MESIDLE.TS"
+      "source": "storage/MESIDLE.ts"
     },
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/PIPCOIDLEFRAMEWORKS.IMG",
-      "source": "storage/PIPCOIDLEFRAMEWORKS.IMG"
+      "source": "storage/PIPCOIDLEFRAMEWORKS.img"
     },
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/PIPQMODE.CFG",
-      "source": "storage/PIPQMODE.CFG"
+      "source": "storage/PIPQMODE.cfg"
     },
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/PIPQRUN.JS",
-      "source": "storage/PIPQRUN.TS"
+      "source": "storage/PIPQRUN.ts"
     },
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/SERVICE.JS",
-      "source": "storage/SERVICE.TS"
+      "source": "storage/SERVICE.ts"
     },
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/TITLE.BIN",
-      "source": "storage/TITLE.BIN"
+      "source": "storage/TITLE.bin"
     },
     {
       "pipboy": "HOLO/FALLOUT_SCREENSAVER/WAKE.JS",
-      "source": "storage/WAKE.TS"
+      "source": "storage/WAKE.ts"
     }
   ],
   "storageOptional": []

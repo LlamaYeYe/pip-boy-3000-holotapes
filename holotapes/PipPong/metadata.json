@@ -4,34 +4,34 @@
   "author": "@Neiferr",
   "version": "1.0.0",
   "description": "Pong on the Pip-Boy 3000a.",
-  "icon": "storage/PIPPONG.PNG",
-  "previews": ["previews/MENU.BMP", "previews/GAME.BMP"],
+  "icon": "storage/PIPPONG.png",
+  "previews": ["previews/MENU.bmp", "previews/GAME.bmp"],
   "type": "game",
   "readme": "README.MD",
   "storage": [
     {
       "pipboy": "HOLO/PIPPONG/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/PIPPONG/PADDLE1.WAV",
-      "source": "storage/PADDLE1.WAV"
+      "source": "storage/PADDLE1.wav"
     },
     {
       "pipboy": "HOLO/PIPPONG/PADDLE2.WAV",
-      "source": "storage/PADDLE2.WAV"
+      "source": "storage/PADDLE2.wav"
     },
     {
       "pipboy": "HOLO/PIPPONG/SCORE.WAV",
-      "source": "storage/SCORE.WAV"
+      "source": "storage/SCORE.wav"
     },
     {
       "pipboy": "HOLO/PIPPONG/WALL.WAV",
-      "source": "storage/WALL.WAV"
+      "source": "storage/WALL.wav"
     },
     {
       "pipboy": "HOLO/PIPPONG/WIN.WAV",
-      "source": "storage/WIN.WAV"
+      "source": "storage/WIN.wav"
     }
   ],
   "storageOptional": []

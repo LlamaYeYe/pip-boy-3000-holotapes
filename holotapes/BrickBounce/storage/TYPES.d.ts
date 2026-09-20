@@ -50,7 +50,7 @@ interface BrickBounceParams {
  */
 type BrickBounceFactory = (params?: BrickBounceParams | 0) => HolotapeApp;
 
-/** Decrypted save payload returned by SAVE.TS `read`. */
+/** Decrypted save payload returned by SAVE.ts `read`. */
 interface BrickBounceSaveEnvelope {
   d: PipValue;
   r: string;
@@ -136,7 +136,7 @@ interface BrickBounceGameAudio {
 
 /** Brick cell value: digit code or letter power-up glyph. */
 type BrickBounceCell = number | string;
-/** Autosave blob written by GAME.TS. */
+/** Autosave blob written by GAME.ts. */
 interface BrickBounceGameSave {
   p?: number;
   w?: number;

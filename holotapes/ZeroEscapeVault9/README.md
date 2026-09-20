@@ -56,7 +56,7 @@ character takes that shot. Be luck be on your side
 Install from Pip-Boy.com, or copy to the SD card manually:
 
 ```
-HOLO/ZERO_ESCAPE_VAULT_9/APP.JS        (from storage/APP.TS; build emits APP.MIN.JS)
+HOLO/ZERO_ESCAPE_VAULT_9/APP.JS        (from storage/APP.ts; build emits APP.MIN.JS)
 HOLO/ZERO_ESCAPE_VAULT_9/DATA.JSON     (storage/DATA.JSON)
 ```
 

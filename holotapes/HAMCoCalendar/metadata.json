@@ -4,62 +4,62 @@
   "author": "@joemto20-tech",
   "version": "1.0.0",
   "description": "A native-feeling calendar with date jumping and note-taking.",
-  "icon": "storage/HAMCAL.IMG",
-  "previews": ["previews/AUG.BMP"],
+  "icon": "storage/HAMCAL.img",
+  "previews": ["previews/AUG.bmp"],
   "type": "app",
   "readme": "README.md",
   "storage": [
     {
       "pipboy": "HOLO/CALENDAR/APP.JS",
-      "source": "storage/APP.TS"
+      "source": "storage/APP.ts"
     },
     {
       "pipboy": "HOLO/CALENDAR/JAN.IMG",
-      "source": "storage/JAN.IMG"
+      "source": "storage/JAN.img"
     },
     {
       "pipboy": "HOLO/CALENDAR/FEB.IMG",
-      "source": "storage/FEB.IMG"
+      "source": "storage/FEB.img"
     },
     {
       "pipboy": "HOLO/CALENDAR/MAR.IMG",
-      "source": "storage/MAR.IMG"
+      "source": "storage/MAR.img"
     },
     {
       "pipboy": "HOLO/CALENDAR/APRIL.IMG",
-      "source": "storage/APRIL.IMG"
+      "source": "storage/APRIL.img"
     },
     {
       "pipboy": "HOLO/CALENDAR/MAY.IMG",
-      "source": "storage/MAY.IMG"
+      "source": "storage/MAY.img"
     },
     {
       "pipboy": "HOLO/CALENDAR/JUNE.IMG",
-      "source": "storage/JUNE.IMG"
+      "source": "storage/JUNE.img"
     },
     {
       "pipboy": "HOLO/CALENDAR/JULY.IMG",
-      "source": "storage/JULY.IMG"
+      "source": "storage/JULY.img"
     },
     {
       "pipboy": "HOLO/CALENDAR/AUG.IMG",
-      "source": "storage/AUG.IMG"
+      "source": "storage/AUG.img"
     },
     {
       "pipboy": "HOLO/CALENDAR/SEP.IMG",
-      "source": "storage/SEP.IMG"
+      "source": "storage/SEP.img"
     },
     {
       "pipboy": "HOLO/CALENDAR/OCT.IMG",
-      "source": "storage/OCT.IMG"
+      "source": "storage/OCT.img"
     },
     {
       "pipboy": "HOLO/CALENDAR/NOV.IMG",
-      "source": "storage/NOV.IMG"
+      "source": "storage/NOV.img"
     },
     {
       "pipboy": "HOLO/CALENDAR/DEC.IMG",
-      "source": "storage/DEC.IMG"
+      "source": "storage/DEC.img"
     }
   ],
   "storageOptional": []

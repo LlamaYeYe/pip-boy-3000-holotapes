@@ -35,7 +35,7 @@ interface Radroach {
 }
 
 /**
- * Packed map blob from MAPS.TS: Int16-style numeric array of goal/start/walls.
+ * Packed map blob from MAPS.ts: Int16-style numeric array of goal/start/walls.
  * Indexed as a number array after eval.
  */
 type RadroachMapData = ArrayLike<number> & {

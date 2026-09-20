@@ -1,7 +1,7 @@
 /**
  * HAMCo LED Control shared types.
  *
- * APP.TS is the settings UI; SESSION.TS is eval-loaded so the effect can
+ * APP.ts is the settings UI; SESSION.ts is eval-loaded so the effect can
  * outlive the holotape. The live session sits on global.HAM_LED_SESSION.
  */
 
@@ -15,7 +15,7 @@ interface HamLedState {
   level: number;
 }
 
-/** Live session object returned by SESSION.TS / start(). */
+/** Live session object returned by SESSION.ts / start(). */
 interface HamLedService {
   /** Protocol version; APP adopts only when v === 9. */
   v: number;
