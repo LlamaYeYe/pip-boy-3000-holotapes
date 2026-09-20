@@ -95,13 +95,14 @@
   function loadMusic(): boolean {
     const source = app.musicSources[app.musicSource];
     const entries = source === 'OFF' ? [] : readDir(source);
+    const wavFile = /\.wav$/i;
 
     app.musicList = [];
     currentTrack = undefined;
     musicIndex = 0;
 
     for (let i = 0; i < entries.length; i++) {
-      if (/\.wav$/i.test(entries[i])) {
+      if (wavFile.test(entries[i])) {
         app.musicList.push(source + '/' + entries[i]);
       }
     }
